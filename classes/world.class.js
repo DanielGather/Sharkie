@@ -1,39 +1,44 @@
 class World {
-    
-    character = new Character();
-    barrier = new Barrier();
-    enemies = [
-        new Fish(), 
-        new Fish(),
-        new Fish()
-    ];
-    canvas;
-    ctx;
+  character = new Character();
+  barrier = new Barrier();
+  enemies = [
+    new Fish(), 
+    new Fish(), 
+    new Fish()];
 
-    constructor(canvas){
-        this.ctx = canvas.getContext('2d');
-        this.canvas = canvas;
-        this.draw();
-    }
+  canvas;
+  ctx;
 
+  backgroundObjects = [
+    new BackgroundObject("img/3.Background/Dark/1.png", 0,0)
+];
 
+  constructor(canvas) {
+    this.ctx = canvas.getContext("2d");
+    this.canvas = canvas;
+    this.draw();
+  }
 
+  draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.backgroundObjects);
+    this.addToMap(this.barrier);
 
-    draw(){
-        this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
-        this.ctx.drawImage(this.character.img,this.character.x, this.character.y, this.character.width, this.character.height)
-        this.enemies.forEach(enemy => {
-        this.ctx.drawImage(enemy.img,enemy.x, enemy.y, enemy.width, enemy.height)
-        })
-        this.ctx.drawImage(this.barrier.img, this.barrier.x, this.barrier.y, this.barrier.width, this.barrier.height);
+    let self = this;
+    requestAnimationFrame(function () {
+      self.draw();
+    });
+  }
 
+  addObjectsToMap(objects) {
+    objects.forEach((o) => {
+        this.addToMap(o);
+      });
+  }
 
-
-
-        // Draw() wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function(){
-            self.draw();
-        });
-    }
+  addToMap(mo) {
+    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+  }
 }
