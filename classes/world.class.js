@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-  barrier = new Barrier();
+//   barrier = new Barrier();
   enemies = [
     new Fish(), 
     new Fish(), 
@@ -10,7 +10,14 @@ class World {
   ctx;
 
   backgroundObjects = [
-    new BackgroundObject("img/3.Background/Dark/1.png", 0,0)
+    // new BackgroundObject("img/3.Background/Dark/1.png", 0,0),
+    new BackgroundObject("img/3.Background/Layers/5. Water/D1.png", 0,0),
+    new BackgroundObject("img/3.Background/Layers/1. Light/1.png", 0,0),
+    new BackgroundObject("img/3.Background/Layers/3.Fondo 1/D1.png", 0,0),
+    new BackgroundObject("img/3.Background/Layers/4.Fondo 2/D1.png", 0,0),
+    new BackgroundObject("img/3.Background/Layers/2.Floor/D1.png", 0,0)
+
+
 ];
 
   constructor(canvas) {
@@ -22,9 +29,9 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.addObjectsToMap(this.backgroundObjects);
-    this.addToMap(this.character);
     this.addObjectsToMap(this.enemies);
-    this.addToMap(this.barrier);
+    this.addToMap(this.character);
+    // this.addToMap(this.barrier);
 
     let self = this;
     requestAnimationFrame(function () {
