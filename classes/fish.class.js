@@ -1,13 +1,24 @@
 class Fish extends MovableObject{
-
+    
     width = 120;
     height = 80;
 
-    constructor(){
-        super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
+    IMAGES_SWIMING = [
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png'
+    ]
 
+
+    constructor(img){
+        super().loadImage(img);
+        this.loadImages(this.IMAGES_SWIMING)
         this.x = 300 + Math.random() * 500;
         this.y = this.calculateY();
+        this.speed = 0.15 + Math.random() * 0.25;
+        this.animate();
     }
 
     calculateY(){
@@ -21,4 +32,15 @@ class Fish extends MovableObject{
         }
         return number;
     }
+
+    animate() {
+        this.moveLeft();
+        setInterval(()=>{
+            let i = this.currentImage % this.IMAGES_SWIMING.length;
+            let path = this.IMAGES_SWIMING[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+    
+        }, 200)
+      }
 }

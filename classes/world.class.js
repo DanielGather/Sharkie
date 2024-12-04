@@ -2,9 +2,10 @@ class World {
   character = new Character();
 //   barrier = new Barrier();
   enemies = [
-    new Fish(), 
-    new Fish(), 
-    new Fish()];
+    new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'), 
+    new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png'), 
+    new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png')
+  ];
 
   canvas;
   ctx;
