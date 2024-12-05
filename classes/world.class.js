@@ -9,6 +9,7 @@ class World {
 
   canvas;
   ctx;
+  keyboard;
 
   backgroundObjects = [
     // new BackgroundObject("img/3.Background/Dark/1.png", 0,0),
@@ -17,14 +18,18 @@ class World {
     new BackgroundObject("img/3.Background/Layers/3.Fondo 1/D1.png", 0,0),
     new BackgroundObject("img/3.Background/Layers/4.Fondo 2/D1.png", 0,0),
     new BackgroundObject("img/3.Background/Layers/2.Floor/D1.png", 0,0)
-
-
 ];
 
-  constructor(canvas) {
+  constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
+    this.keyboard = keyboard;
     this.draw();
+    this.setWorld();
+  }
+
+  setWorld(){
+    this.character.world = this;
   }
 
   draw() {

@@ -4,7 +4,7 @@ let keyboard = new Keyboard();
 
 function init() {
   canvas = document.getElementById("canvas");
-  world = new World(canvas);
+  world = new World(canvas, keyboard);
   ctx = canvas.getContext("2d");
 
   console.log("My Character is,", world.character);
@@ -27,7 +27,6 @@ document.addEventListener('keydown', (event) =>{
   if(event.code == "Space"){
     keyboard.SPACE = true;
   }
-  console.log(event);
 })
 
 document.addEventListener('keyup', (event) =>{
@@ -46,5 +45,4 @@ document.addEventListener('keyup', (event) =>{
   if(event.code == "Space"){
     keyboard.SPACE = false;
   }
-  console.log(event);
 })

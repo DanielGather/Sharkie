@@ -10,7 +10,7 @@ class Character extends MovableObject {
     "img/1.Sharkie/3.Swim/6.png"
 ];
 
-
+world;
 
   constructor() {
     super().loadImage("img/1.Sharkie/3.Swim/1.png");
@@ -20,11 +20,12 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(()=>{
+      if (this.world.keyboard.RIGHT){
         let i = this.currentImage % this.IMAGES_SWIMING.length;
         let path = this.IMAGES_SWIMING[i];
         this.img = this.imageCache[path];
         this.currentImage++;
-
+      }
     }, 200)
   }
 
