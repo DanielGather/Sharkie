@@ -1,10 +1,12 @@
 class MovableObject {
-  x = 80;
+  x = 0;
   y = 200;
   img;
   imageCache = {};
   currentImage = 0;
   speed = 0.1;
+  hz = 144;
+  otherDirection = false;
 
   loadImage(path) {
     this.img = new Image();
@@ -26,7 +28,7 @@ class MovableObject {
   moveLeft(){
     setInterval(() =>{
         this.x -= this.speed;
-    },1000/144)
+    },1000 / this.hz)
   }
 
 }
