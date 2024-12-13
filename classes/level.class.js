@@ -2,9 +2,10 @@ class Level {
   enemies;
   canvas;
   backgroundObjects;
-  constructor(enemies, backgroundObjects){
+  level_end_x;
+
+  constructor(enemies, backgroundObjects) {
     this.enemies = enemies;
     this.backgroundObjects = backgroundObjects;
-
   }
 }
