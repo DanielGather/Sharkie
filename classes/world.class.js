@@ -14,10 +14,23 @@ class World {
     this.createBackgroundObjects(2, 1024);
     this.draw();
     this.setWorld();
+    this.checkCollisions();
+    // this.character.isDead();
   }
 
   setWorld() {
     this.character.world = this;
+  }
+
+  checkCollisions(){
+    setInterval(() => {
+      this.level.enemies.forEach((enemy)=>{
+        if(this.character.isColliding(enemy)){
+
+          this.character.hit();
+          console.log(this.character.lifebar);
+      }})
+    }, 100);
   }
 
   draw() {
@@ -27,6 +40,8 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.ctx.translate(-this.camera_x, 0);
+
+
 
     // this.addToMap(this.barrier);
     let self = this;
@@ -64,7 +79,9 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
-    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+    mo.draw(this.ctx)
+    mo.drawFrame(this.ctx)
+    
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }
