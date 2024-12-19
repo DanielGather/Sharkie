@@ -1,16 +1,11 @@
-class MovableObject {
-  x = 0;
-  y = 200;
-  img;
-  imageCache = {};
-  currentImage = 0;
+class MovableObject extends DrawableObject {
   speed = 0.1;
   hz = 144;
   otherDirection = false;
   speedY = 0;
   acceleration = 0.005;
   lifebar = 100;
-  animationDead = false;
+  lastHit = 0;
 
   applyGravity() {
     setInterval(() => {
@@ -22,21 +17,11 @@ class MovableObject {
   }
 
   isNotOnTheGround() {
-    return this.y < 445;
+    return this.y < 415;
   }
 
-  loadImage(path) {
-    this.img = new Image();
-    this.img.src = path;
-  }
 
-  loadImages(arr) {
-    arr.forEach((path) => {
-      let image = new Image();
-      image.src = path;
-      this.imageCache[path] = image;
-    });
-  }
+
 
   moveRight() {
     this.x += this.speed;
@@ -47,7 +32,7 @@ class MovableObject {
   }
 
   playAnimation(images) {
-    let i = this.currentImage % this.IMAGES_SWIMING.length;
+    let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;
@@ -62,9 +47,7 @@ class MovableObject {
     this.y += this.speed;
   }
 
-  draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-  }
+
 
   drawFrame(ctx) {
     if (this instanceof Character || this instanceof Fish) {
@@ -94,6 +77,8 @@ class MovableObject {
     this.lifebar -= 5;
     if(this.lifebar < 0){
       this.lifebar = 0;
+    } else {
+      this.lastHit = new Date().getTime();
     }
   }
 
@@ -101,14 +86,9 @@ class MovableObject {
     return this.lifebar == 0;
   }
 
-  // isDead(){
-  //   setInterval(() => {
-  //       if(this.lifebar < 0 && !this.animationDead){
-  //       this.playAnimation(this.IMAGES_ELECTRO_DEAD);
-  //       this.animationDead = true;
-  //     }
-  //     }, 300);
-  // }
-
-
+  isHurt(){
+    let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
+    timepassed = timepassed / 1000; // Difference in s
+    return timepassed < 0.2;
+  }
 }
