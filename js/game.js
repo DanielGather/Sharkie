@@ -27,6 +27,9 @@ document.addEventListener('keydown', (event) =>{
   if(event.code == "Space"){
     keyboard.SPACE = true;
   }
+  if(event.code == "KeyF"){
+    keyboard.THROW = true;
+  }
 })
 
 document.addEventListener('keyup', (event) =>{
@@ -44,5 +47,8 @@ document.addEventListener('keyup', (event) =>{
   }
   if(event.code == "Space"){
     keyboard.SPACE = false;
+  }
+  if(event.code == "KeyF"){
+    keyboard.THROW = false;
   }
 })

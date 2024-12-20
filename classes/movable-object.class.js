@@ -6,6 +6,8 @@ class MovableObject extends DrawableObject {
   acceleration = 0.005;
   lifebar = 100;
   lastHit = 0;
+  height = 100;
+  width = 100;
 
   applyGravity() {
     setInterval(() => {
@@ -49,15 +51,6 @@ class MovableObject extends DrawableObject {
 
 
 
-  drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Fish) {
-      ctx.beginPath();
-      ctx.lineWidth = "3";
-      ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    }
-  }
 
   isColliding(mo){
     return this.x + this.width > mo.x &&
