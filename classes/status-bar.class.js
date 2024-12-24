@@ -1,31 +1,47 @@
 class StatusBar extends DrawableObject {
   IMAGES_LIFE = ["img/4. Marcadores/green/Life/0_  copia 3.png", "img/4. Marcadores/green/Life/20_ copia 4.png", "img/4. Marcadores/green/Life/40_  copia 3.png", "img/4. Marcadores/green/Life/60_  copia 3.png", "img/4. Marcadores/green/Life/80_  copia 3.png", "img/4. Marcadores/green/Life/100_  copia 2.png"];
 
-  IMAGES_LIFE_ICON = ["img/4. Marcadores/green/100_  copia 3.png"]
+  IMAGES_LIFE_ICON = ["img/4. Marcadores/green/100_  copia 3.png"];
 
   percentage = 100;
+  poisonIcon = "img/4. Marcadores/green/100_ copia 5.png";
+  lifeIcon = "img/4. Marcadores/green/100_  copia 3.png";
+  coinIcon = "img/4. Marcadores/green/100_ copia 6.png";
+  icons = []; 
 
   constructor() {
     super();
     this.loadImages(this.IMAGES_LIFE);
-    // this.x = 0;
-    // this.y = 0;
-    // this.width = 200;
-    // this.height =  60;
-    this.setPercentage(100);
-    // this.loadSingleImage();
+    // this.setPercentage(100);
+    this.addIcon(0, 0, 70, 50, this.poisonIcon);
+    this.addIcon(0, 50, 70, 50, this.lifeIcon);
+    this.drawIcons();
+  }
+
+  addIcon(x, y, width, height, img) {
+    this.icons.push({ x, y, width, height, img });
+  }
+
+  drawIcons() {
+    this.icons.forEach(icon => {
+      this.x = icon.x;
+      this.y = icon.y;
+      this.width = icon.width;
+      this.height = icon.height;
+      this.loadImage(icon.img);
+    });
   }
 
   //setPercentage(50);
-  setPercentage(percentage) {
-    this.x = 0;
-    this.y = 0;
-    this.width = 200;
-    this.height = 60;
-    this.percentage = percentage;
-    let path = this.IMAGES_LIFE[this.resolveImageIndex()];
-    this.img = this.imageCache[path]
-  }
+  // setPercentage(percentage) {
+  //   this.x = 0;
+  //   this.y = 0;
+  //   this.width = 200;
+  //   this.height = 60;
+  //   this.percentage = percentage;
+  //   let path = this.IMAGES_LIFE[this.resolveImageIndex()];
+  //   this.img = this.imageCache[path];
+  // }
 
   resolveImageIndex() {
     if (this.percentage == 100) {
@@ -43,11 +59,11 @@ class StatusBar extends DrawableObject {
     }
   }
 
-//   loadSingleImage(){
-//     this.x = 0;
-//     this.y = 0;
-//     this.height = 75;
-//     this.width = 75;
-//     this.loadImage("img/4. Marcadores/green/100_ copia 5.png");
-//   }
+  loadSingleImage(x, y, weight, height, img) {
+    this.x = x;
+    this.y = y;
+    this.height = height;
+    this.width = weight;
+    this.loadImage(img);
+  }
 }
