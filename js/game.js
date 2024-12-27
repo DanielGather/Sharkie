@@ -6,8 +6,9 @@ function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
   ctx = canvas.getContext("2d");
-
   console.log("My Character is,", world.character);
+  console.log("My World is,", world);
+  
 }
 
 

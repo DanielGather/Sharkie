@@ -1,13 +1,13 @@
 class World {
   static characterIsInRange = false;
   character = new Character();
+  statusBar = new StatusBar();
   //   barrier = new Barrier();
   level = level1;
   canvas;
   ctx;
   keyboard;
   camera_x = 0;
-  statusBar = new StatusBar();
   throwableObjects = [
     
   ]
@@ -16,7 +16,7 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.createBackgroundObjects(2, 1024);
+    // this.createBackgroundObjects(2, 1024);
     this.draw();
     this.setWorld();
     this.run();
@@ -86,24 +86,24 @@ class World {
     });
   }
 
-  createBackgroundObjects(repeatCount, step) {
-    const backgroundLayers = ["img/3.Background/Layers/5. Water/D", "img/3.Background/Layers/1. Light/", "img/3.Background/Layers/3.Fondo 1/D", "img/3.Background/Layers/4.Fondo 2/D", "img/3.Background/Layers/2.Floor/D"];
-    let variableZahl = 1;
-    let count = 0;
-    this.level.level_end_x = repeatCount * step;
-    for (let i = 0; i < repeatCount; i++) {
-      let x = i * step;
-      backgroundLayers.forEach((backgroundLayerBase) => {
-        this.level.backgroundObjects.push(new BackgroundObject(`${backgroundLayerBase}${variableZahl}.png`, x, 0));
-      });
-      count++;
-      if (count >= 1) {
-        variableZahl = variableZahl === 1 ? 2 : 1;
-        count = 0;
-      }
+  // createBackgroundObjects(repeatCount, step) {
+  //   const backgroundLayers = ["img/3.Background/Layers/5. Water/D", "img/3.Background/Layers/1. Light/", "img/3.Background/Layers/3.Fondo 1/D", "img/3.Background/Layers/4.Fondo 2/D", "img/3.Background/Layers/2.Floor/D"];
+  //   let variableZahl = 1;
+  //   let count = 0;
+  //   this.level.level_end_x = repeatCount * step;
+  //   for (let i = 0; i < repeatCount; i++) {
+  //     let x = i * step;
+  //     backgroundLayers.forEach((backgroundLayerBase) => {
+  //       this.level.backgroundObjects.push(new BackgroundObject(`${backgroundLayerBase}${variableZahl}.png`, x, 0));
+  //     });
+  //     count++;
+  //     if (count >= 1) {
+  //       variableZahl = variableZahl === 1 ? 2 : 1;
+  //       count = 0;
+  //     }
       
-    }
-  }
+  //   }
+  // }
 
   addObjectsToMap(objects) {
     objects.forEach((o) => {

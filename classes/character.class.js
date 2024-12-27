@@ -156,9 +156,8 @@ class Character extends MovableObject {
   jump() {}
 
   introduceBoss(){
-      if(this.x + this.width == 1024){
+      if(this.x + this.width == Level.level_end_x - 1024){
         console.log("Kommen wir in die Funktion Introduce Boss rein?");
-        
         World.characterIsInRange = true;
       }
   }
