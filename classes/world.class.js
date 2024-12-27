@@ -1,4 +1,5 @@
 class World {
+  static characterIsInRange = false;
   character = new Character();
   //   barrier = new Barrier();
   level = level1;
@@ -7,7 +8,6 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new StatusBar();
-
   throwableObjects = [
     
   ]
@@ -67,7 +67,7 @@ class World {
     // ------ Space for fixed  objects ------ //
     this.ctx.translate(-this.camera_x, 0);
     this.ctx.fillText(this.character.lifebar, 100,100)
-    this.addToMap(this.statusBar);
+    // this.addToMap(this.statusBar);
     this.ctx.translate(this.camera_x, 0);
     // ------ Space for fixed objects ------- //
 

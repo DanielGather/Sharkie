@@ -119,12 +119,13 @@ class Character extends MovableObject {
         setInterval(() => {
           this.walking_SOUND.pause();
           this.ambience_SOUND.play();
-          if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x - 944) {
+          if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.moveRight();
+            this.introduceBoss();
             this.otherDirection = false;
             this.walking_SOUND.play();
           }
-          if (this.world.keyboard.LEFT && this.x > 0) {
+          if (this.world.keyboard.LEFT && this.x > -944) {
             this.moveLeft();
             this.otherDirection = true;
             this.walking_SOUND.play();
@@ -153,8 +154,17 @@ class Character extends MovableObject {
 
 
   jump() {}
-}
 
+  introduceBoss(){
+      if(this.x + this.width == 1024){
+        console.log("Kommen wir in die Funktion Introduce Boss rein?");
+        
+        World.characterIsInRange = true;
+      }
+  }
+
+
+}
 
 
 // Für später nochmal

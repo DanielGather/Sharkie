@@ -12,36 +12,19 @@ class StatusBar extends DrawableObject {
   constructor() {
     super();
     this.loadImages(this.IMAGES_LIFE);
-    // this.setPercentage(100);
-    this.addIcon(0, 0, 70, 50, this.poisonIcon);
-    this.addIcon(0, 50, 70, 50, this.lifeIcon);
-    this.drawIcons();
+    this.setPercentage(100);
   }
 
-  addIcon(x, y, width, height, img) {
-    this.icons.push({ x, y, width, height, img });
-  }
 
-  drawIcons() {
-    this.icons.forEach(icon => {
-      this.x = icon.x;
-      this.y = icon.y;
-      this.width = icon.width;
-      this.height = icon.height;
-      this.loadImage(icon.img);
-    });
+  setPercentage(percentage) {
+    this.x = 0;
+    this.y = 0;
+    this.width = 200;
+    this.height = 60;
+    this.percentage = percentage;
+    let path = this.IMAGES_LIFE[this.resolveImageIndex()];
+    this.img = this.imageCache[path];
   }
-
-  //setPercentage(50);
-  // setPercentage(percentage) {
-  //   this.x = 0;
-  //   this.y = 0;
-  //   this.width = 200;
-  //   this.height = 60;
-  //   this.percentage = percentage;
-  //   let path = this.IMAGES_LIFE[this.resolveImageIndex()];
-  //   this.img = this.imageCache[path];
-  // }
 
   resolveImageIndex() {
     if (this.percentage == 100) {

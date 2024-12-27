@@ -39,7 +39,7 @@ class Endboss extends MovableObject{
         super().loadImage(this.IMAGES_INTRODUCE[0])
         this.loadImages(this.IMAGES_INTRODUCE);
         this.loadImages(this.IMAGES_SWIMING);
-        this.x = 500;
+        this.x = 1524;
         this.animate();
         
     }
@@ -47,13 +47,18 @@ class Endboss extends MovableObject{
     animate(){
         let i = 0
         setInterval(()=>{
-            if(i<10){
-                this.playAnimation(this.IMAGES_INTRODUCE);
-                console.log("i", i);
-            } else{
-                this.playAnimation(this.IMAGES_SWIMING);
-            } 
-            i++;
+            console.log("Wird ausgeführt");
+            if(World.characterIsInRange){
+                console.log("Wir kommen hier auch rein");
+                
+                if(i<10){
+                    this.playAnimation(this.IMAGES_INTRODUCE);
+                    console.log("i", i);
+                } else{
+                    this.playAnimation(this.IMAGES_SWIMING);
+                } 
+                i++;
+            }
         }, 150)
     }
 
