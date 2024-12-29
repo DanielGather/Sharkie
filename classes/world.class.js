@@ -8,9 +8,7 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-  throwableObjects = [
-    
-  ]
+  throwableObjects = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -28,34 +26,32 @@ class World {
     this.character.world = this;
   }
 
-  setFontRules(){
+  setFontRules() {
     this.ctx.font = "30px LuckiestGuy";
     this.ctx.fillStyle = "white";
   }
 
-  run(){
+  run() {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
     }, 100);
   }
 
-
-
-  checkThrowObjects(){
-    if(this.keyboard.THROW){
-      let bottle = new ThrowableObject(this.character.x + this.character.width, this.character.y + this.character.height / 2)
+  checkThrowObjects() {
+    if (this.keyboard.THROW) {
+      let bottle = new ThrowableObject(this.character.x + this.character.width, this.character.y + this.character.height / 2);
       this.throwableObjects.push(bottle);
     }
   }
 
-
-  checkCollisions(){
-    this.level.enemies.forEach((enemy)=>{
-      if(this.character.isColliding(enemy)){
+  checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
         this.character.hit();
         // this.statusBar.setPercentage(this.character.lifebar)
-    }})
+      }
+    });
   }
 
   draw() {
@@ -63,21 +59,17 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
 
-    
     // ------ Space for fixed  objects ------ //
     this.ctx.translate(-this.camera_x, 0);
-    this.ctx.fillText(this.character.lifebar, 100,100)
+    this.ctx.fillText(this.character.lifebar, 100, 100);
     // this.addToMap(this.statusBar);
     this.ctx.translate(this.camera_x, 0);
     // ------ Space for fixed objects ------- //
-
 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
-
-
 
     // this.addToMap(this.barrier);
     let self = this;
@@ -101,7 +93,7 @@ class World {
   //       variableZahl = variableZahl === 1 ? 2 : 1;
   //       count = 0;
   //     }
-      
+
   //   }
   // }
 
@@ -115,9 +107,9 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
-    mo.draw(this.ctx)
-    mo.drawFrame(this.ctx)
-    
+    mo.draw(this.ctx);
+    mo.drawFrame(this.ctx);
+
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }
