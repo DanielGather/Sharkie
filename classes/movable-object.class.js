@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   height = 100;
   width = 100;
+  characterIsInRange = false;
 
   applyGravity() {
     setInterval(() => {

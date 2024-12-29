@@ -1,5 +1,5 @@
 class World {
-  static characterIsInRange = false;
+  // static characterIsInRange = false;
   character = new Character();
   statusBar = new StatusBar();
   //   barrier = new Barrier();

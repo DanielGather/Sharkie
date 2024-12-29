@@ -158,7 +158,8 @@ class Character extends MovableObject {
   introduceBoss(){
       if(this.x + this.width == Level.level_end_x - 1024){
         console.log("Kommen wir in die Funktion Introduce Boss rein?");
-        World.characterIsInRange = true;
+        // World.characterIsInRange = true;
+        this.characterIsInRange = true;
       }
   }
 

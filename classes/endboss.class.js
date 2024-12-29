@@ -47,7 +47,8 @@ class Endboss extends MovableObject{
     animate(){
         let i = 0
         setInterval(()=>{
-            if(World.characterIsInRange){ 
+            // if(World.characterIsInRange){ 
+            if(this.characterIsInRange){
                 if(i<10){
                     this.playAnimation(this.IMAGES_INTRODUCE);
                     console.log("i", i);
