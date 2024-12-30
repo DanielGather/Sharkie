@@ -9,6 +9,13 @@ class Character extends MovableObject {
   swimAnimation;
   animationPlayed = false;
   imageIsLoaded = false;
+
+  offset = {
+    top: 90,
+    right: 40,
+    left: 40,
+    bottom: 50
+  }
   
 
   IMAGES_SWIMING = ["img/1.Sharkie/3.Swim/1.png", "img/1.Sharkie/3.Swim/2.png", "img/1.Sharkie/3.Swim/3.png", "img/1.Sharkie/3.Swim/4.png", "img/1.Sharkie/3.Swim/5.png", "img/1.Sharkie/3.Swim/6.png"];
@@ -87,7 +94,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_HURT_POISON);
     this.loadImages(this.IMAGES_HURT_ELECTRO);
     this.animate();
-    this.applyGravity();
+    // this.applyGravity();
     // this.isDead();
   }
 
@@ -159,7 +166,7 @@ class Character extends MovableObject {
       if(this.x + this.width == Level.level_end_x - 1024){
         console.log("Kommen wir in die Funktion Introduce Boss rein?");
         // World.characterIsInRange = true;
-        this.characterIsInRange = true;
+        world.characterIsInRange = true;
       }
   }
 

@@ -1,18 +1,31 @@
 class Level {
+  static level_end_x;
   enemies;
   canvas;
   backgroundObjects;
-  static level_end_x;;
   repeatCount;
   step;
+  coinsArray = [];
 
-  constructor(enemies, backgroundObjects, repeatCount, step) {
+  constructor(enemies, backgroundObjects, coins, repeatCount, step) {
     Level.level_end_x = repeatCount * step;
     this.enemies = enemies;
     this.backgroundObjects = backgroundObjects;
+    this.coins = coins;
     this.repeatCount = repeatCount;
     this.step = step;
-    this.createBackgroundObjects(repeatCount, step)
+    this.createBackgroundObjects(repeatCount, step);
+    this.createCoins(coins);
+  }
+
+  createCoins(coins) {
+    for (let i = 0; i < coins; i++) {
+      const angleStep = (1.25 * Math.PI) / coins; // Winkelabstand zwischen den Coins
+      const angle = angleStep * i; // Winkel für den aktuellen Coin
+      let x = 600 + 75 * Math.cos(-angle); // X-Koordinate
+      let y = 150 + 75 * Math.sin(-angle);
+      this.coinsArray.push(new Coins(x, y));
+    }
   }
 
   createBackgroundObjects(repeatCount, step) {
@@ -29,7 +42,7 @@ class Level {
       if (count >= 1) {
         variableZahl = variableZahl === 1 ? 2 : 1;
         count = 0;
-      }  
+      }
     }
   }
 }

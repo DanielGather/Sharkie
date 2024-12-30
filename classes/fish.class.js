@@ -3,6 +3,13 @@ class Fish extends MovableObject{
     width = 120;
     height = 80;
 
+    offset = {
+        top: 5,
+        right: 10,
+        left: 5,
+        bottom: 25
+      }
+
     IMAGES_SWIMING = [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
@@ -37,8 +44,6 @@ class Fish extends MovableObject{
         setInterval(()=>{
             this.moveLeft();
         },1000/ this.hz)
-
-
 
         setInterval(()=>{
             this.playAnimation(this.IMAGES_SWIMING);

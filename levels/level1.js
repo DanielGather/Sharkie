@@ -1,8 +1,8 @@
 const level1 = new Level(
   [
-    // new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-    // new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png'),
-    // new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png'),
+    new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+    new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png'),
+    new Fish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png'),
     new Endboss(),
   ],
   [
@@ -13,6 +13,7 @@ const level1 = new Level(
     new BackgroundObject("img/3.Background/Layers/4.Fondo 2/D2.png", -1024, 0),
     new BackgroundObject("img/3.Background/Layers/2.Floor/D2.png", -1024, 0),
   ],
+  5,
   2,
   1024
 );

@@ -8,9 +8,8 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-  throwableObjects = [
-    
-  ]
+  characterIsInRange = false;
+  throwableObjects = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -28,34 +27,46 @@ class World {
     this.character.world = this;
   }
 
-  setFontRules(){
+  setFontRules() {
     this.ctx.font = "30px LuckiestGuy";
     this.ctx.fillStyle = "white";
   }
 
-  run(){
+  run() {
     setInterval(() => {
-      this.checkCollisions();
+      this.checkCollisionsEnemy();
+      this.checkCollisionsCoins();
       this.checkThrowObjects();
     }, 100);
   }
 
-
-
-  checkThrowObjects(){
-    if(this.keyboard.THROW){
-      let bottle = new ThrowableObject(this.character.x + this.character.width, this.character.y + this.character.height / 2)
+  checkThrowObjects() {
+    if (this.keyboard.THROW) {
+      let bottle = new ThrowableObject(this.character.x + this.character.width, this.character.y + this.character.height / 2);
       this.throwableObjects.push(bottle);
     }
   }
 
+  checkCollisionsEnemy() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hitEnemy();
+      }
+    });
+  }
 
-  checkCollisions(){
-    this.level.enemies.forEach((enemy)=>{
-      if(this.character.isColliding(enemy)){
-        this.character.hit();
-        // this.statusBar.setPercentage(this.character.lifebar)
-    }})
+  checkCollisionsCoins() {
+    this.level.coinsArray = this.level.coinsArray.filter((coin) => {
+      if (this.character.isColliding(coin)) {
+        this.character.coins += 1;
+        return false;
+      }
+      return true;
+    });
+  }
+
+  deleteCoin(coin, index) {
+    this.level.coinsArray.splice(coin[index], 1);
   }
 
   draw() {
@@ -63,21 +74,20 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
 
-    
     // ------ Space for fixed  objects ------ //
     this.ctx.translate(-this.camera_x, 0);
-    this.ctx.fillText(this.character.lifebar, 100,100)
-    // this.addToMap(this.statusBar);
+    this.ctx.fillText(this.character.lifebar, 50, 40);
+    this.ctx.fillText(this.character.poisonStorage, 50, 90);
+    this.ctx.fillText(this.character.coins, 50, 135);
+    this.addToMap(this.statusBar);
     this.ctx.translate(this.camera_x, 0);
     // ------ Space for fixed objects ------- //
 
-
     this.addToMap(this.character);
+    this.addObjectsToMap(this.level.coinsArray);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
-
-
 
     // this.addToMap(this.barrier);
     let self = this;
@@ -85,25 +95,6 @@ class World {
       self.draw();
     });
   }
-
-  // createBackgroundObjects(repeatCount, step) {
-  //   const backgroundLayers = ["img/3.Background/Layers/5. Water/D", "img/3.Background/Layers/1. Light/", "img/3.Background/Layers/3.Fondo 1/D", "img/3.Background/Layers/4.Fondo 2/D", "img/3.Background/Layers/2.Floor/D"];
-  //   let variableZahl = 1;
-  //   let count = 0;
-  //   this.level.level_end_x = repeatCount * step;
-  //   for (let i = 0; i < repeatCount; i++) {
-  //     let x = i * step;
-  //     backgroundLayers.forEach((backgroundLayerBase) => {
-  //       this.level.backgroundObjects.push(new BackgroundObject(`${backgroundLayerBase}${variableZahl}.png`, x, 0));
-  //     });
-  //     count++;
-  //     if (count >= 1) {
-  //       variableZahl = variableZahl === 1 ? 2 : 1;
-  //       count = 0;
-  //     }
-      
-  //   }
-  // }
 
   addObjectsToMap(objects) {
     objects.forEach((o) => {
@@ -115,9 +106,10 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
-    mo.draw(this.ctx)
-    mo.drawFrame(this.ctx)
-    
+    mo.draw(this.ctx);
+    mo.drawFrame(this.ctx);
+    mo.drawFrameOffset(this.ctx);
+
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

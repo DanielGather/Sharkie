@@ -4,6 +4,13 @@ class Endboss extends MovableObject{
     height = 500;
     y = 0;
 
+    offset = {
+        top: 160,
+        right: 30,
+        left: 30,
+        bottom: 85
+      }
+
     IMAGES_INTRODUCE = [
         'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
         'img/2.Enemy/3 Final Enemy/1.Introduce/2.png',
@@ -48,7 +55,7 @@ class Endboss extends MovableObject{
         let i = 0
         setInterval(()=>{
             // if(World.characterIsInRange){ 
-            if(this.characterIsInRange){
+            if(world.characterIsInRange){
                 if(i<10){
                     this.playAnimation(this.IMAGES_INTRODUCE);
                     console.log("i", i);

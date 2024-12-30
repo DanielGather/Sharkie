@@ -1,6 +1,13 @@
 class ThrowableObject extends MovableObject {
     speedX = 20;
 
+    offset = {
+        top: 0,
+        right: 0,
+        left: 0,
+        bottom: 0
+      }
+
     constructor(x,y){
         super().loadImage("img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
         this.x = x;

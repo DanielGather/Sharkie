@@ -1,54 +1,54 @@
 @font-face {
-    font-family: LuckiestGuy;
-    src: url('./img/5.Font/LuckiestGuy-Regular.ttf');
+  font-family: LuckiestGuy;
+  src: url("./img/5.Font/LuckiestGuy-Regular.ttf");
 }
 
 @font-face {
-    font-family: MightySoul;
-    src: url(./img/5.Font/MightySouly-lxggD.ttf);
+  font-family: MightySoul;
+  src: url(./img/5.Font/MightySouly-lxggD.ttf);
 }
 
-*{
-    margin: 0;
+* {
+  margin: 0;
 }
 
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url(./img/sharkMouth.webp);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    font-family: 'MightySoul', Arial, Helvetica, sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.35rem;
-    text-shadow: 6px 4px 2px rgba(0, 0, 0, 0.5);
-    color: white;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(./img/sharkMouth.webp);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  font-family: "MightySoul", Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.35rem;
+  text-shadow: 6px 4px 2px rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 100%;
+  height: 100vh;
+}
+
+canvas {
+  background-color: black;
+  margin: 1rem 0rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  canvas {
     width: 100%;
+    margin: 0;
+  }
+  .controlKeys {
+    display: none;
+  }
+  h1 {
+    display: none;
+  }
+}
+
+@media only screen and (max-height: 600px) {
+  canvas {
     height: 100vh;
-}
-
-canvas{
-    background-color: black;
-    margin:1rem 0rem;
-}
-
-@media only screen and (max-width: 1024px){
-    canvas{
-        width: 100%;
-        margin: 0;
-    }
-    .controlKeys{
-        display: none;
-    }
-    h1 {
-        display: none;
-    }
-}
-
-@media only screen and (max-height: 600px){
-    canvas{
-        height: 100vh;
-    }
+  }
 }
