@@ -100,7 +100,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_HURT_POISON);
     this.loadImages(this.IMAGES_HURT_ELECTRO);
     this.animate();
-    // this.applyGravity();
+    this.applyGravity();
     // this.isDead();
   }
 
