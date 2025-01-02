@@ -26,6 +26,7 @@ class Fish extends MovableObject{
         this.y = this.calculateY();
         this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
+
     }
 
     calculateY(){
@@ -39,14 +40,13 @@ class Fish extends MovableObject{
         }
         return number;
     }
-
-    animate() {
-        setInterval(()=>{
-            this.moveLeft();
-        },1000/ this.hz)
-
-        setInterval(()=>{
+    
+    fishSwiming(){
             this.playAnimation(this.IMAGES_SWIMING);
-        }, 200)
+    }
+    
+    animate() {
+        setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz)
+        setStoppableInterval(this.fishSwiming.bind(this),200)
       }
 }

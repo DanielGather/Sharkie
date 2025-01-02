@@ -1,4 +1,6 @@
 class World {
+
+
   // static characterIsInRange = false;
   character = new Character();
   statusBar = new StatusBar();
@@ -10,6 +12,7 @@ class World {
   camera_x = 0;
   characterIsInRange = false;
   throwableObjects = [];
+  // intervalIDs = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -18,10 +21,16 @@ class World {
     // this.createBackgroundObjects(2, 1024);
     this.draw();
     this.setWorld();
-    this.run();
     this.setFontRules();
-    // this.character.isDead();
+    setStoppableInterval(this.run.bind(this), 100)
   }
+
+  run() {
+      this.checkCollisionsEnemy();
+      this.checkCollisionsCoins();
+      this.checkThrowObjects();
+  }
+
 
   setWorld() {
     this.character.world = this;
@@ -32,13 +41,7 @@ class World {
     this.ctx.fillStyle = "white";
   }
 
-  run() {
-    setInterval(() => {
-      this.checkCollisionsEnemy();
-      this.checkCollisionsCoins();
-      this.checkThrowObjects();
-    }, 100);
-  }
+
 
   checkThrowObjects() {
     if (this.keyboard.THROW) {
@@ -48,6 +51,7 @@ class World {
   }
 
   checkCollisionsEnemy() {
+    
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hitEnemy();

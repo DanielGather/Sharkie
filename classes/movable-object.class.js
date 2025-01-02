@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   height = 100;
   width = 100;
+  lastMovementCharacter;
 
   // offset = {
   //   top: 0,
@@ -30,9 +31,6 @@ class MovableObject extends DrawableObject {
   isNotOnTheGround() {
     return this.y < 415;
   }
-
-
-
 
   moveRight() {
     this.x += this.speed;

@@ -1,6 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let intervalIDs = [];
+
 
 function init() {
   canvas = document.getElementById("canvas");
@@ -9,6 +11,23 @@ function init() {
   console.log("My Character is,", world.character);
   console.log("My World is,", world);
   
+}
+
+// window.setStoppableInterval = function (fn, time) {
+//   console.log("Ich werde aufgerufen");
+//   let id = setInterval(fn, time);
+//   intervalIDs.push(id);
+// };
+
+function setStoppableInterval(fn, time){
+  console.log("Ich werde aufgerufen");
+  
+  let id = setInterval(fn,time)
+  intervalIDs.push(id);
+}
+
+function stopGame(){
+  intervalIDs.forEach(clearInterval)
 }
 
 
