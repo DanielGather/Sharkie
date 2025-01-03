@@ -20,8 +20,6 @@ function init() {
 // };
 
 function setStoppableInterval(fn, time){
-  console.log("Ich werde aufgerufen");
-  
   let id = setInterval(fn,time)
   intervalIDs.push(id);
 }

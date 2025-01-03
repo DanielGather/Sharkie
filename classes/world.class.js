@@ -1,7 +1,7 @@
 class World {
   character = new Character();
   statusBar = new StatusBar();
-  endbossLifebar = new EndbossLifebar();
+  endbossLife = new EndbossLifebar();
   //   barrier = new Barrier();
   level = level1;
   canvas;
@@ -11,6 +11,7 @@ class World {
   characterIsInRange = false;
   throwableObjects = [];
   bossIsTriggerd = false;
+  lastThrow;
   // intervalIDs = [];
 
   constructor(canvas, keyboard) {
@@ -33,6 +34,7 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.level.enemies.world = this;
   }
 
   setFontRules() {
@@ -41,11 +43,24 @@ class World {
   }
 
   checkThrowObjects() {
-    if (this.keyboard.THROW) {
-      let bottle = new ThrowableObject(this.character.x + this.character.width, this.character.y + this.character.height / 2);
-      this.throwableObjects.push(bottle);
+    if (this.keyboard.THROW && !this.throwDelay()) {
+        this.lastThrow = new Date().getTime();
+        let bottle = new ThrowableObject(
+            this.character.x + this.character.width,
+            this.character.y + this.character.height / 2
+        );
+        this.throwableObjects.push(bottle);
     }
-  }
+}
+
+  throwDelay() {
+    if (!this.lastThrow) {
+        this.lastThrow = 0;
+    }
+    let currentTime = new Date().getTime();
+    let timePassed = (currentTime - this.lastThrow) / 1000;
+    return timePassed < 0.5;
+}
 
   checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
@@ -57,18 +72,23 @@ class World {
 
   checkCollisionThrowableObject() {
     this.throwableObjects = this.throwableObjects.filter((obj) => {
-      let hitEnemy = false;
-      this.level.enemies = this.level.enemies.filter((enemy) => {
-        if (obj.isColliding(enemy)) {
-          hitEnemy = true; // Projektil trifft einen Gegner
-          return false; // Entfernt den Gegner
-        }
-        return true; // Gegner bleibt im Array
-      });
+        let hitEnemy = false;
+        this.level.enemies = this.level.enemies.filter((enemy) => {
+            if (obj.isColliding(enemy)) {
+                if (enemy instanceof Fish) {
+                    hitEnemy = true; // Projektil trifft einen Fisch
+                    return false;    // Entfernt den Fisch aus dem Array
+                } else if (enemy instanceof Endboss) {
+                    this.character.hitEndboss();
+                    hitEnemy = true;
+                }
+            }
+            return true; // Gegner bleibt im Array, wenn er nicht getroffen wurde
+        });
 
-      return !hitEnemy; // Entfernt das Projektil, wenn es einen Gegner trifft
+        return !hitEnemy; // Entfernt das Projektil, wenn es einen Gegner (Fisch) trifft
     });
-  }
+}
 
   checkCollisionsCoins() {
     this.level.coinsArray = this.level.coinsArray.filter((coin) => {
@@ -78,10 +98,6 @@ class World {
       }
       return true;
     });
-  }
-
-  deleteCoin(coin, index) {
-    this.level.coinsArray.splice(coin[index], 1);
   }
 
   draw() {
@@ -113,27 +129,10 @@ class World {
     });
   }
 
-  translateCameraNegative(){
-    if(this.character.x < 2150){
-      this.ctx.translate(-this.camera_x, 0);
-    } else {
-      this.ctx.translate(-this.camera_x, 1024)
-    }
-  }
-
-  translateCameraPositive(){
-    if(this.character.x < 2150){
-      this.ctx.translate(this.camera_x, 0);
-    } else{
-
-      this.ctx.translate(this.camera_x, 1024);
-    }
-  }
-
   addEndbossLifebar(){
-    if(this.character.x >= 1024 || this.bossIsTriggerd == true){
-      this.ctx.fillText(this.character.endbossLifebar, 925, 40)
-      this.addToMap(this.endbossLifebar)
+    if(this.character.x >= Level.level_end_x - 2024 || this.bossIsTriggerd == true){
+      this.ctx.fillText(this.character.endbossLife, 925, 40)
+      this.addToMap(this.endbossLife)
       this.bossIsTriggerd = true;
     }
   }
