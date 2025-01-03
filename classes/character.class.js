@@ -85,7 +85,8 @@ class Character extends MovableObject {
       this.characterSwimDown();
       this.playWalkingSound();
       this.lastMovement();
-      this.world.camera_x = -this.x + 80;
+      this.changeCameraX();
+      // this.world.camera_x = -this.x + 80;
 
     }, 1000 / this.hz);
   }
@@ -109,13 +110,13 @@ class Character extends MovableObject {
   }
 
   characterSwimDown() {
-    if (this.world.keyboard.DOWN) {
+    if (this.world.keyboard.DOWN && this.y + this.height - this.offset.bottom < 600) {
       this.swimDOWN();
     }
   }
 
   characterSwimUp() {
-    if (this.world.keyboard.UP) {
+    if (this.world.keyboard.UP && this.y + this.offset.top > 0) {
       this.swimUP();
     }
   }
@@ -128,10 +129,18 @@ class Character extends MovableObject {
   }
 
   characterSwimRight() {
-    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+    if (this.world.keyboard.RIGHT && this.x + this.width + this.offset.right < Level.level_end_x) {
       this.moveRight();
       this.introduceBoss();
       this.otherDirection = false;
+    }
+  }
+
+  changeCameraX(){
+    if(this.x >= Level.level_end_x - 1024){
+      this.world.camera_x = -Level.level_end_x + 1104;
+    } else {
+          this.world.camera_x = -this.x + 80;
     }
   }
 
@@ -145,9 +154,7 @@ class Character extends MovableObject {
   jump() {}
 
   introduceBoss() {
-    if (this.x + this.width == Level.level_end_x - 1024) {
-      console.log("Kommen wir in die Funktion Introduce Boss rein?");
-      // World.characterIsInRange = true;
+    if (this.x + this.width == Level.level_end_x - 1548) {
       world.characterIsInRange = true;
     }
   }

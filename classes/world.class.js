@@ -1,9 +1,7 @@
 class World {
-
-
-  // static characterIsInRange = false;
   character = new Character();
   statusBar = new StatusBar();
+  endbossLifebar = new EndbossLifebar();
   //   barrier = new Barrier();
   level = level1;
   canvas;
@@ -12,6 +10,7 @@ class World {
   camera_x = 0;
   characterIsInRange = false;
   throwableObjects = [];
+  bossIsTriggerd = false;
   // intervalIDs = [];
 
   constructor(canvas, keyboard) {
@@ -22,15 +21,15 @@ class World {
     this.draw();
     this.setWorld();
     this.setFontRules();
-    setStoppableInterval(this.run.bind(this), 100)
+    setStoppableInterval(this.run.bind(this), 100);
   }
 
   run() {
-      this.checkCollisionsEnemy();
-      this.checkCollisionsCoins();
-      this.checkThrowObjects();
+    this.checkCollisionsEnemy();
+    this.checkCollisionsCoins();
+    this.checkThrowObjects();
+    this.checkCollisionThrowableObject();
   }
-
 
   setWorld() {
     this.character.world = this;
@@ -41,8 +40,6 @@ class World {
     this.ctx.fillStyle = "white";
   }
 
-
-
   checkThrowObjects() {
     if (this.keyboard.THROW) {
       let bottle = new ThrowableObject(this.character.x + this.character.width, this.character.y + this.character.height / 2);
@@ -51,11 +48,25 @@ class World {
   }
 
   checkCollisionsEnemy() {
-    
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hitEnemy();
       }
+    });
+  }
+
+  checkCollisionThrowableObject() {
+    this.throwableObjects = this.throwableObjects.filter((obj) => {
+      let hitEnemy = false;
+      this.level.enemies = this.level.enemies.filter((enemy) => {
+        if (obj.isColliding(enemy)) {
+          hitEnemy = true; // Projektil trifft einen Gegner
+          return false; // Entfernt den Gegner
+        }
+        return true; // Gegner bleibt im Array
+      });
+
+      return !hitEnemy; // Entfernt das Projektil, wenn es einen Gegner trifft
     });
   }
 
@@ -83,6 +94,7 @@ class World {
     this.ctx.fillText(this.character.lifebar, 50, 40);
     this.ctx.fillText(this.character.poisonStorage, 50, 90);
     this.ctx.fillText(this.character.coins, 50, 135);
+    this.addEndbossLifebar();
     this.addToMap(this.statusBar);
     this.ctx.translate(this.camera_x, 0);
     // ------ Space for fixed objects ------- //
@@ -93,11 +105,37 @@ class World {
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
 
+
     // this.addToMap(this.barrier);
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  translateCameraNegative(){
+    if(this.character.x < 2150){
+      this.ctx.translate(-this.camera_x, 0);
+    } else {
+      this.ctx.translate(-this.camera_x, 1024)
+    }
+  }
+
+  translateCameraPositive(){
+    if(this.character.x < 2150){
+      this.ctx.translate(this.camera_x, 0);
+    } else{
+
+      this.ctx.translate(this.camera_x, 1024);
+    }
+  }
+
+  addEndbossLifebar(){
+    if(this.character.x >= 1024 || this.bossIsTriggerd == true){
+      this.ctx.fillText(this.character.endbossLifebar, 925, 40)
+      this.addToMap(this.endbossLifebar)
+      this.bossIsTriggerd = true;
+    }
   }
 
   addObjectsToMap(objects) {

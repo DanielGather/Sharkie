@@ -71,9 +71,9 @@ class Endboss extends MovableObject{
         const interval = setInterval(() => {
             if (Level.level_end_x !== undefined) {
                 clearInterval(interval);
-                this.x = Level.level_end_x - 500
+                this.x = Level.level_end_x - 1024
             }
-        }, 100); // prüft alle 100ms
+        }, 100);
     }
 
 }
