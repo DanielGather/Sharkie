@@ -26,7 +26,6 @@ class Fish extends MovableObject{
         this.y = this.calculateY();
         this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
-
     }
 
     calculateY(){
