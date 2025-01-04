@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
   acceleration = 0.005;
   lifebar = 100;
   endbossLife = 1000;
-  poisonStorage = 20;
+  poisonStorage = 5;
   coins = 0;
   lastHit = 0;
   height = 100;
@@ -62,14 +62,6 @@ class MovableObject extends DrawableObject {
 
 
   isColliding(mo){
-    // console.log("MO OFFSET LEFT",mo.offset.left);    
-    // console.log("MO X",mo.x);
-
-    // console.log("Character X VORNE", this.x + this.width - this.offset.right, "MO X VORNE", mo.x + mo.offset.left);    
-    // console.log("Character Y UNTEN", this.y + this.height - this.offset.bottom, "MO Y OBEN", mo.y + mo.offset.top);
-    // console.log("Character X HINTEN", this.x + this.offset.left, "MO X HINTEN", mo.x + mo.width - mo.offset.right);
-    // console.log("Character Y OBEN", this.y + this.offset.top, "MO Y UNTEN", mo.y + mo.height - mo.offset.bottom);
-
     return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
     this.y + this.height - this.offset.bottom  > mo.y + mo.offset.top &&
     this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
@@ -101,6 +93,16 @@ class MovableObject extends DrawableObject {
 
   hitCoin(){
     this.coins += 1;
+  }
+
+  hitPoisonBottle(){
+    this.poisonStorage += 1;
+  }
+
+  reducePoisonStorage(){
+    if(!this.poisonStorage == 0){
+      this.poisonStorage -= 1;
+    }
   }
 
   

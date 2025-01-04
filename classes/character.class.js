@@ -31,6 +31,17 @@ class Character extends MovableObject {
 
   IMAGES_HURT_ELECTRO = ["img/1.Sharkie/5.Hurt/2.Electric shock/1.png", "img/1.Sharkie/5.Hurt/2.Electric shock/2.png", "img/1.Sharkie/5.Hurt/2.Electric shock/3.png"];
 
+  IMAGES_SHOOTING_BUBBLE = [
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
+  ]
+
   world;
   walking_SOUND = new Audio("audio/fishSwiming.mp3");
   ambience_SOUND = new Audio("audio/underWaterNoise.mp3");
@@ -44,6 +55,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_ELECTRO_DEAD);
     this.loadImages(this.IMAGES_HURT_POISON);
     this.loadImages(this.IMAGES_HURT_ELECTRO);
+    this.loadImages(this.IMAGES_SHOOTING_BUBBLE);
     this.animate();
     this.applyGravity(); 
     // this.isDead();
@@ -86,8 +98,6 @@ class Character extends MovableObject {
       this.playWalkingSound();
       this.lastMovement();
       this.changeCameraX();
-      // this.world.camera_x = -this.x + 80;
-
     }, 1000 / this.hz);
   }
 

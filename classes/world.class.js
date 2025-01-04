@@ -30,6 +30,7 @@ class World {
     this.checkCollisionsCoins();
     this.checkThrowObjects();
     this.checkCollisionThrowableObject();
+    this.checkCollisionsPoisonBottle();
   }
 
   setWorld() {
@@ -43,15 +44,34 @@ class World {
   }
 
   checkThrowObjects() {
-    if (this.keyboard.THROW && !this.throwDelay()) {
+    if (this.keyboard.THROW && !this.throwDelay() && !this.character.poisonStorage == 0 ) {
+      this.shootingAnimation();
+      setTimeout(()=>{
         this.lastThrow = new Date().getTime();
         let bottle = new ThrowableObject(
-            this.character.x + this.character.width,
+            this.character.x + this.character.width - this.character.offset.right + 25,
             this.character.y + this.character.height / 2
         );
-        this.throwableObjects.push(bottle);
+          this.throwableObjects.push(bottle);
+        }, 400)
+        this.character.reducePoisonStorage();
     }
 }
+
+  shootingAnimation(){
+    let i = 0
+    let isPlayed = false;
+    setInterval(()=>{
+      if(i < 8){
+        this.character.playAnimation(this.character.IMAGES_SHOOTING_BUBBLE)
+      } else if(isPlayed == false) {
+        this.character.loadImage("img/1.Sharkie/3.Swim/1.png")
+        isPlayed = true;
+      }
+      i++
+    },50)
+    
+  }
 
   throwDelay() {
     if (!this.lastThrow) {
@@ -93,7 +113,17 @@ class World {
   checkCollisionsCoins() {
     this.level.coinsArray = this.level.coinsArray.filter((coin) => {
       if (this.character.isColliding(coin)) {
-        this.character.coins += 1;
+        this.character.hitCoin();
+        return false;
+      }
+      return true;
+    });
+  }
+
+  checkCollisionsPoisonBottle() {
+    this.level.poisonBottleArray = this.level.poisonBottleArray.filter((bottle) => {
+      if (this.character.isColliding(bottle)) {
+        this.character.hitPoisonBottle();
         return false;
       }
       return true;
@@ -118,6 +148,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.coinsArray);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.poisonBottleArray);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
 
