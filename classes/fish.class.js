@@ -31,11 +31,9 @@ class Fish extends MovableObject{
     calculateY(){
         let number = Math.random() * 400;
         if(number < 200){
-            number = 200 + number;
-            return number;
+            return 200 + number;
         } else if (number > 400){
-            number = number - 200;
-            return number;
+            return number - 200;
         }
         return number;
     }
