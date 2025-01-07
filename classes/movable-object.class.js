@@ -12,6 +12,7 @@ class MovableObject extends DrawableObject {
   width = 100;
   lastMovementCharacter;
   FishIsInRange = false;
+  timerHasExpired = false;
 
   // offset = {
   //   top: 0,

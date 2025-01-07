@@ -88,7 +88,7 @@ class Character extends MovableObject {
     setStoppableMovementInterval(this.characterSwimUp.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimDown.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.playWalkingSound.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.fishIsNearCharacter.bind(this), 100);
+    setStoppableMovementInterval(this.fishIsNearCharacter.bind(this), 300);
 
     setInterval(() => {
       this.lastMovement();
@@ -173,8 +173,13 @@ class Character extends MovableObject {
     // this.FishIsInRange = false;
     Level.enemyLevelArray.forEach((enemy) => {
       const distance = Math.abs(this.x + this.width - enemy.x);
+      console.log("Distance",distance);
+      
       if (distance < 150) {
         enemy.updateFishIsInRangeTrue(true);
+      } else if(distance > 300) {
+        enemy.updateFishIsInRangeTrue(false);
+
       }
     });
   }

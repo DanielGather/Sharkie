@@ -4,7 +4,9 @@ class PinkFish extends MovableObject {
   j;
   x;
   FishIsInRange;
+  timerHasExpired = true;
   animationPlayed;
+  
 
   offset = {
     top: 5,
@@ -30,6 +32,7 @@ class PinkFish extends MovableObject {
     this.y = this.calculateY();
     this.speed = 0.15 + Math.random() * 0.25;
     this.animate();
+    this.playAnimation(this.IMAGES_PINK_FISH_SWIMING);
   }
 
   updateFishIsInRangeTrue(isInRange) {
@@ -39,8 +42,7 @@ class PinkFish extends MovableObject {
   animate() {
     this.j = 0;
     setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
-    setStoppableInterval(this.fishSwiming.bind(this), 200);
-    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this), 400);
+    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this), 150);
   }
 
   calculateY() {
@@ -55,10 +57,47 @@ class PinkFish extends MovableObject {
 
   checkFishAndCharacterDistance() {
     if (this.FishIsInRange) {
-      if (this.j < 12) {
-        this.playAnimation(this.IMAGES_PINK_FISH_TRANSITION);
-      } 
+      if (this.timerIsRunning()) {
+        this.playAnimation(this.IMAGES_PINK_FISH_BUBBLE_SWIM);
+      } else {
+       this.playFishTransition();
+      }
+    } else {
+      if (this.timerIsStopped()) {
+        this.playStandardFishAnimation();
+      } else {
+        this.setTimer();
+      }
+    }
+  }
+
+  timerIsRunning(){
+    return !this.timerHasExpired;
+  }
+
+  timerIsStopped(){
+    return this.timerHasExpired;
+  }
+
+  setTimer(){
+    setTimeout(() => {
+      this.timerHasExpired = true;
+    }, 3000);
+  }
+
+  playStandardFishAnimation(){
+    this.playAnimation(this.IMAGES_PINK_FISH_SWIMING);
+    this.offset.bottom = 25;
+  }
+
+  playFishTransition(){
+    if (this.j < 12) {
+      this.playAnimation(this.IMAGES_PINK_FISH_TRANSITION);
+      this.offset.bottom = 5;
       this.j++;
+    } else {
+      this.timerHasExpired = false;
+      this.j = 0;
     }
   }
 
@@ -67,14 +106,5 @@ class PinkFish extends MovableObject {
     console.log("calculateX", number);
 
     return number;
-  }
-
-  fishSwiming() {
-    if (!this.FishIsInRange) {
-      this.playAnimation(this.IMAGES_PINK_FISH_SWIMING);
-    } else {
-      this.playAnimation(this.IMAGES_PINK_FISH_BUBBLE_SWIM);
-      this.offset.bottom = 5;
-    }
   }
 }

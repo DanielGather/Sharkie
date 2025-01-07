@@ -3,7 +3,7 @@ let repeatCountLevel = 2;
 let stepLevel = 1024;
 let PoisonBottleLevel = 10;
 let first_level_end_x_ = repeatCountLevel * stepLevel;
-let enemyLevel = 3
+let enemyLevel = 1
 
 const level1 = new Level(
 
