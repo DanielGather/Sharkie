@@ -14,13 +14,13 @@ class DrawableObject {
     try{
       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     } catch(e){
-      console.warn(e);
+      console.warn(e.img.src);
     }
   }
 
 
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Fish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle) {
+    if (this instanceof Character || this instanceof GreenFish || this instanceof PinkFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle) {
       ctx.beginPath();
       ctx.lineWidth = "3";
       ctx.strokeStyle = "blue";
@@ -30,7 +30,7 @@ class DrawableObject {
   }
 
   drawFrameOffset(ctx) {
-    if (this instanceof Character || this instanceof Fish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle) {
+    if (this instanceof Character || this instanceof GreenFish || this instanceof PinkFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle) {
       ctx.beginPath();
       ctx.lineWidth = "3";
       ctx.strokeStyle = "red";

@@ -5,14 +5,13 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 0.005;
   lifebar = 100;
-  endbossLife = 1000;
   poisonStorage = 5;
   coins = 0;
   lastHit = 0;
   height = 100;
   width = 100;
   lastMovementCharacter;
-  bubbleDamage = 50;
+  enemiesArray = [];
 
   // offset = {
   //   top: 0,
@@ -84,12 +83,6 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  hitEndboss(){
-    this.endbossLife -= this.bubbleDamage;
-    if(this.endbossLife < 0){
-      this.endbossLife = 0;
-    }
-  }
 
   hitCoin(){
     this.coins += 1;

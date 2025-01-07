@@ -1,4 +1,4 @@
-class Fish extends MovableObject{
+class GreenFish extends MovableObject{
     
     width = 120;
     height = 80;
@@ -10,7 +10,7 @@ class Fish extends MovableObject{
         bottom: 25
       }
 
-    IMAGES_SWIMING = [
+    IMAGES_GREEN_FISH_SWIMING = [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.webp',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.webp',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.webp',
@@ -18,16 +18,22 @@ class Fish extends MovableObject{
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.webp'
     ]
 
-
-    constructor(img){
-        super().loadImage(img);
-        this.loadImages(this.IMAGES_SWIMING)
-        this.x = 300 + Math.random() * 500;
+    constructor(level_end_x){
+        super()
+        this.level_end_x = level_end_x;
+        this.loadImages(this.IMAGES_GREEN_FISH_SWIMING)
+        this.x = level_end_x
         this.y = this.calculateY();
         this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
     }
 
+    animate() {
+        setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz)
+        setStoppableInterval(this.fishSwiming.bind(this),200)
+      }
+
+      
     calculateY(){
         let number = Math.random() * 400;
         if(number < 200){
@@ -37,13 +43,18 @@ class Fish extends MovableObject{
         }
         return number;
     }
+
+    // calculateX(){
+    //     console.log("level end x", Level.level_end_x);
+        
+    //     let number = 300 + Math.random() * this.level_end_x
+    //     console.log("calculateX",number);
+        
+    //     return number
+    // }
     
     fishSwiming(){
-            this.playAnimation(this.IMAGES_SWIMING);
+            this.playAnimation(this.IMAGES_GREEN_FISH_SWIMING);
     }
     
-    animate() {
-        setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz)
-        setStoppableInterval(this.fishSwiming.bind(this),200)
-      }
 }

@@ -6,6 +6,10 @@ class Endboss extends MovableObject {
   j;
   isNotDead = true;
   animationPlayed;
+  endbossLife = 1000;
+  bubbleDamage = 50;
+  lastHitEndboss = 0;
+  isHurt = false;
 
   offset = {
     top: 160,
@@ -41,6 +45,13 @@ class Endboss extends MovableObject {
     "img/2.Enemy/3 Final Enemy/2.floating/12.webp", 
     "img/2.Enemy/3 Final Enemy/2.floating/13.webp"];
 
+  IMAGES_IS_HURT = [
+    "img/2.Enemy/3 Final Enemy/Hurt/1.webp",
+    "img/2.Enemy/3 Final Enemy/Hurt/2.webp",
+    "img/2.Enemy/3 Final Enemy/Hurt/3.webp",
+    "img/2.Enemy/3 Final Enemy/Hurt/4.webp"
+  ]
+
   IMAGES_ENDBOSS_DEAD = [
     "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.webp", 
     "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.webp", 
@@ -53,6 +64,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_INTRODUCE);
     this.loadImages(this.IMAGES_SWIMING);
     this.loadImages(this.IMAGES_ENDBOSS_DEAD);
+    this.loadImages(this.IMAGES_IS_HURT);
     this.waitForEndbossVariable();
     this.animate();
   }
@@ -62,10 +74,34 @@ class Endboss extends MovableObject {
     this.j = 0;
     setStoppableInterval(this.characterIsNearEndboss.bind(this), 200);
     setStoppableInterval(this.endbossIsDead.bind(this), 500);
+    setStoppableInterval(this.endbossTakesDamage.bind(this),100)
+    setStoppableInterval(this.test.bind(this),100)
   }
 
+  endbossTakesDamage(){
+    if(this.isHurt && this.endbossIsHurt()){
+      this.playAnimation(this.IMAGES_IS_HURT)
+  }
+}
+
+hitEndboss(){
+  this.endbossLife -= this.bubbleDamage;
+  if(this.endbossLife < 0){
+    this.endbossLife = 0;
+  }
+  else {
+    this.lastHitEndboss = new Date().getTime();
+  }
+}
+
+endbossIsHurt(){
+  let timepassedEndboss = new Date().getTime() - this.lastHitEndboss; // Difference in ms
+  timepassedEndboss = timepassedEndboss / 1000; // Difference in s
+  return timepassedEndboss < 0.5;
+}
+
   characterIsNearEndboss() {
-    if (world.characterIsInRange && this.isNotDead) {
+    if (this.world.characterIsInRange && this.isNotDead) {
       if (this.i < 10) {
         this.playAnimation(this.IMAGES_INTRODUCE);
       } else {
@@ -85,6 +121,12 @@ class Endboss extends MovableObject {
         this.animationPlayed = true;
       }
       this.j++;
+    }
+  }
+
+  test(){
+    if(this.world){
+      console.log(this.world.keyboard.RIGHT);
     }
   }
 

@@ -1,7 +1,8 @@
 class World {
   character = new Character();
+  endboss = new Endboss();
   statusBar = new StatusBar();
-  endbossLife = new EndbossLifebar();
+  LifeEndboss = new EndbossLifebar();
   //   barrier = new Barrier();
   level = level1;
   canvas;
@@ -22,6 +23,7 @@ class World {
     this.draw();
     this.setWorld();
     this.setFontRules();
+    this.pushEndbossInArray();
     setStoppableInterval(this.run.bind(this), 100);
   }
 
@@ -35,8 +37,14 @@ class World {
 
   setWorld() {
     this.character.world = this;
-    this.level.enemies.world = this;
+    this.endboss.world = this;
+    // this.level.enemyLevelArray.world = this;
   }
+
+  pushEndbossInArray(){
+    this.level.enemyLevelArray.push(this.endboss)
+  }
+
 
   setFontRules() {
     this.ctx.font = "30px LuckiestGuy";
@@ -44,46 +52,42 @@ class World {
   }
 
   checkThrowObjects() {
-    if (this.keyboard.THROW && !this.throwDelay() && !this.character.poisonStorage == 0 ) {
+    if (this.keyboard.THROW && !this.throwDelay() && this.character.poisonStorage > 0) {
+      this.lastThrow = new Date().getTime();
       this.shootingAnimation();
-      setTimeout(()=>{
-        this.lastThrow = new Date().getTime();
-        let bottle = new ThrowableObject(
-            this.character.x + this.character.width - this.character.offset.right + 25,
-            this.character.y + this.character.height / 2
-        );
-          this.throwableObjects.push(bottle);
-        }, 400)
-        this.character.reducePoisonStorage();
+      setTimeout(() => {
+        let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right + 25, this.character.y + this.character.height / 2);
+        this.throwableObjects.push(bottle);
+      }, 400);
+      this.character.reducePoisonStorage();
     }
-}
+  }
 
-  shootingAnimation(){
-    let i = 0
+  shootingAnimation() {
+    let i = 0;
     let isPlayed = false;
-    setInterval(()=>{
-      if(i < 8){
-        this.character.playAnimation(this.character.IMAGES_SHOOTING_BUBBLE)
-      } else if(isPlayed == false) {
-        this.character.loadImage("img/1.Sharkie/3.Swim/1.webp")
+    setInterval(() => {
+      if (i < 8) {
+        this.character.playAnimation(this.character.IMAGES_SHOOTING_BUBBLE);
+      } else if (isPlayed == false) {
+        this.character.loadImage("img/1.Sharkie/3.Swim/1.webp");
         isPlayed = true;
       }
-      i++
-    },50)
-    
+      i++;
+    }, 50);
   }
 
   throwDelay() {
     if (!this.lastThrow) {
-        this.lastThrow = 0;
+      this.lastThrow = 0;
     }
     let currentTime = new Date().getTime();
     let timePassed = (currentTime - this.lastThrow) / 1000;
     return timePassed < 0.5;
-}
+  }
 
   checkCollisionsEnemy() {
-    this.level.enemies.forEach((enemy) => {
+    this.level.enemyLevelArray.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hitEnemy();
       }
@@ -91,24 +95,24 @@ class World {
   }
 
   checkCollisionThrowableObject() {
-    this.throwableObjects = this.throwableObjects.filter((obj) => {
-        let hitEnemy = false;
-        this.level.enemies = this.level.enemies.filter((enemy) => {
-            if (obj.isColliding(enemy)) {
-                if (enemy instanceof Fish) {
-                    hitEnemy = true; // Projektil trifft einen Fisch
-                    return false;    // Entfernt den Fisch aus dem Array
-                } else if (enemy instanceof Endboss) {
-                    this.character.hitEndboss();
-                    hitEnemy = true;
-                }
-            }
-            return true; // Gegner bleibt im Array, wenn er nicht getroffen wurde
-        });
-
-        return !hitEnemy; // Entfernt das Projektil, wenn es einen Gegner (Fisch) trifft
+    this.throwableObjects = this.throwableObjects.filter((poison) => {
+      let hitEnemy = false;
+      this.level.enemyLevelArray = this.level.enemyLevelArray.filter((enemy) => {
+        if (poison.isColliding(enemy)) {
+          if (enemy instanceof GreenFish || enemy instanceof PinkFish || enemy instanceof RedFish) {
+            hitEnemy = true;
+            return false;
+          } else if (enemy instanceof Endboss) {
+            enemy.isHurt = true;
+            enemy.hitEndboss();
+            hitEnemy = true;
+          }
+        }
+        return true;
+      });
+      return !hitEnemy;
     });
-}
+  }
 
   checkCollisionsCoins() {
     this.level.coinsArray = this.level.coinsArray.filter((coin) => {
@@ -147,11 +151,10 @@ class World {
 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.coinsArray);
-    this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.enemyLevelArray);
     this.addObjectsToMap(this.level.poisonBottleArray);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
-
 
     // this.addToMap(this.barrier);
     let self = this;
@@ -160,18 +163,24 @@ class World {
     });
   }
 
-  addEndbossLifebar(){
-    if(this.character.x >= Level.level_end_x - 2024 || this.bossIsTriggerd == true){
-      this.ctx.fillText(this.character.endbossLife, 925, 40)
-      this.addToMap(this.endbossLife)
+  addEndbossLifebar() {
+    if (this.character.x >= Level.level_end_x - 2024 || this.bossIsTriggerd == true) {
+      this.ctx.fillText(this.endboss.endbossLife, 925, 40);
+      this.addToMap(this.LifeEndboss);
       this.bossIsTriggerd = true;
     }
   }
 
   addObjectsToMap(objects) {
-    objects.forEach((o) => {
-      this.addToMap(o);
-    });
+    try{
+      objects.forEach((o) => {
+        this.addToMap(o);
+      });
+
+    } catch(e){
+      // console.log("image", e);
+      
+    }
   }
 
   addToMap(mo) {

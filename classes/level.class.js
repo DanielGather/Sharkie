@@ -5,12 +5,15 @@ class Level {
   backgroundObjects;
   repeatCount;
   step;
+  levelEnemies;
   coinsArray = [];
   poisonBottleArray = [];
+  enemyLevelArray = [
+  ];
 
-  constructor(enemies, backgroundObjects, coins, repeatCount, step, poisonBottle) {
+  constructor(backgroundObjects, coins, repeatCount, step, poisonBottle,enemyLevel) {
     Level.level_end_x = repeatCount * step;
-    this.enemies = enemies;
+    this.levelEnemies = enemyLevel;
     this.backgroundObjects = backgroundObjects;
     this.coins = coins;
     this.repeatCount = repeatCount;
@@ -18,6 +21,7 @@ class Level {
     this.createBackgroundObjects(repeatCount, step);
     this.createCoins(coins);
     this.createBottle(poisonBottle);
+    this.createFish();
   }
 
   // createCoins(coins) {
@@ -29,6 +33,37 @@ class Level {
   //     this.coinsArray.push(new Coins(x, y));
   //   }
   // }
+
+  // createFish(){
+  //   this.enemyLevelArray.push(
+  //     new GreenFish(1024), 
+  //     new RedFish(1024)
+  //   )
+  // }
+
+  createFish() {
+    let numberOfCanvas = this.repeatCount;
+    console.log(this.levelEnemies);
+    
+    let enemiesPerCanvas = Math.floor(this.levelEnemies / numberOfCanvas);
+    console.log(enemiesPerCanvas);
+    
+    let remainingEnemies = this.levelEnemies % numberOfCanvas;
+
+    for (let i = 0; i < numberOfCanvas; i++) {
+      let canvasStartX = i * 1024;
+      let fishCount = enemiesPerCanvas + (i < remainingEnemies ? 1 : 0);
+      for (let j = 0; j < fishCount; j++) {
+        let xPosition;
+        if (i === 0) {
+          xPosition = 300 + Math.random() * (1024 - 300);
+        } else {
+          xPosition = canvasStartX + Math.random() * 1024;
+        }
+        this.enemyLevelArray.push(new GreenFish(xPosition),new PinkFish(xPosition),new RedFish(xPosition));
+      }
+    }
+  }
 
   createCoins(coins) {
     const coinsPerSegment = 5; // Immer 5 Coins pro Halbkreis
