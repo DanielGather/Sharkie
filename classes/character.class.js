@@ -31,16 +31,7 @@ class Character extends MovableObject {
 
   IMAGES_HURT_ELECTRO = ["img/1.Sharkie/5.Hurt/2.Electric shock/1.png", "img/1.Sharkie/5.Hurt/2.Electric shock/2.png", "img/1.Sharkie/5.Hurt/2.Electric shock/3.png"];
 
-  IMAGES_SHOOTING_BUBBLE = [
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
-  ]
+  IMAGES_SHOOTING_BUBBLE = ["img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png"];
 
   world;
   walking_SOUND = new Audio("audio/fishSwiming.mp3");
@@ -57,7 +48,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_HURT_ELECTRO);
     this.loadImages(this.IMAGES_SHOOTING_BUBBLE);
     this.animate();
-    this.applyGravity(); 
+    this.applyGravity();
     // this.isDead();
   }
 
@@ -75,10 +66,10 @@ class Character extends MovableObject {
         this.walking_SOUND.pause();
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT_ELECTRO);
-      } else if(this.isIdle() >=3 && this.isIdle() <= 7) {
+      } else if (this.isIdle() >= 3 && this.isIdle() <= 7) {
         this.playAnimation(this.IMAGES_IDLE);
-      } else if(this.isIdle() >=7) {
-        this.playAnimation(this.IMAGES_LONG_IDLE)
+      } else if (this.isIdle() >= 7) {
+        this.playAnimation(this.IMAGES_LONG_IDLE);
       } else {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
           clearInterval(this.idleAnimationInterval);
@@ -101,15 +92,15 @@ class Character extends MovableObject {
     }, 1000 / this.hz);
   }
 
-  isIdle(){
-    let currentTime = new Date().getTime()
-    let timepassed = (currentTime - this.lastMovementCharacter)/1000;
+  isIdle() {
+    let currentTime = new Date().getTime();
+    let timepassed = (currentTime - this.lastMovementCharacter) / 1000;
     return timepassed;
   }
 
-  lastMovement(){
+  lastMovement() {
     if (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT) {
-      this.lastMovementCharacter = new Date().getTime()
+      this.lastMovementCharacter = new Date().getTime();
     }
   }
 
@@ -146,11 +137,11 @@ class Character extends MovableObject {
     }
   }
 
-  changeCameraX(){
-    if(this.x >= Level.level_end_x - 1024){
+  changeCameraX() {
+    if (this.x >= Level.level_end_x - 1024) {
       this.world.camera_x = -Level.level_end_x + 1104;
     } else {
-          this.world.camera_x = -this.x + 80;
+      this.world.camera_x = -this.x + 80;
     }
   }
 
