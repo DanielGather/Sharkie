@@ -29,6 +29,18 @@ class MovableObject extends DrawableObject {
     }, 1000 / this.hz);
   }
 
+<<<<<<< HEAD
+=======
+  fishIsNearCharacter(){
+    console.log("kommen wir hier rein",this.world.character.x + this.character.width - enemy.x < 50);
+    TEW
+     this.isNearCharakter = this.enemiesArray.some((enemy) => {
+      console.log("Hallo",this.character.x + this.character.width - enemy.x < 50);
+      return this.character.x + this.character.width - enemy.x < 50;
+    });
+  }
+
+>>>>>>> daec0c55937370273b215a55773af1b2b0503861
   isNotOnTheGround() {
     return this.y < 415;
   }
