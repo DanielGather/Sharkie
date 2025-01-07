@@ -126,7 +126,6 @@ endbossIsHurt(){
 
   test(){
     if(this.world){
-      console.log(this.world.keyboard.RIGHT);
     }
   }
 

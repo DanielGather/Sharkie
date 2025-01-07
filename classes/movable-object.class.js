@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
   height = 100;
   width = 100;
   lastMovementCharacter;
+  isNearCharakter;
   enemiesArray = [];
 
   // offset = {
@@ -27,6 +28,15 @@ class MovableObject extends DrawableObject {
         this.speedY -= this.acceleration;
       }
     }, 1000 / this.hz);
+  }
+
+  fishIsNearCharacter(){
+    console.log("kommen wir hier rein",this.world.character.x + this.character.width - enemy.x < 50);
+    
+     this.isNearCharakter = this.enemiesArray.some((enemy) => {
+      console.log("Hallo",this.character.x + this.character.width - enemy.x < 50);
+      return this.character.x + this.character.width - enemy.x < 50;
+    });
   }
 
   isNotOnTheGround() {

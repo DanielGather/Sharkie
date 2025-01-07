@@ -74,7 +74,8 @@ class Character extends MovableObject {
     "img/1.Sharkie/6.dead/1.Poisoned/9.webp", 
     "img/1.Sharkie/6.dead/1.Poisoned/10.webp", 
     "img/1.Sharkie/6.dead/1.Poisoned/11.webp", 
-    "img/1.Sharkie/6.dead/1.Poisoned/12.webp"];
+    "img/1.Sharkie/6.dead/1.Poisoned/12.webp"
+  ];
 
   IMAGES_ELECTRO_DEAD = [
     "img/1.Sharkie/6.dead/2.Electro_shock/1.webp", 
