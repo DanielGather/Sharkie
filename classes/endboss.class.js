@@ -7,7 +7,7 @@ class Endboss extends MovableObject {
   isNotDead = true;
   animationPlayed;
   endbossLife = 1000;
-  bubbleDamage = 50;
+  bubbleDamage = 1000;
   lastHitEndboss = 0;
   isHurt = false;
 
@@ -79,7 +79,7 @@ class Endboss extends MovableObject {
   }
 
   endbossTakesDamage(){
-    if(this.isHurt && this.endbossIsHurt()){
+    if(this.world && this.isHurt && this.endbossIsHurt()){
       this.playAnimation(this.IMAGES_IS_HURT)
   }
 }
@@ -101,7 +101,7 @@ endbossIsHurt(){
 }
 
   characterIsNearEndboss() {
-    if (this.world.characterIsInRange && this.isNotDead) {
+    if (this.world && this.world.characterIsInRange && this.isNotDead) {
       if (this.i < 10) {
         this.playAnimation(this.IMAGES_INTRODUCE);
       } else {
@@ -112,7 +112,7 @@ endbossIsHurt(){
   }
 
   endbossIsDead() {
-    if (world.character.endbossLife == 0) {
+    if (this.world && this.endbossLife == 0) {
       this.isNotDead = false;
       if (this.j < 3) {
         this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
