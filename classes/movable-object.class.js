@@ -32,7 +32,7 @@ class MovableObject extends DrawableObject {
 
   fishIsNearCharacter(){
     console.log("kommen wir hier rein",this.world.character.x + this.character.width - enemy.x < 50);
-    
+    TEW
      this.isNearCharakter = this.enemiesArray.some((enemy) => {
       console.log("Hallo",this.character.x + this.character.width - enemy.x < 50);
       return this.character.x + this.character.width - enemy.x < 50;
