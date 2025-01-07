@@ -50,6 +50,7 @@ IMAGES_PINK_FISH_TRANSITION = [
   }
 
   checkFishAndCharacterDistance(){
+    Test
     if(this.fishIsNearCharacter()){
       console.log("RTest");
       
