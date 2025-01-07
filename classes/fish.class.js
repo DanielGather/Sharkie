@@ -11,11 +11,11 @@ class Fish extends MovableObject{
       }
 
     IMAGES_SWIMING = [
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png'
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.webp',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.webp',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.webp',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.webp',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.webp'
     ]
 
 
@@ -31,11 +31,9 @@ class Fish extends MovableObject{
     calculateY(){
         let number = Math.random() * 400;
         if(number < 200){
-            number = 200 + number;
-            return number;
+            return 200 + number;
         } else if (number > 400){
-            number = number - 200;
-            return number;
+            return number - 200;
         }
         return number;
     }

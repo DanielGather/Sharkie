@@ -2,6 +2,11 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let intervalIDs = [];
+let intervalData = [];
+let intervalMovementIDs = [];
+let intervalMovementData = [];
+let soundData = [];
+let gamePaused = false;
 
 
 function init() {
@@ -22,10 +27,58 @@ function init() {
 function setStoppableInterval(fn, time){
   let id = setInterval(fn,time)
   intervalIDs.push(id);
+  intervalData.push({fn, time});
+}
+
+function setStoppableMovementInterval(fn, time){
+  let id = setInterval(fn,time)
+  intervalMovementIDs.push(id);
+  intervalMovementData.push({fn, time});
+}
+
+function stopMovement(){
+  intervalMovementIDs.forEach(clearInterval);
 }
 
 function stopGame(){
-  intervalIDs.forEach(clearInterval)
+  intervalIDs.forEach(clearInterval);
+  intervalMovementIDs.forEach(clearInterval);
+  muteAllSounds();
+  console.log(keyboard);
+  gamePaused = true;
+  
+}
+
+function restartGame(){
+  intervalData.forEach(({ fn, time }) => {
+    let id = setInterval(fn, time);
+    intervalIDs.push(id); // Speichert die neuen Interval-IDs
+  });
+  intervalMovementData.forEach(({ fn, time }) => {
+    let id = setInterval(fn, time);
+    intervalMovementIDs.push(id); // Speichert die neuen Interval-IDs
+  });
+  unmuteAllSounds();
+}
+
+
+function playSound(audio) {
+  audio.play();
+  if (!soundData.some(sound => sound.audio === audio)) {
+    soundData.push({ audio });
+  }
+}
+
+function muteAllSounds() {
+  soundData.forEach(sound => {
+    sound.audio.muted = true; // Muten des Sounds
+  });
+}
+
+function unmuteAllSounds() {
+  soundData.forEach(sound => {
+    sound.audio.muted = false; // Entmuten des Sounds
+  });
 }
 
 

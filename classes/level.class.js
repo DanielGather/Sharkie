@@ -38,16 +38,14 @@ class Level {
     const centerX = 600; // X-Koordinate des ersten Halbkreises
 
     for (let i = 0; i < coins; i++) {
-        const segmentIndex = Math.floor(i / coinsPerSegment); // Bestimmt, in welchem Segment sich der Coin befindet
-        const positionInSegment = i % coinsPerSegment; // Position des Coins im aktuellen Halbkreis
+        const segmentIndex = Math.floor(i / coinsPerSegment);
+        const positionInSegment = i % coinsPerSegment;
+        const offsetX = segmentIndex * segmentWidth;
+        const angleStep = (1.25 * Math.PI) / coinsPerSegment;
+        const angle = angleStep * positionInSegment;
 
-        const offsetX = segmentIndex * segmentWidth; // Verschiebung des Halbkreises nach rechts
-        const angleStep = (1.25 * Math.PI) / coinsPerSegment; // Winkelabstand zwischen den Coins
-        const angle = angleStep * positionInSegment; // Winkel für den aktuellen Coin
-
-        const x = centerX + offsetX + radius * Math.cos(-angle); // X-Koordinate mit Verschiebung
-        const y = centerY + radius * Math.sin(-angle); // Y-Koordinate
-
+        const x = centerX + offsetX + radius * Math.cos(-angle);
+        const y = centerY + radius * Math.sin(-angle);
         this.coinsArray.push(new Coins(x, y));
     }
 }
@@ -76,11 +74,13 @@ class Level {
       const x = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
       const y = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
       if (!this.isOverlapping(x, y, bottleRadius)) {
-        return { x, y }; // Valide Position gefunden.
+        return { x, y }; 
+        // Valide Position gefunden.
       }
       attempts++;
     }
-    return null; // Keine freie Position gefunden.
+    // Keine freie Position gefunden.
+    return null; 
   }
   // Checkt ob eine Bottle an der gegebenen Position überlappt
   isOverlapping(x, y, bottleRadius) {
@@ -100,7 +100,7 @@ class Level {
     for (let i = 0; i < repeatCount; i++) {
       let x = i * step;
       backgroundLayers.forEach((backgroundLayerBase) => {
-        this.backgroundObjects.push(new BackgroundObject(`${backgroundLayerBase}${variableZahl}.png`, x, 0));
+        this.backgroundObjects.push(new BackgroundObject(`${backgroundLayerBase}${variableZahl}.webp`, x, 0));
       });
       count++;
       if (count >= 1) {
