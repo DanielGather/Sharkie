@@ -17,29 +17,97 @@ class Character extends MovableObject {
     bottom: 50,
   };
 
-  IMAGES_SWIMING = ["img/1.Sharkie/3.Swim/1.png", "img/1.Sharkie/3.Swim/2.png", "img/1.Sharkie/3.Swim/3.png", "img/1.Sharkie/3.Swim/4.png", "img/1.Sharkie/3.Swim/5.png", "img/1.Sharkie/3.Swim/6.png"];
+  IMAGES_SWIMING = [
+    "img/1.Sharkie/3.Swim/1.webp", 
+    "img/1.Sharkie/3.Swim/2.webp", 
+    "img/1.Sharkie/3.Swim/3.webp", 
+    "img/1.Sharkie/3.Swim/4.webp", 
+    "img/1.Sharkie/3.Swim/5.webp", 
+    "img/1.Sharkie/3.Swim/6.webp"];
 
-  IMAGES_IDLE = ["img/1.Sharkie/1.IDLE/1.png", "img/1.Sharkie/1.IDLE/2.png", "img/1.Sharkie/1.IDLE/3.png", "img/1.Sharkie/1.IDLE/4.png", "img/1.Sharkie/1.IDLE/5.png", "img/1.Sharkie/1.IDLE/6.png", "img/1.Sharkie/1.IDLE/7.png", "img/1.Sharkie/1.IDLE/8.png", "img/1.Sharkie/1.IDLE/9.png", "img/1.Sharkie/1.IDLE/10.png", "img/1.Sharkie/1.IDLE/11.png", "img/1.Sharkie/1.IDLE/12.png", "img/1.Sharkie/1.IDLE/13.png", "img/1.Sharkie/1.IDLE/14.png", "img/1.Sharkie/1.IDLE/15.png", "img/1.Sharkie/1.IDLE/16.png", "img/1.Sharkie/1.IDLE/17.png", "img/1.Sharkie/1.IDLE/18.png"];
+  IMAGES_IDLE = [
+    "img/1.Sharkie/1.IDLE/1.webp", 
+    "img/1.Sharkie/1.IDLE/2.webp", 
+    "img/1.Sharkie/1.IDLE/3.webp", 
+    "img/1.Sharkie/1.IDLE/4.webp", 
+    "img/1.Sharkie/1.IDLE/5.webp", 
+    "img/1.Sharkie/1.IDLE/6.webp", 
+    "img/1.Sharkie/1.IDLE/7.webp", 
+    "img/1.Sharkie/1.IDLE/8.webp", 
+    "img/1.Sharkie/1.IDLE/9.webp", 
+    "img/1.Sharkie/1.IDLE/10.webp", 
+    "img/1.Sharkie/1.IDLE/11.webp", 
+    "img/1.Sharkie/1.IDLE/12.webp", 
+    "img/1.Sharkie/1.IDLE/13.webp", 
+    "img/1.Sharkie/1.IDLE/14.webp", 
+    "img/1.Sharkie/1.IDLE/15.webp", 
+    "img/1.Sharkie/1.IDLE/16.webp", 
+    "img/1.Sharkie/1.IDLE/17.webp", 
+    "img/1.Sharkie/1.IDLE/18.webp"];
 
-  IMAGES_LONG_IDLE = ["img/1.Sharkie/2.Long_IDLE/i1.png", "img/1.Sharkie/2.Long_IDLE/i2.png", "img/1.Sharkie/2.Long_IDLE/i3.png", "img/1.Sharkie/2.Long_IDLE/i4.png", "img/1.Sharkie/2.Long_IDLE/i5.png", "img/1.Sharkie/2.Long_IDLE/i6.png", "img/1.Sharkie/2.Long_IDLE/i7.png", "img/1.Sharkie/2.Long_IDLE/i8.png", "img/1.Sharkie/2.Long_IDLE/i9.png", "img/1.Sharkie/2.Long_IDLE/i10.png", "img/1.Sharkie/2.Long_IDLE/i11.png", "img/1.Sharkie/2.Long_IDLE/i12.png", "img/1.Sharkie/2.Long_IDLE/i13.png", "img/1.Sharkie/2.Long_IDLE/i14.png"];
+  IMAGES_LONG_IDLE = [
+    "img/1.Sharkie/2.Long_IDLE/i1.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i2.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i3.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i4.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i5.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i6.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i7.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i8.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i9.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i10.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i11.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i12.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i13.webp", 
+    "img/1.Sharkie/2.Long_IDLE/i14.webp"
+  ];
 
-  IMAGES_POISON_DEAD = ["img/1.Sharkie/6.dead/1.Poisoned/1.png", "img/1.Sharkie/6.dead/1.Poisoned/2.png", "img/1.Sharkie/6.dead/1.Poisoned/3.png", "img/1.Sharkie/6.dead/1.Poisoned/4.png", "img/1.Sharkie/6.dead/1.Poisoned/5.png", "img/1.Sharkie/6.dead/1.Poisoned/6.png", "img/1.Sharkie/6.dead/1.Poisoned/7.png", "img/1.Sharkie/6.dead/1.Poisoned/8.png", "img/1.Sharkie/6.dead/1.Poisoned/9.png", "img/1.Sharkie/6.dead/1.Poisoned/10.png", "img/1.Sharkie/6.dead/1.Poisoned/11.png", "img/1.Sharkie/6.dead/1.Poisoned/12.png"];
+  IMAGES_POISON_DEAD = [
+    "img/1.Sharkie/6.dead/1.Poisoned/1.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/2.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/3.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/4.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/5.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/6.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/7.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/8.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/9.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/10.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/11.webp", 
+    "img/1.Sharkie/6.dead/1.Poisoned/12.webp"];
 
-  IMAGES_ELECTRO_DEAD = ["img/1.Sharkie/6.dead/2.Electro_shock/1.png", "img/1.Sharkie/6.dead/2.Electro_shock/2.png", "img/1.Sharkie/6.dead/2.Electro_shock/3.png", "img/1.Sharkie/6.dead/2.Electro_shock/4.png", "img/1.Sharkie/6.dead/2.Electro_shock/5.png", "img/1.Sharkie/6.dead/2.Electro_shock/6.png", "img/1.Sharkie/6.dead/2.Electro_shock/7.png", "img/1.Sharkie/6.dead/2.Electro_shock/8.png", "img/1.Sharkie/6.dead/2.Electro_shock/9.png", "img/1.Sharkie/6.dead/2.Electro_shock/10.png"];
+  IMAGES_ELECTRO_DEAD = [
+    "img/1.Sharkie/6.dead/2.Electro_shock/1.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/2.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/3.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/4.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/5.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/6.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/7.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/8.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/9.webp", 
+    "img/1.Sharkie/6.dead/2.Electro_shock/10.webp"];
 
-  IMAGES_HURT_POISON = ["img/1.Sharkie/5.Hurt/1.Poisoned/1.png", "img/1.Sharkie/5.Hurt/1.Poisoned/2.png", "img/1.Sharkie/5.Hurt/1.Poisoned/3.png", "img/1.Sharkie/5.Hurt/1.Poisoned/4.png"];
+  IMAGES_HURT_POISON = [
+    "img/1.Sharkie/5.Hurt/1.Poisoned/1.webp", 
+    "img/1.Sharkie/5.Hurt/1.Poisoned/2.webp", 
+    "img/1.Sharkie/5.Hurt/1.Poisoned/3.webp", 
+    "img/1.Sharkie/5.Hurt/1.Poisoned/4.webp"];
 
-  IMAGES_HURT_ELECTRO = ["img/1.Sharkie/5.Hurt/2.Electric shock/1.png", "img/1.Sharkie/5.Hurt/2.Electric shock/2.png", "img/1.Sharkie/5.Hurt/2.Electric shock/3.png"];
+  IMAGES_HURT_ELECTRO = [
+    "img/1.Sharkie/5.Hurt/2.Electric shock/1.webp", 
+    "img/1.Sharkie/5.Hurt/2.Electric shock/2.webp", 
+    "img/1.Sharkie/5.Hurt/2.Electric shock/3.webp"];
 
   IMAGES_SHOOTING_BUBBLE = [
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
-    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.webp',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.webp',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.webp',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.webp',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.webp',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.webp',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.webp',
+    'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.webp'
   ]
 
   world;
@@ -47,7 +115,7 @@ class Character extends MovableObject {
   ambience_SOUND = new Audio("audio/underWaterNoise.mp3");
 
   constructor() {
-    super().loadImage("img/1.Sharkie/3.Swim/1.png");
+    super().loadImage("img/1.Sharkie/3.Swim/1.webp");
     this.loadImages(this.IMAGES_SWIMING);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONG_IDLE);
@@ -69,7 +137,7 @@ class Character extends MovableObject {
             stopMovement();
             this.playAnimation(this.IMAGES_ELECTRO_DEAD);
             setTimeout(() => {
-              this.loadImage("img/1.Sharkie/6.dead/2.Electro_shock/10.png");
+              this.loadImage("img/1.Sharkie/6.dead/2.Electro_shock/10.webp");
               this.animationPlayed = true;
             }, 1000);
           }
@@ -87,7 +155,7 @@ class Character extends MovableObject {
             this.idle = false;
           }
         }
-        this.ambience_SOUND.play();
+        playSound(this.ambience_SOUND);
         this.walking_SOUND.pause();
       }, 150);
       setStoppableMovementInterval(this.characterSwimRight.bind(this), 1000 / this.hz);

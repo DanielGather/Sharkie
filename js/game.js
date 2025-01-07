@@ -41,7 +41,8 @@ function stopMovement(){
 }
 
 function stopGame(){
-  intervalIDs.forEach(clearInterval)
+  intervalIDs.forEach(clearInterval);
+  intervalMovementIDs.forEach(clearInterval);
   muteAllSounds();
   console.log(keyboard);
   gamePaused = true;
@@ -52,6 +53,10 @@ function restartGame(){
   intervalData.forEach(({ fn, time }) => {
     let id = setInterval(fn, time);
     intervalIDs.push(id); // Speichert die neuen Interval-IDs
+  });
+  intervalMovementData.forEach(({ fn, time }) => {
+    let id = setInterval(fn, time);
+    intervalMovementIDs.push(id); // Speichert die neuen Interval-IDs
   });
   unmuteAllSounds();
 }

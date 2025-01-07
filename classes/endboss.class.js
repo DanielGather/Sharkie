@@ -14,11 +14,39 @@ class Endboss extends MovableObject {
     bottom: 85,
   };
 
-  IMAGES_INTRODUCE = ["img/2.Enemy/3 Final Enemy/1.Introduce/1.png", "img/2.Enemy/3 Final Enemy/1.Introduce/2.png", "img/2.Enemy/3 Final Enemy/1.Introduce/3.png", "img/2.Enemy/3 Final Enemy/1.Introduce/4.png", "img/2.Enemy/3 Final Enemy/1.Introduce/5.png", "img/2.Enemy/3 Final Enemy/1.Introduce/6.png", "img/2.Enemy/3 Final Enemy/1.Introduce/7.png", "img/2.Enemy/3 Final Enemy/1.Introduce/8.png", "img/2.Enemy/3 Final Enemy/1.Introduce/9.png", "img/2.Enemy/3 Final Enemy/1.Introduce/10.png"];
+  IMAGES_INTRODUCE = [
+    "img/2.Enemy/3 Final Enemy/1.Introduce/1.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/2.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/3.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/4.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/5.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/6.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/7.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/8.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/9.webp", 
+    "img/2.Enemy/3 Final Enemy/1.Introduce/10.webp"];
 
-  IMAGES_SWIMING = ["img/2.Enemy/3 Final Enemy/2.floating/1.png", "img/2.Enemy/3 Final Enemy/2.floating/2.png", "img/2.Enemy/3 Final Enemy/2.floating/3.png", "img/2.Enemy/3 Final Enemy/2.floating/4.png", "img/2.Enemy/3 Final Enemy/2.floating/5.png", "img/2.Enemy/3 Final Enemy/2.floating/6.png", "img/2.Enemy/3 Final Enemy/2.floating/7.png", "img/2.Enemy/3 Final Enemy/2.floating/8.png", "img/2.Enemy/3 Final Enemy/2.floating/9.png", "img/2.Enemy/3 Final Enemy/2.floating/10.png", "img/2.Enemy/3 Final Enemy/2.floating/11.png", "img/2.Enemy/3 Final Enemy/2.floating/12.png", "img/2.Enemy/3 Final Enemy/2.floating/13.png"];
+  IMAGES_SWIMING = [
+    "img/2.Enemy/3 Final Enemy/2.floating/1.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/2.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/3.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/4.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/5.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/6.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/7.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/8.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/9.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/10.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/11.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/12.webp", 
+    "img/2.Enemy/3 Final Enemy/2.floating/13.webp"];
 
-  IMAGES_ENDBOSS_DEAD = ["img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png"];
+  IMAGES_ENDBOSS_DEAD = [
+    "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.webp", 
+    "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.webp", 
+    "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.webp", 
+    "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.webp", 
+    "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.webp"];
 
   constructor() {
     super().loadImage(this.IMAGES_INTRODUCE[0]);

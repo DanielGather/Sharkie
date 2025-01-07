@@ -15,7 +15,7 @@ class Coins extends DrawableObject{
 
 
     constructor(x,y){
-        super().loadImage("img/4. Marcadores/green/100_ copia 6.png");
+        super().loadImage("img/4. Marcadores/green/100_ copia 6.webp");
         this.x = x;
         this.y = y;
         this.width = 75;

@@ -100,7 +100,7 @@ class Level {
     for (let i = 0; i < repeatCount; i++) {
       let x = i * step;
       backgroundLayers.forEach((backgroundLayerBase) => {
-        this.backgroundObjects.push(new BackgroundObject(`${backgroundLayerBase}${variableZahl}.png`, x, 0));
+        this.backgroundObjects.push(new BackgroundObject(`${backgroundLayerBase}${variableZahl}.webp`, x, 0));
       });
       count++;
       if (count >= 1) {

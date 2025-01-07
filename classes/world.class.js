@@ -65,7 +65,7 @@ class World {
       if(i < 8){
         this.character.playAnimation(this.character.IMAGES_SHOOTING_BUBBLE)
       } else if(isPlayed == false) {
-        this.character.loadImage("img/1.Sharkie/3.Swim/1.png")
+        this.character.loadImage("img/1.Sharkie/3.Swim/1.webp")
         isPlayed = true;
       }
       i++

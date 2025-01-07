@@ -1,6 +1,6 @@
 class PoisonBottle extends DrawableObject {
 
-    POISON_BOTTLE_IMAGE = "img/4. Marcadores/Posión/Dark - Left.png"
+    POISON_BOTTLE_IMAGE = "img/4. Marcadores/Posión/Dark - Left.webp"
 
 
     offset = {
