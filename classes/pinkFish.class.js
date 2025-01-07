@@ -1,7 +1,6 @@
 class PinkFish extends MovableObject {
   width = 120;
   height = 80;
-  x;
 
   offset = {
     top: 5,
@@ -25,7 +24,7 @@ IMAGES_PINK_FISH_TRANSITION = [
     this.level_end_x = level_end_x;
     this.loadImages(this.IMAGES_PINK_FISH_SWIMING);
     this.loadImages(this.IMAGES_PINK_FISH_TRANSITION);
-    this.x = level_end_x
+    this.x = 300 + Math.random() * 500;
     this.y = this.calculateY();
     this.speed = 0.15 + Math.random() * 0.25;
     this.animate();
@@ -49,6 +48,7 @@ IMAGES_PINK_FISH_TRANSITION = [
     return number;
   }
 
+<<<<<<< Updated upstream
   checkFishAndCharacterDistance(){
     Test
     if(this.fishIsNearCharacter()){
@@ -59,6 +59,8 @@ IMAGES_PINK_FISH_TRANSITION = [
   }
 
 
+=======
+>>>>>>> Stashed changes
   calculateX(){    
     let number = 300 + Math.random() * this.level_end_x
     console.log("calculateX",number);
@@ -69,4 +71,5 @@ IMAGES_PINK_FISH_TRANSITION = [
   fishSwiming() {
     this.playAnimation(this.IMAGES_PINK_FISH_SWIMING);
   }
+
 }
