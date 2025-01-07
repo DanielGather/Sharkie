@@ -38,11 +38,11 @@ class World {
   setWorld() {
     this.character.world = this;
     this.endboss.world = this;
-    // this.level.enemyLevelArray.world = this;
+    this.level.world = this;
   }
 
   pushEndbossInArray(){
-    this.level.enemyLevelArray.push(this.endboss)
+    Level.enemyLevelArray.push(this.endboss)
   }
 
 
@@ -87,7 +87,7 @@ class World {
   }
 
   checkCollisionsEnemy() {
-    this.level.enemyLevelArray.forEach((enemy) => {
+    Level.enemyLevelArray.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hitEnemy();
       }
@@ -97,7 +97,7 @@ class World {
   checkCollisionThrowableObject() {
     this.throwableObjects = this.throwableObjects.filter((poison) => {
       let hitEnemy = false;
-      this.level.enemyLevelArray = this.level.enemyLevelArray.filter((enemy) => {
+      Level.enemyLevelArray = Level.enemyLevelArray.filter((enemy) => {
         if (poison.isColliding(enemy)) {
           if (enemy instanceof GreenFish || enemy instanceof PinkFish || enemy instanceof RedFish) {
             hitEnemy = true;
@@ -151,7 +151,7 @@ class World {
 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.coinsArray);
-    this.addObjectsToMap(this.level.enemyLevelArray);
+    this.addObjectsToMap(Level.enemyLevelArray);
     this.addObjectsToMap(this.level.poisonBottleArray);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);

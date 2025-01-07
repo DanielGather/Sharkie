@@ -1,5 +1,6 @@
 class Level {
   static level_end_x;
+  static enemyLevelArray = [];
   enemies;
   canvas;
   backgroundObjects;
@@ -8,11 +9,10 @@ class Level {
   levelEnemies;
   coinsArray = [];
   poisonBottleArray = [];
-  enemyLevelArray = [
-  ];
 
   constructor(backgroundObjects, coins, repeatCount, step, poisonBottle,enemyLevel) {
     Level.level_end_x = repeatCount * step;
+    // this.enemyLevelArray = this.enemyLevelArray
     this.levelEnemies = enemyLevel;
     this.backgroundObjects = backgroundObjects;
     this.coins = coins;
@@ -43,13 +43,8 @@ class Level {
 
   createFish() {
     let numberOfCanvas = this.repeatCount;
-    console.log(this.levelEnemies);
-    
     let enemiesPerCanvas = Math.floor(this.levelEnemies / numberOfCanvas);
-    console.log(enemiesPerCanvas);
-    
     let remainingEnemies = this.levelEnemies % numberOfCanvas;
-
     for (let i = 0; i < numberOfCanvas; i++) {
       let canvasStartX = i * 1024;
       let fishCount = enemiesPerCanvas + (i < remainingEnemies ? 1 : 0);
@@ -60,7 +55,7 @@ class Level {
         } else {
           xPosition = canvasStartX + Math.random() * 1024;
         }
-        this.enemyLevelArray.push(new GreenFish(xPosition),new PinkFish(xPosition),new RedFish(xPosition));
+        Level.enemyLevelArray.push(new PinkFish(xPosition));
       }
     }
   }

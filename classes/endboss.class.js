@@ -125,7 +125,7 @@ endbossIsHurt(){
   }
 
   test(){
-    if(this.world){
+    if(this.world.camera_x){
     }
   }
 
