@@ -103,8 +103,8 @@ class World {
             hitEnemy = true;
             return false;
           } else if (enemy instanceof Endboss) {
-            enemy.isHurt = true;
-            enemy.hitEndboss();
+            // enemy.isHurt = true;
+            this.character.hitEndboss();
             hitEnemy = true;
           }
         }

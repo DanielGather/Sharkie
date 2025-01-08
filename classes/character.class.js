@@ -1,12 +1,17 @@
 class Character extends MovableObject {
-  width = 200;
-  height = 200;
-  speed = 1;
-  idle = false;
+  world;
   idleAnimationInterval;
   movementAnimation;
   idleAnimation;
   swimAnimation;
+  width = 200;
+  height = 200;
+  speed = 1;
+  coins = 0;
+  poisonStorage = 5;
+  bubbleDamage = 100;
+  idle = false;
+  otherDirection = false;
   animationPlayed = false;
   imageIsLoaded = false;
 
@@ -33,7 +38,6 @@ class Character extends MovableObject {
 
   IMAGES_SHOOTING_BUBBLE = ["img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.webp"];
 
-  world;
   walking_SOUND = new Audio("audio/fishSwiming.mp3");
   ambience_SOUND = new Audio("audio/underWaterNoise.mp3");
 
@@ -94,6 +98,25 @@ class Character extends MovableObject {
       this.lastMovement();
       this.changeCameraX();
     }, 1000 / this.hz);
+  }
+
+  hitCoin(){
+    this.coins += 1;
+  }
+
+  hitEndboss() {
+    console.log("wir werden ausgeführt", this.world.endboss.endbossLife);
+    this.world.endboss.endbossLife -= this.bubbleDamage; 
+  }
+
+  hitPoisonBottle(){
+    this.poisonStorage += 1;
+  }
+
+  reducePoisonStorage(){
+    if(!this.poisonStorage == 0){
+      this.poisonStorage -= 1;
+    }
   }
 
   isIdle() {
@@ -173,7 +196,7 @@ class Character extends MovableObject {
     // this.FishIsInRange = false;
     Level.enemyLevelArray.forEach((enemy) => {
       const distance = Math.abs(this.x + this.width - enemy.x);
-      console.log("Distance",distance);
+      // console.log("Distance",distance);
       
       if (distance < 150) {
         enemy.updateFishIsInRangeTrue(true);

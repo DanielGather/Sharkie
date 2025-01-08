@@ -1,9 +1,9 @@
-let coinsLevel = 10
+let coinsLevel = 20
 let repeatCountLevel = 2;
 let stepLevel = 1024;
-let PoisonBottleLevel = 10;
+let PoisonBottleLevel = 20;
 let first_level_end_x_ = repeatCountLevel * stepLevel;
-let enemyLevel = 1
+let enemyLevel = 0
 
 const level1 = new Level(
 
