@@ -12,6 +12,12 @@ class MovableObject extends DrawableObject {
   FishIsInRange = false;
   timerHasExpired = false;
 
+  j;
+  x;
+  FishIsInRange = false;
+  timerHasExpired = true;
+  animationPlayed;
+
   // offset = {
   //   top: 0,
   //   right: 0,
@@ -84,11 +90,63 @@ class MovableObject extends DrawableObject {
     return timepassed < 0.2;
   }
   
-}
 
-// isCollidingNew (obj) {
-//   return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
-//           (this.y + this.offsetY + this.height) >= obj.y &&
-//           (this.y + this.offsetY) <= (obj.y + obj.height) && 
-//           obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-// }
+  calculateY() {
+    let number = Math.random() * 400;
+    if (number < 200) {
+      return 200 + number;
+    } else if (number > 400) {
+      return number - 200;
+    }
+    return number;
+  }
+
+  checkFishAndCharacterDistance(bubbleSwim,swim,transition) {
+    if (this.FishIsInRange) {
+      if (this.timerIsRunning()) {
+        this.playAnimation(bubbleSwim);
+      } else {
+       this.playFishTransition(transition);
+      }
+    } else {
+      if (this.timerIsStopped()) {
+        this.playStandardFishAnimation(swim);
+      } else {
+        this.setTimer();
+      }
+    }
+  }
+
+  timerIsRunning(){
+    return !this.timerHasExpired;
+  }
+
+  timerIsStopped(){
+    return this.timerHasExpired;
+  }
+
+  setTimer(){
+    setTimeout(() => {
+      this.timerHasExpired = true;
+    }, 2500);
+  }
+
+  playStandardFishAnimation(swim){
+    this.playAnimation(swim);
+    this.offset.bottom = 25;
+  }
+
+  playFishTransition(transition){
+    if (this.j < 12) {
+      this.playAnimation(transition);
+      this.offset.bottom = 5;
+      this.j++;
+    } else {
+      this.timerHasExpired = false;
+      this.j = 0;
+    }
+  }
+
+
+
+}

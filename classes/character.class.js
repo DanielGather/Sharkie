@@ -53,6 +53,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_SHOOTING_BUBBLE);
     this.animate();
     this.applyGravity();
+    this.x = 80;
 
     // this.saveAllSoundsInArray();
     // this.isDead();
@@ -85,14 +86,14 @@ class Character extends MovableObject {
       }
       playSound(this.ambience_SOUND);
       this.walking_SOUND.pause();
-      // console.log(this.world);
     }, 150);
     setStoppableMovementInterval(this.characterSwimRight.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimLeft.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimUp.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimDown.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.playWalkingSound.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.fishIsNearCharacter.bind(this), 300);
+    setStoppableMovementInterval(this.checkIfCharacterIsCloseToEndboss.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.bossFollowsCharacter.bind(this), 1000 / this.hz);
 
     setInterval(() => {
       this.lastMovement();
@@ -100,21 +101,35 @@ class Character extends MovableObject {
     }, 1000 / this.hz);
   }
 
-  hitCoin(){
+  hitCoin() {
     this.coins += 1;
   }
 
-  hitEndboss() {
-    console.log("wir werden ausgeführt", this.world.endboss.endbossLife);
-    this.world.endboss.endbossLife -= this.bubbleDamage; 
+  checkIfCharacterIsCloseToEndboss() {
+    if (this.world && this.x + this.width == Level.level_end_x - 1248) {
+      this.world.endboss.attackingCharacter = true;
+    }
   }
 
-  hitPoisonBottle(){
+  bossFollowsCharacter() {
+    if (this.world.endboss.attackingCharacter && this.world.endboss.isNotDead) {
+      let characterCenterY = this.y + this.offset.top + this.height / 2;
+      let endbossCurrentCenterY = this.world.endboss.y + this.world.endboss.offset.top + this.world.endboss.height / 2;
+      let offsetToCenter = characterCenterY - endbossCurrentCenterY;
+      this.world.endboss.y += offsetToCenter;
+    }
+  }
+
+  hitEndboss() {
+    this.world.endboss.endbossLife -= this.bubbleDamage;
+  }
+
+  hitPoisonBottle() {
     this.poisonStorage += 1;
   }
 
-  reducePoisonStorage(){
-    if(!this.poisonStorage == 0){
+  reducePoisonStorage() {
+    if (!this.poisonStorage == 0) {
       this.poisonStorage -= 1;
     }
   }
@@ -133,7 +148,7 @@ class Character extends MovableObject {
 
   playWalkingSound() {
     if (this.world && (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT)) {
-      this.walking_SOUND.play();
+      playSound(this.walking_SOUND);
     }
   }
 
@@ -157,7 +172,7 @@ class Character extends MovableObject {
   }
 
   characterSwimRight() {
-    if (this.world && this.world.keyboard.RIGHT && this.x + this.width + this.offset.right < Level.level_end_x) {
+    if (this.world && this.world.keyboard.RIGHT && this.x + this.width + this.offset.left < Level.level_end_x) {
       this.moveRight();
       this.introduceBoss();
       this.otherDirection = false;
@@ -185,26 +200,6 @@ class Character extends MovableObject {
     if (this.world && this.x + this.width == Level.level_end_x - 1548) {
       world.characterIsInRange = true;
     }
-  }
-
-  fishIsNearCharacter() {
-    // console.log("Test1", world.character.x, world.character.width);
-    // console.log("Test2", this.world.character.x, this.world.character.width);
-    // console.log("Test3", this.character.x, this.character.width);
-    // console.log("Test4", this.x, this.width);
-    // console.log("Wir werden aufgerufen");
-    // this.FishIsInRange = false;
-    Level.enemyLevelArray.forEach((enemy) => {
-      const distance = Math.abs(this.x + this.width - enemy.x);
-      // console.log("Distance",distance);
-      
-      if (distance < 150) {
-        enemy.updateFishIsInRangeTrue(true);
-      } else if(distance > 300) {
-        enemy.updateFishIsInRangeTrue(false);
-
-      }
-    });
   }
 
   //   saveAllSoundsInArray(){

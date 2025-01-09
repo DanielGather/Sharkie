@@ -2,14 +2,18 @@ class Endboss extends MovableObject {
   animationCounterDead;
   animationCounterIntroduce;
   animationPlayed;
+  animationCounterIsHurt;
   y = 0;
+  x;
   width = 500;
   height = 500;
   lastHitEndboss = 0;
   endbossLife = 1000;
+  speed = 15;
   initialLife = this.endbossLife;
   isNotDead = true;
-  // isHurt = false;
+  attackingCharacter = false;
+  isHurt = false;
 
   offset = {
     top: 160,
@@ -26,12 +30,22 @@ class Endboss extends MovableObject {
 
   IMAGES_ENDBOSS_DEAD = ["img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.webp"];
 
+  IMAGES_ENDBOSS_IS_ATTACKING = [
+    "img/2.Enemy/3 Final Enemy/Attack/1.webp",
+    "img/2.Enemy/3 Final Enemy/Attack/2.webp",
+    "img/2.Enemy/3 Final Enemy/Attack/3.webp",
+    "img/2.Enemy/3 Final Enemy/Attack/4.webp",
+    "img/2.Enemy/3 Final Enemy/Attack/5.webp",
+    "img/2.Enemy/3 Final Enemy/Attack/6.webp"
+  ]
+
   constructor() {
     super().loadImage(this.IMAGES_INTRODUCE[0]);
     this.loadImages(this.IMAGES_INTRODUCE);
     this.loadImages(this.IMAGES_SWIMING);
     this.loadImages(this.IMAGES_ENDBOSS_DEAD);
     this.loadImages(this.IMAGES_IS_HURT);
+    this.loadImages(this.IMAGES_ENDBOSS_IS_ATTACKING);
     this.waitForEndbossVariable();
     this.animate();
   }
@@ -39,17 +53,34 @@ class Endboss extends MovableObject {
   animate() {
     this.animationCounterIntroduce = 0;
     this.animationCounterDead = 0;
+    this.animationCounterIsHurt = 0;
     setStoppableInterval(this.characterIsNearEndboss.bind(this), 200);
     setStoppableInterval(this.endbossIsDead.bind(this), 500);
     setStoppableInterval(this.endbossIsHittet.bind(this), 100)
     setStoppableInterval(this.endbossTakesDamage.bind(this), 100);
+    setStoppableInterval(this.attackCharacter.bind(this), 300);
   }
 
   endbossTakesDamage() {
-    if (this.world && this.endbossIsHurt()) {
-      this.playAnimation(this.IMAGES_IS_HURT);
+    if (this.world && this.isHurt) {
+      if(this.animationCounterIsHurt < 5){
+        this.playAnimation(this.IMAGES_IS_HURT);
+      } else {
+        this.isHurt = false;
+        this.animationCounterIsHurt = 0;
+      }
+      this.animationCounterIsHurt++
     }
   }
+
+  attackCharacter(){
+    if(this.attackingCharacter && !this.isHurt && this.isNotDead){
+      this.playAnimation(this.IMAGES_ENDBOSS_IS_ATTACKING);
+      this.offset.left = 10;
+      this.moveLeft();
+    }
+  }
+
 
   endbossIsHittet() {
     if (this.endbossLife < 0) {

@@ -27,12 +27,16 @@ class World {
     setStoppableInterval(this.run.bind(this), 100);
   }
 
+ 
+
   run() {
     this.checkCollisionsEnemy();
     this.checkCollisionsCoins();
     this.checkThrowObjects();
     this.checkCollisionThrowableObject();
     this.checkCollisionsPoisonBottle();
+    this.fishIsNearCharacter();
+    this.speedBoostBoss();
   }
 
   setWorld() {
@@ -94,6 +98,17 @@ class World {
     });
   }
 
+  speedBoostBoss(){
+    let characterX = this.character.x + this.character.width - this.character.offset.right;
+    let endbossX = this.endboss.x + this.endboss.offset.left;
+    let distance = endbossX -characterX;
+    if(distance > 400 && this.endboss.attackingCharacter){
+      this.endboss.speed = 65;
+    } else if (distance < 50) {
+      this.endboss.speed = 15;
+    }
+  }
+
   checkCollisionThrowableObject() {
     this.throwableObjects = this.throwableObjects.filter((poison) => {
       let hitEnemy = false;
@@ -103,8 +118,8 @@ class World {
             hitEnemy = true;
             return false;
           } else if (enemy instanceof Endboss) {
-            // enemy.isHurt = true;
             this.character.hitEndboss();
+            this.endboss.isHurt = true;
             hitEnemy = true;
           }
         }
@@ -160,6 +175,19 @@ class World {
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
+    });
+  }
+
+  fishIsNearCharacter() {
+    Level.enemyLevelArray.forEach((enemy) => {      
+      const distanceX = Math.abs(this.character.x + this.character.width - this.character.offset.right - enemy.x);
+      const distanceYTop = Math.abs(this.character.y + this.character.height - this.character.offset.bottom - enemy.y);
+      const distanceYBottom = Math.abs((this.character.y + this.character.offset.top) - (enemy.y + enemy.height - enemy.offset.bottom)) 
+      if ((distanceX < 250 && distanceYTop < 100) || (distanceX < 250 && distanceYBottom < 100)) {
+       enemy.FishIsInRange = true;
+      } else if(distanceX > 300 || distanceYBottom > 150 || distanceYTop > 150 ||(distanceX > 300 && distanceYTop > 150 ) || (distanceX > 300 && distanceYBottom > 150)) {
+       enemy.FishIsInRange = false;
+      }
     });
   }
 

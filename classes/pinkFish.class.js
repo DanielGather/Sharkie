@@ -1,11 +1,7 @@
 class PinkFish extends MovableObject {
   width = 120;
   height = 80;
-  j;
-  x;
-  FishIsInRange;
-  timerHasExpired = true;
-  animationPlayed;
+
   
 
   offset = {
@@ -23,7 +19,6 @@ class PinkFish extends MovableObject {
 
   constructor(level_end_x) {
     super();
-    this.FishIsInRange = false;
     this.level_end_x = level_end_x;
     this.loadImages(this.IMAGES_PINK_FISH_SWIMING);
     this.loadImages(this.IMAGES_PINK_FISH_TRANSITION);
@@ -35,14 +30,10 @@ class PinkFish extends MovableObject {
     this.playAnimation(this.IMAGES_PINK_FISH_SWIMING);
   }
 
-  updateFishIsInRangeTrue(isInRange) {
-    this.FishIsInRange = isInRange;
-  }
-
   animate() {
     this.j = 0;
     setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
-    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this), 150);
+    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this,this.IMAGES_PINK_FISH_BUBBLE_SWIM, this.IMAGES_PINK_FISH_SWIMING, this.IMAGES_PINK_FISH_TRANSITION), 150);
   }
 
   calculateY() {
@@ -55,56 +46,5 @@ class PinkFish extends MovableObject {
     return number;
   }
 
-  checkFishAndCharacterDistance() {
-    if (this.FishIsInRange) {
-      if (this.timerIsRunning()) {
-        this.playAnimation(this.IMAGES_PINK_FISH_BUBBLE_SWIM);
-      } else {
-       this.playFishTransition();
-      }
-    } else {
-      if (this.timerIsStopped()) {
-        this.playStandardFishAnimation();
-      } else {
-        this.setTimer();
-      }
-    }
-  }
 
-  timerIsRunning(){
-    return !this.timerHasExpired;
-  }
-
-  timerIsStopped(){
-    return this.timerHasExpired;
-  }
-
-  setTimer(){
-    setTimeout(() => {
-      this.timerHasExpired = true;
-    }, 3000);
-  }
-
-  playStandardFishAnimation(){
-    this.playAnimation(this.IMAGES_PINK_FISH_SWIMING);
-    this.offset.bottom = 25;
-  }
-
-  playFishTransition(){
-    if (this.j < 12) {
-      this.playAnimation(this.IMAGES_PINK_FISH_TRANSITION);
-      this.offset.bottom = 5;
-      this.j++;
-    } else {
-      this.timerHasExpired = false;
-      this.j = 0;
-    }
-  }
-
-  calculateX() {
-    let number = 300 + Math.random() * this.level_end_x;
-    console.log("calculateX", number);
-
-    return number;
-  }
 }

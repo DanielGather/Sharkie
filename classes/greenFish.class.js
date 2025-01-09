@@ -18,10 +18,28 @@ class GreenFish extends MovableObject{
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.webp'
     ]
 
+    IMAGES_GREEN_FISH_TRANSITION = [
+        "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition1.webp",
+        "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition2.webp",
+        "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition3.webp",
+        "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition4.webp",
+        "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition5.webp"
+    ]
+
+    IMAGES_GREEN_FISH_BUBBLE_SWIM = [
+        "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim1.webp",
+        "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim2.webp",
+        "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim3.webp",
+        "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim4.webp",
+        "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim5.webp"
+    ]
+
     constructor(level_end_x){
         super()
         this.level_end_x = level_end_x;
         this.loadImages(this.IMAGES_GREEN_FISH_SWIMING)
+        this.loadImages(this.IMAGES_GREEN_FISH_TRANSITION)
+        this.loadImages(this.IMAGES_GREEN_FISH_BUBBLE_SWIM)
         this.x = level_end_x
         this.y = this.calculateY();
         this.speed = 0.15 + Math.random() * 0.25;
