@@ -1,67 +1,35 @@
-class RedFish extends MovableObject{
-    
-    width = 120;
-    height = 80;
-    level_end_x;
+class RedFish extends MovableObject {
+  width = 120;
+  height = 80;
 
-    offset = {
-        top: 5,
-        right: 10,
-        left: 5,
-        bottom: 25
-      }
+  offset = {
+    top: 5,
+    right: 10,
+    left: 5,
+    bottom: 25,
+  };
 
-    IMAGES_RED_FISH_SWIMING = [
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.webp',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim2.webp',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.webp',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.webp',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.webp'
-    ]
+  IMAGES_RED_FISH_SWIMING = ["img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.webp"];
 
-    constructor(level_end_x){
-        super()
-        this.level_end_x = level_end_x;
-        this.loadImages(this.IMAGES_RED_FISH_SWIMING)
-        this.x = level_end_x;
-        this.y = this.calculateY();
-        this.speed = 0.15 + Math.random() * 0.25;
-        this.animate();
-    }
+  IMAGES_RED_FISH_TRANSITION = ["img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition5.webp"];
 
-    animate() {
-        setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz)
-        setStoppableInterval(this.fishSwiming.bind(this),200)
-      }
+  IMAGES_RED_FISH_BUBBLE_SWIM = ["img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim5.webp"];
 
-      
-    // calculateY(){
-    //     let number = Math.random() * 500;
-    //     if(number < 200){
-    //         return 200 + number;
-    //     } else if (number > 400){
-    //         return number - 200;
-    //     }
-    //     return number;
-    // }
+  constructor(level_end_x) {
+    super();
+    this.level_end_x = level_end_x;
+    this.loadImages(this.IMAGES_RED_FISH_SWIMING);
+    this.loadImages(this.IMAGES_RED_FISH_TRANSITION);
+    this.loadImages(this.IMAGES_RED_FISH_BUBBLE_SWIM);
+    this.x = level_end_x;
+    this.y = this.calculateY();
+    this.speed = 0.15 + Math.random() * 0.25;
+    this.animate();
+  }
 
-        calculateY(){
-        let number = Math.random() * 500;
-    
-        return number;
-    }
-
-    // calculateX(){
-    //     console.log("level end x", Level.level_end_x);
-        
-    //     let number = 300 + Math.random() * this.level_end_x
-    //     console.log("calculateX",number);
-        
-    //     return number
-    // }
-    
-    fishSwiming(){
-            this.playAnimation(this.IMAGES_RED_FISH_SWIMING);
-    }
-    
+  animate() {
+    this.j = 0;
+    setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
+    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this, this.IMAGES_RED_FISH_BUBBLE_SWIM, this.IMAGES_RED_FISH_SWIMING, this.IMAGES_RED_FISH_TRANSITION), 150);
+  }
 }

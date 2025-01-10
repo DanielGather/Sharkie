@@ -2,8 +2,6 @@ class PinkFish extends MovableObject {
   width = 120;
   height = 80;
 
-  
-
   offset = {
     top: 5,
     right: 10,
@@ -33,18 +31,6 @@ class PinkFish extends MovableObject {
   animate() {
     this.j = 0;
     setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
-    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this,this.IMAGES_PINK_FISH_BUBBLE_SWIM, this.IMAGES_PINK_FISH_SWIMING, this.IMAGES_PINK_FISH_TRANSITION), 150);
+    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this, this.IMAGES_PINK_FISH_BUBBLE_SWIM, this.IMAGES_PINK_FISH_SWIMING, this.IMAGES_PINK_FISH_TRANSITION), 150);
   }
-
-  calculateY() {
-    let number = Math.random() * 400;
-    if (number < 200) {
-      return 200 + number;
-    } else if (number > 400) {
-      return number - 200;
-    }
-    return number;
-  }
-
-
 }

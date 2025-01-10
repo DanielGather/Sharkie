@@ -55,7 +55,7 @@ class Level {
         } else {
           xPosition = canvasStartX + Math.random() * 1024;
         }
-        Level.enemyLevelArray.push(new PinkFish(xPosition));
+        Level.enemyLevelArray.push(new PinkFish(xPosition), new GreenFish(xPosition), new RedFish(xPosition));
       }
     }
   }

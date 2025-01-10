@@ -117,6 +117,10 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  calculateY() {
+    return Math.random() * 521;
+}
+
   timerIsRunning(){
     return !this.timerHasExpired;
   }
