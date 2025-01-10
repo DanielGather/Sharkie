@@ -1,7 +1,7 @@
 class MovableObject extends DrawableObject {
   speed = 0.1;
   hz = 144;
-  // otherDirection = false;
+  otherDirection = false;
   speedY = 0;
   acceleration = 0.005;
   lifebar = 100;
@@ -11,11 +11,8 @@ class MovableObject extends DrawableObject {
   lastMovementCharacter;
   FishIsInRange = false;
   timerHasExpired = false;
-
   j;
   x;
-  FishIsInRange = false;
-  timerHasExpired = true;
   animationPlayed;
 
   // offset = {
@@ -62,51 +59,43 @@ class MovableObject extends DrawableObject {
     this.y += this.speed;
   }
 
-  isColliding(mo){
-    return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-    this.y + this.height - this.offset.bottom  > mo.y + mo.offset.top &&
-    this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-    this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+  isColliding(mo) {
+    return this.x + this.width - this.offset.right > mo.x + mo.offset.left && this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && this.x + this.offset.left < mo.x + mo.width - mo.offset.right && this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
   }
 
-  
-  hitEnemy(){
+  hitEnemy() {
     this.lifebar -= 5;
-    if(this.lifebar < 0){
+    if (this.lifebar < 0) {
       this.lifebar = 0;
     } else {
       this.lastHit = new Date().getTime();
     }
   }
-  
-  
-  isDead(){
+
+  isDead() {
     return this.lifebar == 0;
   }
-  
-  isHurt(){
+
+  isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
     timepassed = timepassed / 1000; // Difference in s
     return timepassed < 0.2;
   }
-  
 
   calculateY() {
-    let number = Math.random() * 400;
-    if (number < 200) {
-      return 200 + number;
-    } else if (number > 400) {
-      return number - 200;
-    }
-    return number;
+    return Math.random() * 521;
   }
 
-  checkFishAndCharacterDistance(bubbleSwim,swim,transition) {
+  calculateSpeed() {
+    return this.speed + Math.random() * 0.25;
+  }
+
+  checkFishAndCharacterDistance(bubbleSwim, swim, transition) {
     if (this.FishIsInRange) {
       if (this.timerIsRunning()) {
         this.playAnimation(bubbleSwim);
       } else {
-       this.playFishTransition(transition);
+        this.playFishTransition(transition);
       }
     } else {
       if (this.timerIsStopped()) {
@@ -117,30 +106,26 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  calculateY() {
-    return Math.random() * 521;
-}
-
-  timerIsRunning(){
+  timerIsRunning() {
     return !this.timerHasExpired;
   }
 
-  timerIsStopped(){
+  timerIsStopped() {
     return this.timerHasExpired;
   }
 
-  setTimer(){
+  setTimer() {
     setTimeout(() => {
       this.timerHasExpired = true;
     }, 2500);
   }
 
-  playStandardFishAnimation(swim){
+  playStandardFishAnimation(swim) {
     this.playAnimation(swim);
     this.offset.bottom = 25;
   }
 
-  playFishTransition(transition){
+  playFishTransition(transition) {
     if (this.j < 12) {
       this.playAnimation(transition);
       this.offset.bottom = 5;
@@ -151,6 +136,24 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  fishSwimsTowardsCharacter() {
+    if (world) {
+      const targetXFish = world.character.x + world.character.width - world.character.offset.right;
+      const targetYFish = world.character.y + world.character.height / 2;
+      const diffX = targetXFish - this.x - 10;
+      const diffY = targetYFish - this.y;
+      this.x += (diffX * this.speed) / Math.sqrt(diffX * diffX + diffY * diffY);
+      this.y += (diffY * this.speed) / Math.sqrt(diffX * diffX + diffY * diffY);
+    }
+  }
 
-
+  checkOtherDirection() {
+    if (world) {
+      if (this.x - (world.character.x + world.character.offset.left) <= 0) {
+        this.otherDirection = true;
+      } else {
+        this.otherDirection = false;
+      }
+    }
+  }
 }

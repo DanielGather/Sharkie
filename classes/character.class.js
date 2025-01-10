@@ -11,7 +11,6 @@ class Character extends MovableObject {
   poisonStorage = 5;
   bubbleDamage = 100;
   idle = false;
-  otherDirection = false;
   animationPlayed = false;
   imageIsLoaded = false;
 

@@ -114,7 +114,7 @@ class World {
       let hitEnemy = false;
       Level.enemyLevelArray = Level.enemyLevelArray.filter((enemy) => {
         if (poison.isColliding(enemy)) {
-          if (enemy instanceof GreenFish || enemy instanceof PinkFish || enemy instanceof RedFish) {
+          if (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) {
             hitEnemy = true;
             return false;
           } else if (enemy instanceof Endboss) {

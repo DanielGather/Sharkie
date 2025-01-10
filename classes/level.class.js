@@ -3,82 +3,96 @@ class Level {
   static enemyLevelArray = [];
   enemies;
   canvas;
+  world;
   backgroundObjects;
-  repeatCount;
-  step;
-  levelEnemies;
+  repeatCanvas;
+  canvasStep;
+  enemyPerLevel;
   coinsArray = [];
   poisonBottleArray = [];
+  characterSafeSpace = 500;
+  canvasWidth = 1024;
 
-  constructor(backgroundObjects, coins, repeatCount, step, poisonBottle,enemyLevel) {
-    Level.level_end_x = repeatCount * step;
+  constructor(backgroundObjects, coinsPerLevel, repeatCanvas, canvasStep, poisonBottle, enemyPerLevel) {
+    Level.level_end_x = repeatCanvas * canvasStep;
     // this.enemyLevelArray = this.enemyLevelArray
-    this.levelEnemies = enemyLevel;
+    this.enemyPerLevel = enemyPerLevel;
     this.backgroundObjects = backgroundObjects;
-    this.coins = coins;
-    this.repeatCount = repeatCount;
-    this.step = step;
-    this.createBackgroundObjects(repeatCount, step);
-    this.createCoins(coins);
+    this.coins = coinsPerLevel;
+    this.repeatCanvas = repeatCanvas;
+    this.canvasStep = canvasStep;
+    this.createBackgroundObjects(repeatCanvas, canvasStep);
+    this.createCoins(coinsPerLevel);
     this.createBottle(poisonBottle);
     this.createFish();
   }
 
-  // createCoins(coins) {
-  //   for (let i = 0; i < coins; i++) {
-  //     const angleStep = (1.25 * Math.PI) / coins; // Winkelabstand zwischen den Coins
-  //     const angle = angleStep * i; // Winkel für den aktuellen Coin
-  //     let x = 600 + 75 * Math.cos(-angle); // X-Koordinate
-  //     let y = 150 + 75 * Math.sin(-angle);
-  //     this.coinsArray.push(new Coins(x, y));
-  //   }
-  // }
-
-  // createFish(){
-  //   this.enemyLevelArray.push(
-  //     new GreenFish(1024), 
-  //     new RedFish(1024)
-  //   )
-  // }
-
   createFish() {
-    let numberOfCanvas = this.repeatCount;
-    let enemiesPerCanvas = Math.floor(this.levelEnemies / numberOfCanvas);
-    let remainingEnemies = this.levelEnemies % numberOfCanvas;
+    let numberOfCanvas = this.repeatCanvas;
+    let totalEnemies = this.enemyPerLevel;
+    let enemiesPerCanvas = Math.floor(totalEnemies / numberOfCanvas);
+    let remainingEnemies = totalEnemies % numberOfCanvas;
+    let fishTypes = [OrangeFish, GreenFish, RedFish];
+    let fishTypeCounts = this.calculateFishTypeCounts(totalEnemies, fishTypes);
     for (let i = 0; i < numberOfCanvas; i++) {
-      let canvasStartX = i * 1024;
-      let fishCount = enemiesPerCanvas + (i < remainingEnemies ? 1 : 0);
-      for (let j = 0; j < fishCount; j++) {
-        let xPosition;
-        if (i === 0) {
-          xPosition = 300 + Math.random() * (1024 - 300);
-        } else {
-          xPosition = canvasStartX + Math.random() * 1024;
+      this.createFishForCanvas.call(this, i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts);
+    }
+  }
+
+  calculateFishTypeCounts(totalEnemies, fishTypes) {
+    let fishTypeCounts = fishTypes.map((_, index) => Math.floor(totalEnemies / fishTypes.length) + (index < totalEnemies % fishTypes.length ? 1 : 0));
+    return fishTypeCounts;
+  }
+
+  createFishForCanvas(i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts) {
+    let canvasStartX = i * this.canvasWidth;
+    let fishCount = enemiesPerCanvas + (i < remainingEnemies ? 1 : 0);
+    let currentTypeIndex = 0;
+    for (let j = 0; j < fishCount; j++) {
+      let xPosition = this.getFishPosition.call(this, i, canvasStartX);
+      for (let attempts = 0; attempts < fishTypes.length; attempts++) {
+        if (fishTypeCounts[currentTypeIndex] > 0) {
+          this.createFishOfType(fishTypes, currentTypeIndex, xPosition);
+          fishTypeCounts[currentTypeIndex]--;
+          currentTypeIndex = (currentTypeIndex + 1) % fishTypes.length;
+          break;
         }
-        Level.enemyLevelArray.push(new PinkFish(xPosition), new GreenFish(xPosition), new RedFish(xPosition));
+        currentTypeIndex = (currentTypeIndex + 1) % fishTypes.length;
       }
     }
   }
 
+  getFishPosition(i, canvasStartX) {
+    let xPosition = canvasStartX + Math.random() * this.canvasWidth;
+    if (i === 0) {
+      xPosition = this.characterSafeSpace + Math.random() * (this.canvasWidth - this.characterSafeSpace);
+    }
+    return xPosition;
+  }
+
+  createFishOfType(fishTypes, currentTypeIndex, xPosition) {
+    Level.enemyLevelArray.push(new fishTypes[currentTypeIndex](xPosition));
+  }
+
   createCoins(coins) {
-    const coinsPerSegment = 5; // Immer 5 Coins pro Halbkreis
-    const segmentWidth = 1024; // Abstand zwischen den Segmenten
-    const radius = 75; // Radius des Halbkreises
-    const centerY = 150; // Y-Koordinate des Halbkreises
-    const centerX = 600; // X-Koordinate des ersten Halbkreises
+    const coinsPerSegment = 5;
+    const segmentWidth = this.canvasWidth;
+    const radius = 75;
+    const centerY = 150;
+    const centerX = 600;
 
     for (let i = 0; i < coins; i++) {
-        const segmentIndex = Math.floor(i / coinsPerSegment);
-        const positionInSegment = i % coinsPerSegment;
-        const offsetX = segmentIndex * segmentWidth;
-        const angleStep = (1.25 * Math.PI) / coinsPerSegment;
-        const angle = angleStep * positionInSegment;
+      const segmentIndex = Math.floor(i / coinsPerSegment);
+      const positionInSegment = i % coinsPerSegment;
+      const offsetX = segmentIndex * segmentWidth;
+      const angleStep = (1.25 * Math.PI) / coinsPerSegment;
+      const angle = angleStep * positionInSegment;
 
-        const x = centerX + offsetX + radius * Math.cos(-angle);
-        const y = centerY + radius * Math.sin(-angle);
-        this.coinsArray.push(new Coins(x, y));
+      const x = centerX + offsetX + radius * Math.cos(-angle);
+      const y = centerY + radius * Math.sin(-angle);
+      this.coinsArray.push(new Coins(x, y));
     }
-}
+  }
 
   createBottle(poisonBottle) {
     const minX = 100;
@@ -104,15 +118,14 @@ class Level {
       const x = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
       const y = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
       if (!this.isOverlapping(x, y, bottleRadius)) {
-        return { x, y }; 
-        // Valide Position gefunden.
+        return { x, y };
       }
       attempts++;
     }
-    // Keine freie Position gefunden.
-    return null; 
+
+    return null;
   }
-  // Checkt ob eine Bottle an der gegebenen Position überlappt
+
   isOverlapping(x, y, bottleRadius) {
     return this.poisonBottleArray.some((bottle) => {
       const dx = bottle.x - x;
@@ -122,13 +135,13 @@ class Level {
     });
   }
 
-  createBackgroundObjects(repeatCount, step) {
+  createBackgroundObjects(repeatCanvas, canvasStep) {
     const backgroundLayers = ["img/3.Background/Layers/5. Water/D", "img/3.Background/Layers/1. Light/", "img/3.Background/Layers/3.Fondo 1/D", "img/3.Background/Layers/4.Fondo 2/D", "img/3.Background/Layers/2.Floor/D"];
     let variableZahl = 1;
     let count = 0;
-    this.level_end_x = repeatCount * step;
-    for (let i = 0; i < repeatCount; i++) {
-      let x = i * step;
+    this.level_end_x = repeatCanvas * canvasStep;
+    for (let i = 0; i < repeatCanvas; i++) {
+      let x = i * canvasStep;
       backgroundLayers.forEach((backgroundLayerBase) => {
         this.backgroundObjects.push(new BackgroundObject(`${backgroundLayerBase}${variableZahl}.webp`, x, 0));
       });

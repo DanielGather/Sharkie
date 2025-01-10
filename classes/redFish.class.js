@@ -1,6 +1,7 @@
 class RedFish extends MovableObject {
   width = 120;
   height = 80;
+  speed = 0.35;
 
   offset = {
     top: 5,
@@ -15,15 +16,14 @@ class RedFish extends MovableObject {
 
   IMAGES_RED_FISH_BUBBLE_SWIM = ["img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim5.webp"];
 
-  constructor(level_end_x) {
+  constructor(xPosition) {
     super();
-    this.level_end_x = level_end_x;
+    this.x = xPosition;
     this.loadImages(this.IMAGES_RED_FISH_SWIMING);
     this.loadImages(this.IMAGES_RED_FISH_TRANSITION);
     this.loadImages(this.IMAGES_RED_FISH_BUBBLE_SWIM);
-    this.x = level_end_x;
     this.y = this.calculateY();
-    this.speed = 0.15 + Math.random() * 0.25;
+    this.speed = this.calculateSpeed();
     this.animate();
   }
 

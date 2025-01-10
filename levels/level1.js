@@ -1,9 +1,9 @@
-let coinsLevel = 20
-let repeatCountLevel = 2;
-let stepLevel = 1024;
-let PoisonBottleLevel = 20;
-let first_level_end_x_ = repeatCountLevel * stepLevel;
-let enemyLevel = 1
+let coinsPerLevel = 10
+let repeatCanvas = 5;
+let canvasStep = 1024;
+let PoisonBottleLevel = 10;
+let first_level_end_x_ = repeatCanvas * canvasStep;
+let enemyPerLevel = 6
 
 const level1 = new Level(
 
@@ -15,9 +15,9 @@ const level1 = new Level(
     new BackgroundObject("img/3.Background/Layers/4.Fondo 2/D2.webp", -1024, 0),
     new BackgroundObject("img/3.Background/Layers/2.Floor/D2.webp", -1024, 0),
   ],
-  coinsLevel, // Coins
-  repeatCountLevel, // repeatCount
-  stepLevel,  // step(width)
+  coinsPerLevel, // Coins
+  repeatCanvas, // repeatCount
+  canvasStep,  // step(width)
   PoisonBottleLevel, // PoisonBottle
-  enemyLevel
+  enemyPerLevel
 );
