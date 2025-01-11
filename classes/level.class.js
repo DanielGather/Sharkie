@@ -1,41 +1,52 @@
 class Level {
   static level_end_x;
   static enemyLevelArray = [];
-  enemies;
   canvas;
   world;
   backgroundObjects;
   repeatCanvas;
   canvasStep;
   enemyPerLevel;
+  dangerousEnemiesPerLevel;
   coinsArray = [];
   poisonBottleArray = [];
   characterSafeSpace = 500;
   canvasWidth = 1024;
 
-  constructor(backgroundObjects, coinsPerLevel, repeatCanvas, canvasStep, poisonBottle, enemyPerLevel) {
+  constructor(backgroundObjects, coinsPerLevel, repeatCanvas, canvasStep, poisonBottle, enemyPerLevel, dangerousEnemiesPerLevel,speedFromDangerousFish, speedNormalFish) {
     Level.level_end_x = repeatCanvas * canvasStep;
     // this.enemyLevelArray = this.enemyLevelArray
-    this.enemyPerLevel = enemyPerLevel;
+    // this.enemyPerLevel = enemyPerLevel;
+    // this.dangerousEnemiesPerLevel = dangerousEnemiesPerLevel;
     this.backgroundObjects = backgroundObjects;
-    this.coins = coinsPerLevel;
-    this.repeatCanvas = repeatCanvas;
-    this.canvasStep = canvasStep;
-    this.createBackgroundObjects(repeatCanvas, canvasStep);
+    // this.coins = coinsPerLevel;
+    // this.repeatCanvas = repeatCanvas;
+    // this.canvasStep = canvasStep;
+    this.createBackgroundObjects(repeatCanvas, canvasStep, backgroundObjects);
     this.createCoins(coinsPerLevel);
     this.createBottle(poisonBottle);
-    this.createFish();
+    this.createFish(repeatCanvas, enemyPerLevel, speedNormalFish );
+    this.createDangerousFish(dangerousEnemiesPerLevel,speedFromDangerousFish);
   }
 
-  createFish() {
-    let numberOfCanvas = this.repeatCanvas;
-    let totalEnemies = this.enemyPerLevel;
+  createDangerousFish(dangerousEnemiesPerLevel,speedFromDangerousFish){
+    let numberOfDangerousFishes = dangerousEnemiesPerLevel;
+    let middleOfCanvas = this.canvasWidth / 2;
+    for (let i = 0; i < numberOfDangerousFishes; i++) {
+      Level.enemyLevelArray.push(new GreenSuperDangerousFish(middleOfCanvas,speedFromDangerousFish));
+      middleOfCanvas = middleOfCanvas + this.canvasWidth;
+    }
+  }
+
+  createFish(repeatCanvas, enemyPerLevel,speedNormalFish ) {
+    let numberOfCanvas = repeatCanvas;
+    let totalEnemies = enemyPerLevel;
     let enemiesPerCanvas = Math.floor(totalEnemies / numberOfCanvas);
     let remainingEnemies = totalEnemies % numberOfCanvas;
     let fishTypes = [OrangeFish, GreenFish, RedFish];
     let fishTypeCounts = this.calculateFishTypeCounts(totalEnemies, fishTypes);
     for (let i = 0; i < numberOfCanvas; i++) {
-      this.createFishForCanvas.call(this, i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts);
+      this.createFishForCanvas.call(this, i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts, speedNormalFish);
     }
   }
 
@@ -44,7 +55,7 @@ class Level {
     return fishTypeCounts;
   }
 
-  createFishForCanvas(i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts) {
+  createFishForCanvas(i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts, speedNormalFish) {
     let canvasStartX = i * this.canvasWidth;
     let fishCount = enemiesPerCanvas + (i < remainingEnemies ? 1 : 0);
     let currentTypeIndex = 0;
@@ -52,7 +63,7 @@ class Level {
       let xPosition = this.getFishPosition.call(this, i, canvasStartX);
       for (let attempts = 0; attempts < fishTypes.length; attempts++) {
         if (fishTypeCounts[currentTypeIndex] > 0) {
-          this.createFishOfType(fishTypes, currentTypeIndex, xPosition);
+          this.createFishOfType(fishTypes, currentTypeIndex, xPosition, speedNormalFish);
           fishTypeCounts[currentTypeIndex]--;
           currentTypeIndex = (currentTypeIndex + 1) % fishTypes.length;
           break;
@@ -70,8 +81,8 @@ class Level {
     return xPosition;
   }
 
-  createFishOfType(fishTypes, currentTypeIndex, xPosition) {
-    Level.enemyLevelArray.push(new fishTypes[currentTypeIndex](xPosition));
+  createFishOfType(fishTypes, currentTypeIndex, xPosition, speedNormalFish) {
+    Level.enemyLevelArray.push(new fishTypes[currentTypeIndex](xPosition, speedNormalFish));
   }
 
   createCoins(coins) {
@@ -135,7 +146,7 @@ class Level {
     });
   }
 
-  createBackgroundObjects(repeatCanvas, canvasStep) {
+  createBackgroundObjects(repeatCanvas, canvasStep, backgroundObjects) {
     const backgroundLayers = ["img/3.Background/Layers/5. Water/D", "img/3.Background/Layers/1. Light/", "img/3.Background/Layers/3.Fondo 1/D", "img/3.Background/Layers/4.Fondo 2/D", "img/3.Background/Layers/2.Floor/D"];
     let variableZahl = 1;
     let count = 0;

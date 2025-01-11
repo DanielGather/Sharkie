@@ -16,14 +16,14 @@ class GreenFish extends MovableObject {
 
   IMAGES_GREEN_FISH_BUBBLE_SWIM = ["img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim5.webp"];
 
-  constructor(xPosition) {
+  constructor(xPosition, speedNormalFish) {
     super();
     this.x = xPosition;
     this.loadImages(this.IMAGES_GREEN_FISH_SWIMING);
     this.loadImages(this.IMAGES_GREEN_FISH_TRANSITION);
     this.loadImages(this.IMAGES_GREEN_FISH_BUBBLE_SWIM);
     this.y = this.calculateY();
-    this.speed = this.calculateSpeed();
+    this.speed = this.calculateSpeed(speedNormalFish);
     this.animate();
   }
 
@@ -35,6 +35,4 @@ class GreenFish extends MovableObject {
     setStoppableInterval(this.checkOtherDirection.bind(this), 100)
   }
 
-
-  
 }

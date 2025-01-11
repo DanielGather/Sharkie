@@ -93,11 +93,13 @@ class Character extends MovableObject {
     setStoppableMovementInterval(this.playWalkingSound.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.checkIfCharacterIsCloseToEndboss.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.bossFollowsCharacter.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.lastMovement.bind(this), 1000 / this.hz)
+    setStoppableMovementInterval(this.changeCameraX.bind(this), 1000 / this.hz)
 
-    setInterval(() => {
-      this.lastMovement();
-      this.changeCameraX();
-    }, 1000 / this.hz);
+    // setInterval(() => {
+    //   this.lastMovement();
+    //   this.changeCameraX();
+    // }, 1000 / this.hz);
   }
 
   hitCoin() {

@@ -8,19 +8,14 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   height = 100;
   width = 100;
+  damage = 5;
+  fishIsDead = false;
   lastMovementCharacter;
   FishIsInRange = false;
   timerHasExpired = false;
   j;
   x;
   animationPlayed;
-
-  // offset = {
-  //   top: 0,
-  //   right: 0,
-  //   left: 0,
-  //   bottom: 0
-  // }
 
   applyGravity() {
     setInterval(() => {
@@ -63,8 +58,8 @@ class MovableObject extends DrawableObject {
     return this.x + this.width - this.offset.right > mo.x + mo.offset.left && this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && this.x + this.offset.left < mo.x + mo.width - mo.offset.right && this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
   }
 
-  hitEnemy() {
-    this.lifebar -= 5;
+  hitEnemy(damage) {
+    this.lifebar -= damage;
     if (this.lifebar < 0) {
       this.lifebar = 0;
     } else {
@@ -86,8 +81,8 @@ class MovableObject extends DrawableObject {
     return Math.random() * 521;
   }
 
-  calculateSpeed() {
-    return this.speed + Math.random() * 0.25;
+  calculateSpeed(speed) {
+    return speed + Math.random() * 0.25;
   }
 
   checkFishAndCharacterDistance(bubbleSwim, swim, transition) {

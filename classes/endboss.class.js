@@ -9,11 +9,12 @@ class Endboss extends MovableObject {
   height = 500;
   lastHitEndboss = 0;
   endbossLife = 1000;
-  speed = 15;
+  speed = 0.25;
   initialLife = this.endbossLife;
   isNotDead = true;
   attackingCharacter = false;
   isHurt = false;
+  moveLeftEndboss = false;
 
   offset = {
     top: 160,
@@ -41,6 +42,7 @@ class Endboss extends MovableObject {
 
   constructor() {
     super().loadImage(this.IMAGES_INTRODUCE[0]);
+    this.damage = 10;
     this.loadImages(this.IMAGES_INTRODUCE);
     this.loadImages(this.IMAGES_SWIMING);
     this.loadImages(this.IMAGES_ENDBOSS_DEAD);
@@ -54,11 +56,12 @@ class Endboss extends MovableObject {
     this.animationCounterIntroduce = 0;
     this.animationCounterDead = 0;
     this.animationCounterIsHurt = 0;
-    setStoppableInterval(this.characterIsNearEndboss.bind(this), 200);
+    setStoppableInterval(this.characterIsNearEndboss.bind(this), 125);
     setStoppableInterval(this.endbossIsDead.bind(this), 500);
     setStoppableInterval(this.endbossIsHittet.bind(this), 100)
     setStoppableInterval(this.endbossTakesDamage.bind(this), 100);
-    setStoppableInterval(this.attackCharacter.bind(this), 300);
+    setStoppableInterval(this.attackCharacter.bind(this), 150);
+    setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz)
   }
 
   endbossTakesDamage() {
@@ -73,11 +76,21 @@ class Endboss extends MovableObject {
     }
   }
 
+  moveLeft(){
+    if(this.moveLeftEndboss == true && !this.isHurt){
+      super.moveLeft();
+      this.attackingCharacter = true;
+    }
+  }
+
   attackCharacter(){
     if(this.attackingCharacter && !this.isHurt && this.isNotDead){
       this.playAnimation(this.IMAGES_ENDBOSS_IS_ATTACKING);
       this.offset.left = 10;
-      this.moveLeft();
+      this.moveLeftEndboss = true; 
+    } else if(!this.isNotDead && !this.isHurt) {
+      this.moveLeftEndboss = false;
+
     }
   }
 
@@ -101,7 +114,7 @@ class Endboss extends MovableObject {
     if (this.world && this.world.characterIsInRange && this.isNotDead) {
       if (this.animationCounterIntroduce < 10) {
         this.playAnimation(this.IMAGES_INTRODUCE);
-      } else {
+      } else if(!this.attackingCharacter && !this.isHurt) {
         this.playAnimation(this.IMAGES_SWIMING);
       }
       this.animationCounterIntroduce++;

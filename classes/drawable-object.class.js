@@ -20,7 +20,7 @@ class DrawableObject {
 
 
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof GreenFish || this instanceof OrangeFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle) {
+    if (this instanceof Character || this instanceof GreenFish || this instanceof OrangeFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle || this instanceof GreenSuperDangerousFish) {
       ctx.beginPath();
       ctx.lineWidth = "3";
       ctx.strokeStyle = "blue";
@@ -30,7 +30,7 @@ class DrawableObject {
   }
 
   drawFrameOffset(ctx) {
-    if (this instanceof Character || this instanceof GreenFish || this instanceof OrangeFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle) {
+    if (this instanceof Character || this instanceof GreenFish || this instanceof OrangeFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle || this instanceof GreenSuperDangerousFish) {
       ctx.beginPath();
       ctx.lineWidth = "3";
       ctx.strokeStyle = "red";

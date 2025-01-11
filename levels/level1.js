@@ -1,9 +1,12 @@
-let coinsPerLevel = 10
-let repeatCanvas = 5;
+let repeatCanvas = 2;
+let coinsPerLevel = 0
+let PoisonBottleLevel = 15;
+let enemyPerLevel = 0;
+let speedNormalFish = 0.5;
+let speedFromDangerousFish = 0.1;
 let canvasStep = 1024;
-let PoisonBottleLevel = 10;
 let first_level_end_x_ = repeatCanvas * canvasStep;
-let enemyPerLevel = 6
+let dangerousEnemiesPerLevel = repeatCanvas;
 
 const level1 = new Level(
 
@@ -19,5 +22,8 @@ const level1 = new Level(
   repeatCanvas, // repeatCount
   canvasStep,  // step(width)
   PoisonBottleLevel, // PoisonBottle
-  enemyPerLevel
+  enemyPerLevel,
+  dangerousEnemiesPerLevel,
+  speedFromDangerousFish,
+  speedNormalFish
 );

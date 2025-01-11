@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-  endboss = new Endboss();
+  endboss = new Endboss(this.character.lifebar);
   statusBar = new StatusBar();
   LifeEndboss = new EndbossLifebar();
   //   barrier = new Barrier();
@@ -41,12 +41,12 @@ class World {
 
   setWorld() {
     this.character.world = this;
-    this.endboss.world = this;
     this.level.world = this;
+    this.endboss.world = this;
   }
 
   pushEndbossInArray(){
-    Level.enemyLevelArray.push(this.endboss)
+      Level.enemyLevelArray.push(this.endboss)
   }
 
 
@@ -93,7 +93,11 @@ class World {
   checkCollisionsEnemy() {
     Level.enemyLevelArray.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        this.character.hitEnemy();
+        if(enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish || enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead){
+          this.character.hitEnemy(enemy.damage);
+        } else if (enemy instanceof Endboss){
+          this.character.hitEnemy(this.endboss.damage);
+        }
       }
     });
   }
@@ -103,9 +107,9 @@ class World {
     let endbossX = this.endboss.x + this.endboss.offset.left;
     let distance = endbossX -characterX;
     if(distance > 400 && this.endboss.attackingCharacter){
-      this.endboss.speed = 65;
+      this.endboss.speed = 2;
     } else if (distance < 50) {
-      this.endboss.speed = 15;
+      this.endboss.speed = 0.25;
     }
   }
 
@@ -117,8 +121,12 @@ class World {
           if (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) {
             hitEnemy = true;
             return false;
+          } else if (enemy instanceof GreenSuperDangerousFish){
+            enemy.fishIsDead = true;
+            hitEnemy = true;
           } else if (enemy instanceof Endboss) {
             this.character.hitEndboss();
+            this.endboss.moveLeftEndboss = true;
             this.endboss.isHurt = true;
             hitEnemy = true;
           }
