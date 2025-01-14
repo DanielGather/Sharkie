@@ -4,15 +4,20 @@ class Character extends MovableObject {
   movementAnimation;
   idleAnimation;
   swimAnimation;
+  clickedSpacebar = 0;
   width = 200;
   height = 200;
   speed = 1;
   coins = 0;
   poisonStorage = 5;
   bubbleDamage = 100;
+  finSlapDamage = 10;
   idle = false;
   animationPlayed = false;
   imageIsLoaded = false;
+  spaceBar = false;
+  i;
+  j;
 
   offset = {
     top: 90,
@@ -37,6 +42,8 @@ class Character extends MovableObject {
 
   IMAGES_SHOOTING_BUBBLE = ["img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.webp"];
 
+  IMAGES_FIN_SLAP = ["img/1.Sharkie/4.Attack/Fin slap/1.webp", "img/1.Sharkie/4.Attack/Fin slap/2.webp", "img/1.Sharkie/4.Attack/Fin slap/3.webp", "img/1.Sharkie/4.Attack/Fin slap/4.webp", "img/1.Sharkie/4.Attack/Fin slap/5.webp", "img/1.Sharkie/4.Attack/Fin slap/6.webp", "img/1.Sharkie/4.Attack/Fin slap/7.webp", "img/1.Sharkie/4.Attack/Fin slap/8.webp", "img/1.Sharkie/3.Swim/1.webp"];
+
   walking_SOUND = new Audio("audio/fishSwiming.mp3");
   ambience_SOUND = new Audio("audio/underWaterNoise.mp3");
 
@@ -50,6 +57,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_HURT_POISON);
     this.loadImages(this.IMAGES_HURT_ELECTRO);
     this.loadImages(this.IMAGES_SHOOTING_BUBBLE);
+    this.loadImages(this.IMAGES_FIN_SLAP);
     this.animate();
     this.applyGravity();
     this.x = 80;
@@ -59,33 +67,29 @@ class Character extends MovableObject {
   }
 
   animate() {
+    this.j = 0;
     setInterval(() => {
       if (this.isDead()) {
-        if (!this.animationPlayed) {
-          stopMovement();
-          this.playAnimation(this.IMAGES_ELECTRO_DEAD);
-          setTimeout(() => {
-            this.loadImage("img/1.Sharkie/6.dead/2.Electro_shock/10.webp");
-            this.animationPlayed = true;
-          }, 1000);
-        }
+        console.log("welchen wert hat hier J", this.j);
+
+        this.characterIsDead();
         this.walking_SOUND.pause();
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT_ELECTRO);
-      } else if (this.isIdle() >= 3 && this.isIdle() <= 7) {
+      } else if (this.isIdle() >= 3 && this.isIdle() <= 7 && !this.spaceBar) {
         this.playAnimation(this.IMAGES_IDLE);
-      } else if (this.isIdle() >= 7) {
+      } else if (this.isIdle() >= 7 && !this.spaceBar) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
       } else {
-        if (this.world && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN)) {
-          clearInterval(this.idleAnimationInterval);
+        if (this.world && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) && !this.spaceBar) {
           this.playAnimation(this.IMAGES_SWIMING);
-          this.idle = false;
         }
       }
       playSound(this.ambience_SOUND);
       this.walking_SOUND.pause();
     }, 150);
+
+    this.i = 0;
     setStoppableMovementInterval(this.characterSwimRight.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimLeft.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimUp.bind(this), 1000 / this.hz);
@@ -93,8 +97,10 @@ class Character extends MovableObject {
     setStoppableMovementInterval(this.playWalkingSound.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.checkIfCharacterIsCloseToEndboss.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.bossFollowsCharacter.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.lastMovement.bind(this), 1000 / this.hz)
-    setStoppableMovementInterval(this.changeCameraX.bind(this), 1000 / this.hz)
+    setStoppableMovementInterval(this.lastMovement.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.changeCameraX.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.checkSpaceBar.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.finSlapAttack.bind(this), 50);
 
     // setInterval(() => {
     //   this.lastMovement();
@@ -102,8 +108,45 @@ class Character extends MovableObject {
     // }, 1000 / this.hz);
   }
 
+  characterIsDead() {
+    if (this.j < 10) {
+      this.playAnimation(this.IMAGES_ELECTRO_DEAD);
+      stopMovement();
+      this.j++;
+    } else {
+      this.loadImage(this.IMAGES_ELECTRO_DEAD[9]);
+    }
+  }
+
   hitCoin() {
     this.coins += 1;
+  }
+
+  finSlapAttack() {
+    if (this.spaceBar) {
+      if (this.i <= 9) {
+        this.offset.right = 15;
+        this.playAnimation(this.IMAGES_FIN_SLAP);
+      } else {
+        this.spaceBar = false;
+        this.i = 0;
+        this.offset.right = 40;
+      }
+      this.i++;
+    }
+  }
+
+  checkSpaceBar() {
+    if (this.world && this.world.keyboard.SPACE && !this.spaceBar && this.timePassedClickSpacebar() >= 1.5) {
+      this.spaceBar = true;
+      this.clickedSpacebar = new Date().getTime();
+    }
+  }
+
+  timePassedClickSpacebar() {
+    let currentTime = new Date().getTime();
+    let timepassed = (currentTime - this.clickedSpacebar) / 1000;
+    return timepassed;
   }
 
   checkIfCharacterIsCloseToEndboss() {
@@ -122,7 +165,11 @@ class Character extends MovableObject {
   }
 
   hitEndboss() {
-    this.world.endboss.endbossLife -= this.bubbleDamage;
+    if (!this.spaceBar) {
+      this.world.endboss.endbossLife -= this.bubbleDamage;
+    } else {
+      this.world.endboss.endbossLife -= this.finSlapDamage;
+    }
   }
 
   hitPoisonBottle() {
@@ -142,7 +189,7 @@ class Character extends MovableObject {
   }
 
   lastMovement() {
-    if (this.world && (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT)) {
+    if (this.world && (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT || this.world.keyboard.SPACE)) {
       this.lastMovementCharacter = new Date().getTime();
     }
   }
@@ -187,15 +234,6 @@ class Character extends MovableObject {
       this.world.camera_x = -this.x + 80;
     }
   }
-
-  playIdleAnimation() {
-    this.idleAnimationInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_IDLE);
-      this.idle = true;
-    }, 150);
-  }
-
-  jump() {}
 
   introduceBoss() {
     if (this.world && this.x + this.width == Level.level_end_x - 1548) {

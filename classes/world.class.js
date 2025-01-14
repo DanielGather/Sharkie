@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-  endboss = new Endboss(this.character.lifebar);
+  endboss = new Endboss();
   statusBar = new StatusBar();
   LifeEndboss = new EndbossLifebar();
   //   barrier = new Barrier();
@@ -12,7 +12,7 @@ class World {
   characterIsInRange = false;
   throwableObjects = [];
   bossIsTriggerd = false;
-  lastThrow;
+  lastDamage;
   // intervalIDs = [];
 
   constructor(canvas, keyboard) {
@@ -26,8 +26,6 @@ class World {
     this.pushEndbossInArray();
     setStoppableInterval(this.run.bind(this), 100);
   }
-
- 
 
   run() {
     this.checkCollisionsEnemy();
@@ -45,10 +43,9 @@ class World {
     this.endboss.world = this;
   }
 
-  pushEndbossInArray(){
-      Level.enemyLevelArray.push(this.endboss)
+  pushEndbossInArray() {
+    Level.enemyLevelArray.push(this.endboss);
   }
-
 
   setFontRules() {
     this.ctx.font = "30px LuckiestGuy";
@@ -56,8 +53,8 @@ class World {
   }
 
   checkThrowObjects() {
-    if (this.keyboard.THROW && !this.throwDelay() && this.character.poisonStorage > 0) {
-      this.lastThrow = new Date().getTime();
+    if (this.keyboard.THROW && !this.damageDelay() && this.character.poisonStorage > 0) {
+      this.lastDamage = new Date().getTime();
       this.shootingAnimation();
       setTimeout(() => {
         let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right + 25, this.character.y + this.character.height / 2);
@@ -81,32 +78,40 @@ class World {
     }, 50);
   }
 
-  throwDelay() {
-    if (!this.lastThrow) {
-      this.lastThrow = 0;
+  damageDelay() {
+    if (!this.lastDamage) {
+      this.lastDamage = 0;
     }
     let currentTime = new Date().getTime();
-    let timePassed = (currentTime - this.lastThrow) / 1000;
+    let timePassed = (currentTime - this.lastDamage) / 1000;
     return timePassed < 0.5;
   }
 
   checkCollisionsEnemy() {
-    Level.enemyLevelArray.forEach((enemy) => {
+    Level.enemyLevelArray.forEach((enemy, index) => {
       if (this.character.isColliding(enemy)) {
-        if(enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish || enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead){
+        if ((enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish || (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead)) && !this.character.spaceBar) {
           this.character.hitEnemy(enemy.damage);
-        } else if (enemy instanceof Endboss){
+        } else if (enemy instanceof Endboss && !this.character.spaceBar) {
           this.character.hitEnemy(this.endboss.damage);
+        } else if (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) {
+          Level.enemyLevelArray.splice(index, 1);
+        } else if (enemy instanceof GreenSuperDangerousFish) {
+          enemy.fishIsDead = true;
+        } else if (enemy instanceof Endboss && !this.damageDelay()) {
+          this.lastDamage = new Date().getTime();
+          this.character.hitEndboss();
+          this.endboss.isHurt = true;
         }
       }
     });
   }
 
-  speedBoostBoss(){
+  speedBoostBoss() {
     let characterX = this.character.x + this.character.width - this.character.offset.right;
     let endbossX = this.endboss.x + this.endboss.offset.left;
-    let distance = endbossX -characterX;
-    if(distance > 400 && this.endboss.attackingCharacter){
+    let distance = endbossX - characterX;
+    if (distance > 400 && this.endboss.attackingCharacter) {
       this.endboss.speed = 2;
     } else if (distance < 50) {
       this.endboss.speed = 0.25;
@@ -121,9 +126,9 @@ class World {
           if (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) {
             hitEnemy = true;
             return false;
-          } else if (enemy instanceof GreenSuperDangerousFish){
-            enemy.fishIsDead = true;
+          } else if (enemy instanceof GreenSuperDangerousFish) {
             hitEnemy = true;
+            enemy.fishIsDead = true;
           } else if (enemy instanceof Endboss) {
             this.character.hitEndboss();
             this.endboss.moveLeftEndboss = true;
@@ -187,14 +192,14 @@ class World {
   }
 
   fishIsNearCharacter() {
-    Level.enemyLevelArray.forEach((enemy) => {      
+    Level.enemyLevelArray.forEach((enemy) => {
       const distanceX = Math.abs(this.character.x + this.character.width - this.character.offset.right - enemy.x);
       const distanceYTop = Math.abs(this.character.y + this.character.height - this.character.offset.bottom - enemy.y);
-      const distanceYBottom = Math.abs((this.character.y + this.character.offset.top) - (enemy.y + enemy.height - enemy.offset.bottom)) 
+      const distanceYBottom = Math.abs(this.character.y + this.character.offset.top - (enemy.y + enemy.height - enemy.offset.bottom));
       if ((distanceX < 250 && distanceYTop < 100) || (distanceX < 250 && distanceYBottom < 100)) {
-       enemy.FishIsInRange = true;
-      } else if(distanceX > 300 || distanceYBottom > 150 || distanceYTop > 150 ||(distanceX > 300 && distanceYTop > 150 ) || (distanceX > 300 && distanceYBottom > 150)) {
-       enemy.FishIsInRange = false;
+        enemy.FishIsInRange = true;
+      } else if (distanceX > 300 || distanceYBottom > 150 || distanceYTop > 150 || (distanceX > 300 && distanceYTop > 150) || (distanceX > 300 && distanceYBottom > 150)) {
+        enemy.FishIsInRange = false;
       }
     });
   }
@@ -208,14 +213,12 @@ class World {
   }
 
   addObjectsToMap(objects) {
-    try{
+    try {
       objects.forEach((o) => {
         this.addToMap(o);
       });
-
-    } catch(e){
+    } catch (e) {
       // console.log("image", e);
-      
     }
   }
 

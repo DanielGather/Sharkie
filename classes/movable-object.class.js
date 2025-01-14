@@ -39,11 +39,15 @@ class MovableObject extends DrawableObject {
   }
 
   playAnimation(images) {
+    if (this.currentAnimation !== images) {
+        this.currentAnimation = images; // Speichere den neuen Bildsatz
+        this.currentImage = 0; // Setze die Animation zurück
+    }
     let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;
-  }
+}
 
   swimUP() {
     this.speedY = 0;

@@ -44,6 +44,18 @@ class DrawableObject {
       let image = new Image();
       image.src = path;
       this.imageCache[path] = image;
+
+
+
+
+
+
+
+
+
+
+
+      
     });
   }
 }

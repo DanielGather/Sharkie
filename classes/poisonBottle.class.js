@@ -17,6 +17,7 @@ class PoisonBottle extends DrawableObject {
         this.y = y;
         this.width = 75;
         this.height = 75;
+
     }
 
 }
