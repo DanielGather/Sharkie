@@ -4,6 +4,7 @@ class Character extends MovableObject {
   movementAnimation;
   idleAnimation;
   swimAnimation;
+  scarySound = false;
   clickedSpacebar = 0;
   width = 200;
   height = 200;
@@ -46,6 +47,12 @@ class Character extends MovableObject {
 
   walking_SOUND = new Audio("audio/fishSwiming.mp3");
   ambience_SOUND = new Audio("audio/underWaterNoise.mp3");
+  background_SOUND = new Audio("audio/backgroundSound.mp3")
+  finSlap_SOUND = new Audio("audio/finSlap.mp3");
+  hurt_SOUND = new Audio("audio/electroHurt.mp3");
+  sleep_SOUND = new Audio("audio/sleepSound.wav");
+  scary_SOUND = new Audio("audio/whaleSound.mp3");
+  bubble_shot_SOUND = new Audio("audio/bubbleShot.wav")
 
   constructor() {
     super().loadImage("img/1.Sharkie/3.Swim/1.webp");
@@ -60,6 +67,14 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_FIN_SLAP);
     this.animate();
     this.applyGravity();
+    playSound(this.background_SOUND);
+    this.walking_SOUND.volume = 0.5;
+    // this.ambience_SOUND.volume = 1;
+    this.background_SOUND.volume = 0.2;
+    this.finSlap_SOUND.volume = 0.2;
+    this.hurt_SOUND.volume = 0.3;
+    this.sleep_SOUND.volume = 0.3;
+    this.scary_SOUND.volume = 0.2;
     this.x = 80;
 
     // this.saveAllSoundsInArray();
@@ -70,24 +85,25 @@ class Character extends MovableObject {
     this.j = 0;
     setInterval(() => {
       if (this.isDead()) {
-        console.log("welchen wert hat hier J", this.j);
-
         this.characterIsDead();
         this.walking_SOUND.pause();
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT_ELECTRO);
+        this.playHurtSound();
       } else if (this.isIdle() >= 3 && this.isIdle() <= 7 && !this.spaceBar) {
         this.playAnimation(this.IMAGES_IDLE);
       } else if (this.isIdle() >= 7 && !this.spaceBar) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
+        this.sleep_SOUND.play();
       } else {
         if (this.world && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) && !this.spaceBar) {
           this.playAnimation(this.IMAGES_SWIMING);
+          this.sleep_SOUND.pause();
         }
       }
-      playSound(this.ambience_SOUND);
+      this.background_SOUND.play();
       this.walking_SOUND.pause();
-    }, 150);
+    }, 100);
 
     this.i = 0;
     setStoppableMovementInterval(this.characterSwimRight.bind(this), 1000 / this.hz);
@@ -101,11 +117,23 @@ class Character extends MovableObject {
     setStoppableMovementInterval(this.changeCameraX.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.checkSpaceBar.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.finSlapAttack.bind(this), 50);
+    setStoppableMovementInterval(this.startScaryMusic.bind(this), 100);
+  }
 
-    // setInterval(() => {
-    //   this.lastMovement();
-    //   this.changeCameraX();
-    // }, 1000 / this.hz);
+  startScaryMusic() {
+    if (this.world.endboss.x - this.x - this.width < 1500) {
+      if(!this.scarySound){
+        this.scary_SOUND.play();
+        this.scarySound = true;
+      }
+    }
+  }
+
+  playHurtSound() {
+    this.hurt_SOUND.play();
+    setTimeout(() => {
+      this.hurt_SOUND.pause();
+    }, 500);
   }
 
   characterIsDead() {
@@ -128,6 +156,7 @@ class Character extends MovableObject {
         this.offset.right = 15;
         this.playAnimation(this.IMAGES_FIN_SLAP);
       } else {
+        playSound(this.finSlap_SOUND);
         this.spaceBar = false;
         this.i = 0;
         this.offset.right = 40;

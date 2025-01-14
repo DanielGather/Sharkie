@@ -1,0 +1,14 @@
+sleepSound = 
+Sub-Breathing-Nose-High-BPM 34 by AmeAfterDark -- https://freesound.org/s/568518/ -- License: Attribution NonCommercial 4.0
+
+hurtSoundBoss =
+<a href="https://freesound.org/people/echojonas/sounds/503073/">pain2.wav</a> by <a href="https://freesound.org/people/echojonas/">echojonas</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a>
+
+monsterBite =
+<a href="https://freesound.org/people/DAN2008/sounds/175169/">monster bite</a> by <a href="https://freesound.org/people/DAN2008/">DAN2008</a> | License: <a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0</a>
+
+backgroundSound =
+<a href="https://freesound.org/people/MPooman/sounds/653612/">[ MPooman ] Whale Sounds (High Quality)</a> by <a href="https://freesound.org/people/MPooman/">MPooman</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a>
+
+bubbleShot = 
+<a href="https://freesound.org/people/Breviceps/sounds/445961/">Cartoon / Video Game - Bubble Shot</a> by <a href="https://freesound.org/people/Breviceps/">Breviceps</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a>

@@ -56,9 +56,11 @@ class World {
     if (this.keyboard.THROW && !this.damageDelay() && this.character.poisonStorage > 0) {
       this.lastDamage = new Date().getTime();
       this.shootingAnimation();
+
       setTimeout(() => {
         let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right + 25, this.character.y + this.character.height / 2);
         this.throwableObjects.push(bottle);
+        this.character.bubble_shot_SOUND.play();
       }, 400);
       this.character.reducePoisonStorage();
     }
@@ -90,21 +92,49 @@ class World {
   checkCollisionsEnemy() {
     Level.enemyLevelArray.forEach((enemy, index) => {
       if (this.character.isColliding(enemy)) {
-        if ((enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish || (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead)) && !this.character.spaceBar) {
+        if (this.isCollidableEnemy(enemy)) {
           this.character.hitEnemy(enemy.damage);
-        } else if (enemy instanceof Endboss && !this.character.spaceBar) {
+        } else if (this.isCollidableEndboss(enemy)) {
           this.character.hitEnemy(this.endboss.damage);
-        } else if (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) {
-          Level.enemyLevelArray.splice(index, 1);
+        } else if (this.isRemovableBasicEnemy(enemy)) {
+          this.removeBasicEnemy(enemy, index);
         } else if (enemy instanceof GreenSuperDangerousFish) {
           enemy.fishIsDead = true;
-        } else if (enemy instanceof Endboss && !this.damageDelay()) {
-          this.lastDamage = new Date().getTime();
-          this.character.hitEndboss();
-          this.endboss.isHurt = true;
+        } else if (this.isEndbossVulnerable(enemy)) {
+          this.applyDamageToEndboss();
         }
       }
     });
+  }
+
+  isCollidableEnemy(enemy) {
+    return (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish || (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead)) && !this.character.spaceBar;
+  }
+
+  isCollidableEndboss(enemy) {
+    return enemy instanceof Endboss && !this.character.spaceBar;
+  }
+
+  isEndbossVulnerable(enemy) {
+    return enemy instanceof Endboss && !this.damageDelay();
+  }
+
+  applyDamageToEndboss() {
+    this.lastDamage = new Date().getTime();
+    this.character.hitEndboss();
+    this.endboss.isHurt = true;
+  }
+
+  removeBasicEnemy(enemy, index) {
+    enemy.fishIsDead = true;
+    enemy.markedForRemoval = true;
+    setTimeout(() => {
+      Level.enemyLevelArray.splice(index, 1);
+    }, 2000);
+  }
+
+  isRemovableBasicEnemy(enemy) {
+    return (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) && !enemy.markedForRemoval;
   }
 
   speedBoostBoss() {
@@ -118,15 +148,48 @@ class World {
     }
   }
 
+  // checkCollisionThrowableObject() {
+  //   this.throwableObjects = this.throwableObjects.filter((poison) => {
+  //     let hitEnemy = false;
+  //     Level.enemyLevelArray = Level.enemyLevelArray.filter((enemy) => {
+  //       if (poison.isColliding(enemy)) {
+  //         if (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) {
+  //           hitEnemy = true;
+  //           enemy.fishIsDead = true;
+  //           enemy.markedForRemoval = true;
+  //           setTimeout(()=>{
+  //             return false;
+  //           }, 1000)
+  //         } else if (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead) {
+  //           hitEnemy = true;
+  //           enemy.fishIsDead = true;
+  //         } else if (enemy instanceof Endboss) {
+  //           this.character.hitEndboss();
+  //           this.endboss.moveLeftEndboss = true;
+  //           this.endboss.isHurt = true;
+  //           hitEnemy = true;
+  //         }
+  //       }
+  //       return true;
+  //     });
+  //     return !hitEnemy;
+  //   });
+  // }
+
   checkCollisionThrowableObject() {
-    this.throwableObjects = this.throwableObjects.filter((poison) => {
+    this.throwableObjects.forEach((poison, poisonIndex) => {
       let hitEnemy = false;
-      Level.enemyLevelArray = Level.enemyLevelArray.filter((enemy) => {
+      Level.enemyLevelArray.forEach((enemy, enemyIndex) => {
         if (poison.isColliding(enemy)) {
-          if (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) {
+          if ((enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) && !enemy.markedForRemoval) {
             hitEnemy = true;
-            return false;
-          } else if (enemy instanceof GreenSuperDangerousFish) {
+            enemy.fishIsDead = true;
+            enemy.markedForRemoval = true;
+            enemy.isHittetByBubble = true;
+            setTimeout(() => {
+              Level.enemyLevelArray.splice(enemyIndex, 1);
+            }, 15000);
+          } else if (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead) {
             hitEnemy = true;
             enemy.fishIsDead = true;
           } else if (enemy instanceof Endboss) {
@@ -136,9 +199,10 @@ class World {
             hitEnemy = true;
           }
         }
-        return true;
       });
-      return !hitEnemy;
+      if (hitEnemy) {
+        this.throwableObjects.splice(poisonIndex, 1); // Entferne das Giftobjekt, wenn es getroffen hat
+      }
     });
   }
 

@@ -13,6 +13,9 @@ class MovableObject extends DrawableObject {
   lastMovementCharacter;
   FishIsInRange = false;
   timerHasExpired = false;
+  markedForRemoval = false;
+  isHittetByBubble = false;
+  deadAnimationIsPlayed = false;
   j;
   x;
   animationPlayed;
@@ -40,14 +43,14 @@ class MovableObject extends DrawableObject {
 
   playAnimation(images) {
     if (this.currentAnimation !== images) {
-        this.currentAnimation = images; // Speichere den neuen Bildsatz
-        this.currentImage = 0; // Setze die Animation zurück
+      this.currentAnimation = images; // Speichere den neuen Bildsatz
+      this.currentImage = 0; // Setze die Animation zurück
     }
     let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;
-}
+  }
 
   swimUP() {
     this.speedY = 0;
@@ -78,7 +81,7 @@ class MovableObject extends DrawableObject {
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
     timepassed = timepassed / 1000; // Difference in s
-    return timepassed < 0.2;
+    return timepassed < 0.3;
   }
 
   calculateY() {
@@ -90,18 +93,32 @@ class MovableObject extends DrawableObject {
   }
 
   checkFishAndCharacterDistance(bubbleSwim, swim, transition) {
-    if (this.FishIsInRange) {
+    if (this.FishIsInRange && !this.fishIsDead) {
       if (this.timerIsRunning()) {
         this.playAnimation(bubbleSwim);
       } else {
         this.playFishTransition(transition);
       }
-    } else {
+    } else if (!this.fishIsDead) {
       if (this.timerIsStopped()) {
         this.playStandardFishAnimation(swim);
       } else {
         this.setTimer();
       }
+    }
+  }
+
+  checkIfSmallFishIsDead(dead) {
+    if (this.fishIsDead) {
+      this.speed = 1.5;
+      if (this.isHittetByBubble) {
+        this.x += this.speed;
+        this.y -= this.speed;
+      } else {
+        this.x -= this.speed;
+        this.y -= this.speed;
+      }
+      this.playAnimation(dead);
     }
   }
 
@@ -136,7 +153,7 @@ class MovableObject extends DrawableObject {
   }
 
   fishSwimsTowardsCharacter() {
-    if (world) {
+    if (world && !this.fishIsDead) {
       const targetXFish = world.character.x + world.character.width - world.character.offset.right;
       const targetYFish = world.character.y + world.character.height / 2;
       const diffX = targetXFish - this.x - 10;

@@ -16,12 +16,17 @@ class OrangeFish extends MovableObject {
 
   IMAGES_ORANGE_FISH_BUBBLE_SWIM = ["img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim5.webp"];
 
+  IMAGES_ORANGE_DEAD = [
+    "img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.webp"
+  ]
   constructor(xPosition, speedNormalFish) {
     super();
     this.x = xPosition;
     this.loadImages(this.IMAGES_ORANGE_FISH_SWIMING);
     this.loadImages(this.IMAGES_ORANGE_FISH_TRANSITION);
     this.loadImages(this.IMAGES_ORANGE_FISH_BUBBLE_SWIM);
+    this.loadImages(this.IMAGES_ORANGE_DEAD)
+
     this.y = this.calculateY();
     this.speed = this.calculateSpeed(speedNormalFish);
     this.animate();
@@ -31,5 +36,6 @@ class OrangeFish extends MovableObject {
     this.j = 0;
     setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
     setStoppableInterval(this.checkFishAndCharacterDistance.bind(this, this.IMAGES_ORANGE_FISH_BUBBLE_SWIM, this.IMAGES_ORANGE_FISH_SWIMING, this.IMAGES_ORANGE_FISH_TRANSITION), 150);
+    setStoppableInterval(this.checkIfSmallFishIsDead.bind(this,this.IMAGES_ORANGE_DEAD ), 1000 / this.hz)
   }
 }

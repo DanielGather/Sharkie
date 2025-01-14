@@ -31,14 +31,10 @@ class Endboss extends MovableObject {
 
   IMAGES_ENDBOSS_DEAD = ["img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.webp"];
 
-  IMAGES_ENDBOSS_IS_ATTACKING = [
-    "img/2.Enemy/3 Final Enemy/Attack/1.webp",
-    "img/2.Enemy/3 Final Enemy/Attack/2.webp",
-    "img/2.Enemy/3 Final Enemy/Attack/3.webp",
-    "img/2.Enemy/3 Final Enemy/Attack/4.webp",
-    "img/2.Enemy/3 Final Enemy/Attack/5.webp",
-    "img/2.Enemy/3 Final Enemy/Attack/6.webp"
-  ]
+  IMAGES_ENDBOSS_IS_ATTACKING = ["img/2.Enemy/3 Final Enemy/Attack/1.webp", "img/2.Enemy/3 Final Enemy/Attack/2.webp", "img/2.Enemy/3 Final Enemy/Attack/3.webp", "img/2.Enemy/3 Final Enemy/Attack/4.webp", "img/2.Enemy/3 Final Enemy/Attack/5.webp", "img/2.Enemy/3 Final Enemy/Attack/6.webp"];
+
+  hurt_SOUND = new Audio("audio/hurtSoundBoss.wav");
+  attacking_SOUND = new Audio("audio/monsterBite.wav");
 
   constructor() {
     super().loadImage(this.IMAGES_INTRODUCE[0]);
@@ -58,42 +54,45 @@ class Endboss extends MovableObject {
     this.animationCounterIsHurt = 0;
     setStoppableInterval(this.characterIsNearEndboss.bind(this), 125);
     setStoppableInterval(this.endbossIsDead.bind(this), 500);
-    setStoppableInterval(this.endbossIsHittet.bind(this), 100)
+    setStoppableInterval(this.endbossIsHittet.bind(this), 100);
     setStoppableInterval(this.endbossTakesDamage.bind(this), 100);
     setStoppableInterval(this.attackCharacter.bind(this), 150);
-    setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz)
+    setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
   }
 
   endbossTakesDamage() {
     if (this.world && this.isHurt) {
-      if(this.animationCounterIsHurt < 5){
+      if (this.animationCounterIsHurt < 5) {
         this.playAnimation(this.IMAGES_IS_HURT);
+        this.hurt_SOUND.play();
       } else {
         this.isHurt = false;
         this.animationCounterIsHurt = 0;
       }
-      this.animationCounterIsHurt++
+      this.animationCounterIsHurt++;
     }
   }
 
-  moveLeft(){
-    if(this.moveLeftEndboss == true && !this.isHurt){
+  moveLeft() {
+    if (this.moveLeftEndboss == true && !this.isHurt) {
       super.moveLeft();
       this.attackingCharacter = true;
     }
   }
 
-  attackCharacter(){
-    if(this.attackingCharacter && !this.isHurt && this.isNotDead){
+  attackCharacter() {
+    if (this.attackingCharacter && !this.isHurt && this.isNotDead) {
       this.playAnimation(this.IMAGES_ENDBOSS_IS_ATTACKING);
+      let currentImageIndex = this.currentImage % this.IMAGES_ENDBOSS_IS_ATTACKING.length; // Aktuelles Bild ermitteln
+      if (currentImageIndex === 3 || currentImageIndex === 4) {
+        this.attacking_SOUND.play();
+      }
       this.offset.left = 10;
-      this.moveLeftEndboss = true; 
-    } else if(!this.isNotDead && !this.isHurt) {
+      this.moveLeftEndboss = true;
+    } else if (!this.isNotDead && !this.isHurt) {
       this.moveLeftEndboss = false;
-
     }
   }
-
 
   endbossIsHittet() {
     if (this.endbossLife < 0) {
@@ -114,7 +113,7 @@ class Endboss extends MovableObject {
     if (this.world && this.world.characterIsInRange && this.isNotDead) {
       if (this.animationCounterIntroduce < 10) {
         this.playAnimation(this.IMAGES_INTRODUCE);
-      } else if(!this.attackingCharacter && !this.isHurt) {
+      } else if (!this.attackingCharacter && !this.isHurt) {
         this.playAnimation(this.IMAGES_SWIMING);
       }
       this.animationCounterIntroduce++;
