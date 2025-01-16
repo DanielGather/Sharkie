@@ -8,48 +8,40 @@ let intervalMovementData = [];
 let soundData = [];
 let gamePaused = false;
 
-
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
   ctx = canvas.getContext("2d");
   console.log("My Character is,", world.character);
   console.log("My World is,", world);
-  
 }
 
-// window.setStoppableInterval = function (fn, time) {
-//   console.log("Ich werde aufgerufen");
-//   let id = setInterval(fn, time);
-//   intervalIDs.push(id);
-// };
 
-function setStoppableInterval(fn, time){
-  let id = setInterval(fn,time)
+function setStoppableInterval(fn, time) {
+  let id = setInterval(fn, time);
   intervalIDs.push(id);
-  intervalData.push({fn, time});
+  intervalData.push({ fn, time });
 }
 
-function setStoppableMovementInterval(fn, time){
-  let id = setInterval(fn,time)
+function setStoppableMovementInterval(fn, time) {
+  let id = setInterval(fn, time);
   intervalMovementIDs.push(id);
-  intervalMovementData.push({fn, time});
+  intervalMovementData.push({ fn, time });
 }
 
-function stopMovement(){
+function stopMovement() {
   intervalMovementIDs.forEach(clearInterval);
 }
 
-function stopGame(){
+function stopGame() {
   intervalIDs.forEach(clearInterval);
   intervalMovementIDs.forEach(clearInterval);
   muteAllSounds();
   console.log(keyboard);
   gamePaused = true;
-  
 }
 
-function restartGame(){
+function restartGame() {
   intervalData.forEach(({ fn, time }) => {
     let id = setInterval(fn, time);
     intervalIDs.push(id); // Speichert die neuen Interval-IDs
@@ -61,65 +53,84 @@ function restartGame(){
   unmuteAllSounds();
 }
 
-
 function playSound(audio) {
   audio.play();
-  if (!soundData.some(sound => sound.audio === audio)) {
+  if (!soundData.some((sound) => sound.audio === audio)) {
     soundData.push({ audio });
   }
 }
 
 function muteAllSounds() {
-  soundData.forEach(sound => {
+  soundData.forEach((sound) => {
     sound.audio.muted = true; // Muten des Sounds
   });
 }
 
 function unmuteAllSounds() {
-  soundData.forEach(sound => {
+  soundData.forEach((sound) => {
     sound.audio.muted = false; // Entmuten des Sounds
   });
 }
 
-
-document.addEventListener('keydown', (event) =>{
-  if(event.code == "KeyD"){
+document.addEventListener("keydown", (event) => {
+  if (event.code == "KeyD") {
     keyboard.RIGHT = true;
   }
-  if(event.code == "KeyA"){
+  if (event.code == "KeyA") {
     keyboard.LEFT = true;
   }
-  if(event.code == "KeyW"){
+  if (event.code == "KeyW") {
     keyboard.UP = true;
   }
-  if(event.code == "KeyS"){
+  if (event.code == "KeyS") {
     keyboard.DOWN = true;
   }
-  if(event.code == "Space"){
+  if (event.code == "Space") {
     keyboard.SPACE = true;
   }
-  if(event.code == "KeyF"){
+  if (event.code == "KeyF") {
     keyboard.THROW = true;
   }
-})
+});
 
-document.addEventListener('keyup', (event) =>{
-  if(event.code == "KeyD"){
+document.addEventListener("keyup", (event) => {
+  if (event.code == "KeyD") {
     keyboard.RIGHT = false;
   }
-  if(event.code == "KeyA"){
+  if (event.code == "KeyA") {
     keyboard.LEFT = false;
   }
-  if(event.code == "KeyW"){
+  if (event.code == "KeyW") {
     keyboard.UP = false;
   }
-  if(event.code == "KeyS"){
+  if (event.code == "KeyS") {
     keyboard.DOWN = false;
   }
-  if(event.code == "Space"){
+  if (event.code == "Space") {
     keyboard.SPACE = false;
   }
-  if(event.code == "KeyF"){
+  if (event.code == "KeyF") {
     keyboard.THROW = false;
   }
-})
+});
+
+function goFullscreen() {
+  const canvasContainer = document.getElementById("canvas");
+  const joystick = document.getElementById("joystick");
+  const Container = document.getElementById("canvasContainer"); // Dein Container-Element
+  if (canvasContainer.requestFullscreen) {
+    canvasContainer.requestFullscreen();
+    // Container.requestFullscreen();
+    // joystick.requestFullscreen();
+  } else if (canvasContainer.webkitRequestFullscreen) {
+    // Für Safari
+    canvasContainer.webkitRequestFullscreen();
+    // Container.webkitRequestFullscreen();
+    // joystick.webkitRequestFullscreen();
+  } else if (canvasContainer.msRequestFullscreen) {
+    // Für ältere IE-Versionen
+    canvasContainer.msRequestFullscreen();
+    // Container.msRequestFullscreen();
+    // joystick.msRequestFullscreen();
+  }
+}

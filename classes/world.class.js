@@ -148,34 +148,6 @@ class World {
     }
   }
 
-  // checkCollisionThrowableObject() {
-  //   this.throwableObjects = this.throwableObjects.filter((poison) => {
-  //     let hitEnemy = false;
-  //     Level.enemyLevelArray = Level.enemyLevelArray.filter((enemy) => {
-  //       if (poison.isColliding(enemy)) {
-  //         if (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) {
-  //           hitEnemy = true;
-  //           enemy.fishIsDead = true;
-  //           enemy.markedForRemoval = true;
-  //           setTimeout(()=>{
-  //             return false;
-  //           }, 1000)
-  //         } else if (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead) {
-  //           hitEnemy = true;
-  //           enemy.fishIsDead = true;
-  //         } else if (enemy instanceof Endboss) {
-  //           this.character.hitEndboss();
-  //           this.endboss.moveLeftEndboss = true;
-  //           this.endboss.isHurt = true;
-  //           hitEnemy = true;
-  //         }
-  //       }
-  //       return true;
-  //     });
-  //     return !hitEnemy;
-  //   });
-  // }
-
   checkCollisionThrowableObject() {
     this.throwableObjects.forEach((poison, poisonIndex) => {
       let hitEnemy = false;

@@ -128,6 +128,7 @@ class Character extends MovableObject {
       }
     }
   }
+  
 
   playHurtSound() {
     this.hurt_SOUND.play();

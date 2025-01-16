@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="joystick.css" />
+
     <script src="./classes/keyboard.class.js"></script>
     <script src="./js/game.js"></script>
     <script src="./classes/drawable-object.class.js"></script>
@@ -28,11 +30,14 @@
   </head>
   <body onload="init()">
     <h1>Sharkie</h1>
+    <div id="canvasContainer" class="canvas-Container">
       <canvas id="canvas" width="1024" height="600"></canvas>
-
-    <div class="controlKeys">
-      <img style="width: 100px; height: 100px;" src="img/6.Botones/Key/arrow keys.png" alt="">      
-      <img style="width: 100px; height: 100px;" src="img/6.Botones/Key/D key.png" alt="">
+      <div id="joystick" class="joystick-container">
+        <div id="zone_joystick"></div>
+      </div>
+      <button onclick="goFullscreen()" id="fullscreenButton" class="button">CLICK MICH</button>
     </div>
   </body>
+  <script src="./node_modules/nipplejs/dist/nipplejs.js"></script>
+  <script src="./js/joystick.js"></script>
 </html>
