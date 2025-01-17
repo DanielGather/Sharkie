@@ -63,6 +63,7 @@ class World {
         this.character.bubble_shot_SOUND.play();
       }, 400);
       this.character.reducePoisonStorage();
+      this.keyboard.THROW = false;
     }
   }
 

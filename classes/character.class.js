@@ -66,7 +66,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_SHOOTING_BUBBLE);
     this.loadImages(this.IMAGES_FIN_SLAP);
     this.animate();
-    this.applyGravity();
+    // this.applyGravity();
     playSound(this.background_SOUND);
     this.walking_SOUND.volume = 0.5;
     // this.ambience_SOUND.volume = 1;

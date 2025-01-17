@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="joystick.css" />
+    <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon">
 
     <script src="./classes/keyboard.class.js"></script>
     <script src="./js/game.js"></script>
@@ -26,7 +27,7 @@
     <script src="./classes/redFish.class.js"></script>
     <script src="./classes/endbossLifebar.class.js"></script>
     <script src="./levels/level1.js"></script>
-    <title>Document</title>
+    <title>Sharkie</title>
   </head>
   <body onload="init()">
     <h1>Sharkie</h1>
@@ -35,7 +36,18 @@
       <div id="joystick" class="joystick-container">
         <div id="zone_joystick"></div>
       </div>
-      <button onclick="goFullscreen()" id="fullscreenButton" class="button">CLICK MICH</button>
+      <button ontouchstart="shootMobile()" class="shoot"><img  src="./img/1.Sharkie/7.mobile icons/target.webp" alt=""></button>
+      <div class="startScreen">
+        <div style="display: flex;gap:16px">
+          <button onclick="test()" class="standardButton">START</button>
+          <button class="standardButton">STORY</button>
+          <button class="standardButton">SETTINGS</button>
+        </div>
+        <div style="position:absolute;bottom:0px;padding-bottom:16px">
+          <button class="standardButton">IMPRINT</button>
+          <button class="standardButton">DATA PRIVACY</button>
+        </div>
+      </div>
     </div>
   </body>
   <script src="./node_modules/nipplejs/dist/nipplejs.js"></script>

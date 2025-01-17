@@ -1,15 +1,15 @@
 // CommonJS
 var options = {
     zone: document.getElementById("zone_joystick"),
-    color: "red",
+    color: "black",
     size: 100,
     threshold: 0.1, // before triggering a directional event
-    fadeTime: 100, // transition time
+    fadeTime: 250, // transition time
     multitouch: false,
     maxNumberOfNipples: 1, // when multitouch, what is too many?
     dataOnly: false, // no dom element whatsoever
-    position: { top: "50px", left: "50px" }, // preset position for 'static' mode
-    mode: "dynamic", // 'dynamic', 'static' or 'semi'
+    position: { bottom: "75px", left: "100px" }, // preset position for 'static' mode
+    mode: "static", // 'dynamic', 'static' or 'semi'
     restJoystick: true, // Re-center joystick on rest state
     restOpacity: 0.5, // opacity when not 'dynamic' and rested
     lockX: false, // only move on the X axis
@@ -18,7 +18,7 @@ var options = {
     // // 'semi' mode
     shape: "circle", // 'circle' or 'square'
     dynamicPage: false, // Enable if the page has dynamically visible elements
-    follow: true, // Makes the joystick follow the thumbstick
+    follow: false, // Makes the joystick follow the thumbstick
   };
   var manager = nipplejs.create(options);
   manager

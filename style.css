@@ -34,23 +34,68 @@ body {
   height: 100vh;
 }
 
-.canvas-Container{
-  position: relative;
-  width: 1024px;
-  height: 600px;
-}
 canvas {
   background-color: black;
   width: 100%;
   /* height: 100%; */
 }
 
-.button{
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
+button:hover{
+  cursor: pointer;
 }
 
+button:active{
+  border-color: grey;
+}
+
+.canvas-Container{
+  position: relative;
+  width: 1024px;
+  height: 600px;
+}
+
+.standardButton{
+  background-color: #531a82;
+  color: white;
+  max-width: 380px;
+  padding: 0px 32px;  
+  font-size: 48px;
+  border: 4px solid white;
+  border-radius: 32px;
+  font-family: LuckiestGuy;
+}
+
+.startScreen{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.shoot{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  right:100px;
+  bottom: 75px;
+  width: 50px;
+  height: 50px;
+    &:focus{
+    outline: none;
+  }
+   & img {
+    width: 50px;
+    height: 50px;
+   }
+}
 
 @media only screen and (max-width: 1024px) {
   .canvas-Container {
@@ -69,6 +114,7 @@ canvas {
   }
   body{
     background-image: none;
+    background-color: black;
   }
 }
 

@@ -12,3 +12,9 @@ backgroundSound =
 
 bubbleShot = 
 <a href="https://freesound.org/people/Breviceps/sounds/445961/">Cartoon / Video Game - Bubble Shot</a> by <a href="https://freesound.org/people/Breviceps/">Breviceps</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a>
+
+SHark Icon
+Image by <a href="https://pixabay.com/users/benkageyama-16400508/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5135934">Ben Kageyama</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5135934">Pixabay</a>
+
+Shot Icon
+<a href="https://www.flaticon.com/free-icons/target" title="target icons">Target icons created by Freepik - Flaticon</a>

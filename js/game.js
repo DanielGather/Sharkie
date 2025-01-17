@@ -16,6 +16,15 @@ function init() {
   console.log("My World is,", world);
 }
 
+function shootMobile(){
+  keyboard.THROW = true;
+}
+
+function test(){
+  console.log("1");
+  
+}
+
 
 function setStoppableInterval(fn, time) {
   let id = setInterval(fn, time);
