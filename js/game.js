@@ -16,15 +16,36 @@ function init() {
   console.log("My World is,", world);
 }
 
+function startGame(){
+  init();
+  document.getElementById("startImage").style.display = "none";
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("storyContainer").style.display = "none";
+  document.getElementById("dataPrivacyContainer").style.display = "none";
+}
+
 function shootMobile(){
   keyboard.THROW = true;
 }
 
-function test(){
-  console.log("1");
-  
+function showStory(){
+  document.getElementById("storyContainer").style.display = "flex";
+  document.getElementById("startImage").style.display = "none";
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("dataPrivacyContainer").style.display = "none";
 }
 
+function goToHomeScreen(){
+  document.getElementById("startImage").style.display = "flex";
+  document.getElementById("startScreen").style.display = "flex";
+}
+
+function showDataPrivacy(){
+  document.getElementById("dataPrivacyContainer").style.display = "flex";
+  document.getElementById("startImage").style.display = "none";
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("storyContainer").style.display = "none";
+}
 
 function setStoppableInterval(fn, time) {
   let id = setInterval(fn, time);

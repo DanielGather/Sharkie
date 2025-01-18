@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="joystick.css" />
-    <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon" />
 
     <script src="./classes/keyboard.class.js"></script>
     <script src="./js/game.js"></script>
@@ -29,23 +29,34 @@
     <script src="./levels/level1.js"></script>
     <title>Sharkie</title>
   </head>
-  <body onload="init()">
-    <h1>Sharkie</h1>
+  <body>
+    <h1 class="headline">Sharkie</h1>
     <div id="canvasContainer" class="canvas-Container">
       <canvas id="canvas" width="1024" height="600"></canvas>
       <div id="joystick" class="joystick-container">
         <div id="zone_joystick"></div>
       </div>
-      <button ontouchstart="shootMobile()" class="shoot"><img  src="./img/1.Sharkie/7.mobile icons/target.webp" alt=""></button>
-      <div class="startScreen">
-        <div style="display: flex;gap:16px">
-          <button onclick="test()" class="standardButton">START</button>
-          <button class="standardButton">STORY</button>
-          <button class="standardButton">SETTINGS</button>
+      <button ontouchstart="shootMobile()" class="shoot"><img src="./img/1.Sharkie/7.mobile icons/target.webp" alt="" /></button>
+      <div id="dataPrivacyContainer" class="data-privacy-container">
+        <h1>Datenschutz</h1>
+        <p> Der Rachedurst des Hais Der junge Hai Kael suchte Rache. Der riesige Wal Morgrim hatte seine Freunde gefressen. In der finsteren Abyssos-Schlucht stellte Kael ihn schließlich. „Dein Schrecken endet hier!“ rief Kael. Morgrim lachte nur und griff an, doch Kael war flink. Mit gezielten Attacken auf Morgrims Flossen schwächte er den Riesen. Der Kampf war hart, doch Kael ließ nicht nach. Mit einem letzten mutigen Biss traf er Morgrims Auge. Der Wal brüllte vor Schmerz und floh in die Dunkelheit. Kael hatte gesiegt. Von diesem Tag an war er eine Legende der Tiefsee – ein Symbol für Mut und Entschlossenheit.</p>
+        <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
+      </div>
+      <div id="storyContainer" class="story-container">
+        <h1>Der Rachedurst des Hais</h1>
+        <p> Der Rachedurst des Hais Der junge Hai Kael suchte Rache. Der riesige Wal Morgrim hatte seine Freunde gefressen. In der finsteren Abyssos-Schlucht stellte Kael ihn schließlich. „Dein Schrecken endet hier!“ rief Kael. Morgrim lachte nur und griff an, doch Kael war flink. Mit gezielten Attacken auf Morgrims Flossen schwächte er den Riesen. Der Kampf war hart, doch Kael ließ nicht nach. Mit einem letzten mutigen Biss traf er Morgrims Auge. Der Wal brüllte vor Schmerz und floh in die Dunkelheit. Kael hatte gesiegt. Von diesem Tag an war er eine Legende der Tiefsee – ein Symbol für Mut und Entschlossenheit.</p>
+        <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
+      </div>
+      <div id="startImage" class="startImage"></div>
+      <div id="startScreen" class="startScreen">
+        <div class="left-container">
+          <button onclick="startGame()" class="standard-Button">START</button>
+          <button onclick="showStory()" class="standard-Button">STORY</button>
+          <button class="standard-Button">SETTINGS</button>
         </div>
-        <div style="position:absolute;bottom:0px;padding-bottom:16px">
-          <button class="standardButton">IMPRINT</button>
-          <button class="standardButton">DATA PRIVACY</button>
+        <div class="container-right">
+          <button class="police-Button">IMPRINT</button>
+          <button onclick="showDataPrivacy()" class="police-Button">DATA PRIVACY</button>
         </div>
       </div>
     </div>
