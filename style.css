@@ -64,7 +64,8 @@ button:active{
 }
 
 .data-privacy-container{
-  display: flex;
+  content-visibility: auto;
+  display: none;
   flex-direction: column;
   align-items: center;
   position: absolute;
@@ -94,6 +95,7 @@ button:active{
 }
 
 .startImage{
+  content-visibility: auto;
   position: absolute;
   top: 0;
   width: 100%;
@@ -109,7 +111,8 @@ button:active{
 }
 
 .story-container{
-  display: flex;
+  content-visibility: auto;
+  display: none;
   flex-direction: column;
   align-items: center;
   position: absolute;
@@ -160,6 +163,7 @@ button:active{
 }
 
 .startScreen{
+  content-visibility: auto;
   position: absolute;
   display: flex;
   gap: 8px;

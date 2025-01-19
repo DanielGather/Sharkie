@@ -30,22 +30,29 @@ class Character extends MovableObject {
   // IMAGES_SWIMING = ["img/1.Sharkie/3.Swim/1.webp", "img/1.Sharkie/3.Swim/2.webp", "img/1.Sharkie/3.Swim/3.webp", "img/1.Sharkie/3.Swim/4.webp", "img/1.Sharkie/3.Swim/5.webp", "img/1.Sharkie/3.Swim/6.webp"];
   IMAGES_SWIMING = sprites.character.swim
 
-  IMAGES_IDLE = ["img/1.Sharkie/1.IDLE/1.webp", "img/1.Sharkie/1.IDLE/2.webp", "img/1.Sharkie/1.IDLE/3.webp", "img/1.Sharkie/1.IDLE/4.webp", "img/1.Sharkie/1.IDLE/5.webp", "img/1.Sharkie/1.IDLE/6.webp", "img/1.Sharkie/1.IDLE/7.webp", "img/1.Sharkie/1.IDLE/8.webp", "img/1.Sharkie/1.IDLE/9.webp", "img/1.Sharkie/1.IDLE/10.webp", "img/1.Sharkie/1.IDLE/11.webp", "img/1.Sharkie/1.IDLE/12.webp", "img/1.Sharkie/1.IDLE/13.webp", "img/1.Sharkie/1.IDLE/14.webp", "img/1.Sharkie/1.IDLE/15.webp", "img/1.Sharkie/1.IDLE/16.webp", "img/1.Sharkie/1.IDLE/17.webp", "img/1.Sharkie/1.IDLE/18.webp"];
+  // IMAGES_IDLE = ["img/1.Sharkie/1.IDLE/1.webp", "img/1.Sharkie/1.IDLE/2.webp", "img/1.Sharkie/1.IDLE/3.webp", "img/1.Sharkie/1.IDLE/4.webp", "img/1.Sharkie/1.IDLE/5.webp", "img/1.Sharkie/1.IDLE/6.webp", "img/1.Sharkie/1.IDLE/7.webp", "img/1.Sharkie/1.IDLE/8.webp", "img/1.Sharkie/1.IDLE/9.webp", "img/1.Sharkie/1.IDLE/10.webp", "img/1.Sharkie/1.IDLE/11.webp", "img/1.Sharkie/1.IDLE/12.webp", "img/1.Sharkie/1.IDLE/13.webp", "img/1.Sharkie/1.IDLE/14.webp", "img/1.Sharkie/1.IDLE/15.webp", "img/1.Sharkie/1.IDLE/16.webp", "img/1.Sharkie/1.IDLE/17.webp", "img/1.Sharkie/1.IDLE/18.webp"];
+  IMAGES_IDLE = sprites.character.idle
 
-  IMAGES_LONG_IDLE = ["img/1.Sharkie/2.Long_IDLE/i1.webp", "img/1.Sharkie/2.Long_IDLE/i2.webp", "img/1.Sharkie/2.Long_IDLE/i3.webp", "img/1.Sharkie/2.Long_IDLE/i4.webp", "img/1.Sharkie/2.Long_IDLE/i5.webp", "img/1.Sharkie/2.Long_IDLE/i6.webp", "img/1.Sharkie/2.Long_IDLE/i7.webp", "img/1.Sharkie/2.Long_IDLE/i8.webp", "img/1.Sharkie/2.Long_IDLE/i9.webp", "img/1.Sharkie/2.Long_IDLE/i10.webp", "img/1.Sharkie/2.Long_IDLE/i11.webp", "img/1.Sharkie/2.Long_IDLE/i12.webp", "img/1.Sharkie/2.Long_IDLE/i13.webp", "img/1.Sharkie/2.Long_IDLE/i14.webp"];
+  // IMAGES_LONG_IDLE = ["img/1.Sharkie/2.Long_IDLE/i1.webp", "img/1.Sharkie/2.Long_IDLE/i2.webp", "img/1.Sharkie/2.Long_IDLE/i3.webp", "img/1.Sharkie/2.Long_IDLE/i4.webp", "img/1.Sharkie/2.Long_IDLE/i5.webp", "img/1.Sharkie/2.Long_IDLE/i6.webp", "img/1.Sharkie/2.Long_IDLE/i7.webp", "img/1.Sharkie/2.Long_IDLE/i8.webp", "img/1.Sharkie/2.Long_IDLE/i9.webp", "img/1.Sharkie/2.Long_IDLE/i10.webp", "img/1.Sharkie/2.Long_IDLE/i11.webp", "img/1.Sharkie/2.Long_IDLE/i12.webp", "img/1.Sharkie/2.Long_IDLE/i13.webp", "img/1.Sharkie/2.Long_IDLE/i14.webp"];
+  IMAGES_LONG_IDLE = sprites.character.longIdle
 
-  IMAGES_POISON_DEAD = ["img/1.Sharkie/6.dead/1.Poisoned/1.webp", "img/1.Sharkie/6.dead/1.Poisoned/2.webp", "img/1.Sharkie/6.dead/1.Poisoned/3.webp", "img/1.Sharkie/6.dead/1.Poisoned/4.webp", "img/1.Sharkie/6.dead/1.Poisoned/5.webp", "img/1.Sharkie/6.dead/1.Poisoned/6.webp", "img/1.Sharkie/6.dead/1.Poisoned/7.webp", "img/1.Sharkie/6.dead/1.Poisoned/8.webp", "img/1.Sharkie/6.dead/1.Poisoned/9.webp", "img/1.Sharkie/6.dead/1.Poisoned/10.webp", "img/1.Sharkie/6.dead/1.Poisoned/11.webp", "img/1.Sharkie/6.dead/1.Poisoned/12.webp"];
+  // IMAGES_POISON_DEAD = ["img/1.Sharkie/6.dead/1.Poisoned/1.webp", "img/1.Sharkie/6.dead/1.Poisoned/2.webp", "img/1.Sharkie/6.dead/1.Poisoned/3.webp", "img/1.Sharkie/6.dead/1.Poisoned/4.webp", "img/1.Sharkie/6.dead/1.Poisoned/5.webp", "img/1.Sharkie/6.dead/1.Poisoned/6.webp", "img/1.Sharkie/6.dead/1.Poisoned/7.webp", "img/1.Sharkie/6.dead/1.Poisoned/8.webp", "img/1.Sharkie/6.dead/1.Poisoned/9.webp", "img/1.Sharkie/6.dead/1.Poisoned/10.webp", "img/1.Sharkie/6.dead/1.Poisoned/11.webp", "img/1.Sharkie/6.dead/1.Poisoned/12.webp"];
+  IMAGES_POISON_DEAD = sprites.character.poisonDead
 
-  IMAGES_ELECTRO_DEAD = ["img/1.Sharkie/6.dead/2.Electro_shock/1.webp", "img/1.Sharkie/6.dead/2.Electro_shock/2.webp", "img/1.Sharkie/6.dead/2.Electro_shock/3.webp", "img/1.Sharkie/6.dead/2.Electro_shock/4.webp", "img/1.Sharkie/6.dead/2.Electro_shock/5.webp", "img/1.Sharkie/6.dead/2.Electro_shock/6.webp", "img/1.Sharkie/6.dead/2.Electro_shock/7.webp", "img/1.Sharkie/6.dead/2.Electro_shock/8.webp", "img/1.Sharkie/6.dead/2.Electro_shock/9.webp", "img/1.Sharkie/6.dead/2.Electro_shock/10.webp"];
+  // IMAGES_ELECTRO_DEAD = ["img/1.Sharkie/6.dead/2.Electro_shock/1.webp", "img/1.Sharkie/6.dead/2.Electro_shock/2.webp", "img/1.Sharkie/6.dead/2.Electro_shock/3.webp", "img/1.Sharkie/6.dead/2.Electro_shock/4.webp", "img/1.Sharkie/6.dead/2.Electro_shock/5.webp", "img/1.Sharkie/6.dead/2.Electro_shock/6.webp", "img/1.Sharkie/6.dead/2.Electro_shock/7.webp", "img/1.Sharkie/6.dead/2.Electro_shock/8.webp", "img/1.Sharkie/6.dead/2.Electro_shock/9.webp", "img/1.Sharkie/6.dead/2.Electro_shock/10.webp"];
+  IMAGES_ELECTRO_DEAD = sprites.character.electroDead
 
-  IMAGES_HURT_POISON = ["img/1.Sharkie/5.Hurt/1.Poisoned/1.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/2.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/3.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/4.webp"];
+  // IMAGES_HURT_POISON = ["img/1.Sharkie/5.Hurt/1.Poisoned/1.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/2.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/3.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/4.webp"];
+  IMAGES_HURT_POISON = sprites.character.hurtPoison
 
-  IMAGES_HURT_ELECTRO = ["img/1.Sharkie/5.Hurt/2.Electric shock/1.webp", "img/1.Sharkie/5.Hurt/2.Electric shock/2.webp", "img/1.Sharkie/5.Hurt/2.Electric shock/3.webp"];
+  // IMAGES_HURT_ELECTRO = ["img/1.Sharkie/5.Hurt/2.Electric shock/1.webp", "img/1.Sharkie/5.Hurt/2.Electric shock/2.webp", "img/1.Sharkie/5.Hurt/2.Electric shock/3.webp"];
+  IMAGES_HURT_ELECTRO = sprites.character.hurtElectro
 
   // IMAGES_SHOOTING_BUBBLE = ["img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.webp"];  IMAGES_SHOOTING_BUBBLE = ["img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.webp"];
   IMAGES_SHOOTING_BUBBLE = sprites.character.bubbleAttack
 
-  IMAGES_FIN_SLAP = ["img/1.Sharkie/4.Attack/Fin slap/1.webp", "img/1.Sharkie/4.Attack/Fin slap/2.webp", "img/1.Sharkie/4.Attack/Fin slap/3.webp", "img/1.Sharkie/4.Attack/Fin slap/4.webp", "img/1.Sharkie/4.Attack/Fin slap/5.webp", "img/1.Sharkie/4.Attack/Fin slap/6.webp", "img/1.Sharkie/4.Attack/Fin slap/7.webp", "img/1.Sharkie/4.Attack/Fin slap/8.webp", "img/1.Sharkie/3.Swim/1.webp"];
+  // IMAGES_FIN_SLAP = ["img/1.Sharkie/4.Attack/Fin slap/1.webp", "img/1.Sharkie/4.Attack/Fin slap/2.webp", "img/1.Sharkie/4.Attack/Fin slap/3.webp", "img/1.Sharkie/4.Attack/Fin slap/4.webp", "img/1.Sharkie/4.Attack/Fin slap/5.webp", "img/1.Sharkie/4.Attack/Fin slap/6.webp", "img/1.Sharkie/4.Attack/Fin slap/7.webp", "img/1.Sharkie/4.Attack/Fin slap/8.webp", "img/1.Sharkie/3.Swim/1.webp"];
+  IMAGES_FIN_SLAP = sprites.character.finSlap
 
   walking_SOUND = new Audio("audio/fishSwiming.mp3");
   ambience_SOUND = new Audio("audio/underWaterNoise.mp3");
@@ -69,7 +76,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_SHOOTING_BUBBLE);
     this.loadImages(this.IMAGES_FIN_SLAP);
     this.animate();
-    // this.applyGravity();
+    this.applyGravity();
     playSound(this.background_SOUND);
     this.walking_SOUND.volume = 0.5;
     // this.ambience_SOUND.volume = 1;
@@ -157,13 +164,13 @@ class Character extends MovableObject {
   finSlapAttack() {
     if (this.spaceBar) {
       if (this.i <= 9) {
-        this.offset.right = 15;
+        this.otherDirection ? (this.offset.left = 15) : (this.offset.right = 15);
         this.playAnimation(this.IMAGES_FIN_SLAP);
       } else {
         playSound(this.finSlap_SOUND);
         this.spaceBar = false;
         this.i = 0;
-        this.offset.right = 40;
+        this.otherDirection ? (this.offset.left = 40) : (this.offset.right = 40);
       }
       this.i++;
     }

@@ -38,7 +38,9 @@ class MovableObject extends DrawableObject {
   }
 
   moveLeft() {
-    this.x -= this.speed;
+    if (!this.fishIsDead) {
+      this.x -= this.speed;
+    }
   }
 
   playAnimation(images) {

@@ -8,6 +8,7 @@ let intervalMovementData = [];
 let soundData = [];
 let gamePaused = false;
 let sprites;
+let spritesLoaded = false;
 
 
 async function importSprites(){
@@ -15,7 +16,10 @@ async function importSprites(){
 }
 
 async function loadSprites(){
+  console.log(spritesLoaded);
   await importSprites();
+  spritesLoaded = true;
+  console.log(spritesLoaded);
   console.log(sprites.greenFish);
 }
 
@@ -50,6 +54,8 @@ function showStory(){
 function goToHomeScreen(){
   document.getElementById("startImage").style.display = "flex";
   document.getElementById("startScreen").style.display = "flex";
+  document.getElementById("storyContainer").style.display = "none";
+  document.getElementById("dataPrivacyContainer").style.display = "none";
 }
 
 function showDataPrivacy(){

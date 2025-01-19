@@ -8,7 +8,7 @@ class Endboss extends MovableObject {
   width = 500;
   height = 500;
   lastHitEndboss = 0;
-  endbossLife = 1000;
+  endbossLife = 100;
   speed = 0.25;
   initialLife = this.endbossLife;
   isNotDead = true;
@@ -23,15 +23,20 @@ class Endboss extends MovableObject {
     bottom: 85,
   };
 
-  IMAGES_INTRODUCE = ["img/2.Enemy/3 Final Enemy/1.Introduce/1.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/2.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/3.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/4.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/5.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/6.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/7.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/8.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/9.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/10.webp"];
+  // IMAGES_INTRODUCE = ["img/2.Enemy/3 Final Enemy/1.Introduce/1.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/2.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/3.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/4.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/5.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/6.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/7.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/8.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/9.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/10.webp"];
+  IMAGES_INTRODUCE = sprites.endboss.introduce
 
-  IMAGES_SWIMING = ["img/2.Enemy/3 Final Enemy/2.floating/1.webp", "img/2.Enemy/3 Final Enemy/2.floating/2.webp", "img/2.Enemy/3 Final Enemy/2.floating/3.webp", "img/2.Enemy/3 Final Enemy/2.floating/4.webp", "img/2.Enemy/3 Final Enemy/2.floating/5.webp", "img/2.Enemy/3 Final Enemy/2.floating/6.webp", "img/2.Enemy/3 Final Enemy/2.floating/7.webp", "img/2.Enemy/3 Final Enemy/2.floating/8.webp", "img/2.Enemy/3 Final Enemy/2.floating/9.webp", "img/2.Enemy/3 Final Enemy/2.floating/10.webp", "img/2.Enemy/3 Final Enemy/2.floating/11.webp", "img/2.Enemy/3 Final Enemy/2.floating/12.webp", "img/2.Enemy/3 Final Enemy/2.floating/13.webp"];
+  // IMAGES_SWIMING = ["img/2.Enemy/3 Final Enemy/2.floating/1.webp", "img/2.Enemy/3 Final Enemy/2.floating/2.webp", "img/2.Enemy/3 Final Enemy/2.floating/3.webp", "img/2.Enemy/3 Final Enemy/2.floating/4.webp", "img/2.Enemy/3 Final Enemy/2.floating/5.webp", "img/2.Enemy/3 Final Enemy/2.floating/6.webp", "img/2.Enemy/3 Final Enemy/2.floating/7.webp", "img/2.Enemy/3 Final Enemy/2.floating/8.webp", "img/2.Enemy/3 Final Enemy/2.floating/9.webp", "img/2.Enemy/3 Final Enemy/2.floating/10.webp", "img/2.Enemy/3 Final Enemy/2.floating/11.webp", "img/2.Enemy/3 Final Enemy/2.floating/12.webp", "img/2.Enemy/3 Final Enemy/2.floating/13.webp"];
+  IMAGES_SWIMING = sprites.endboss.swim
 
-  IMAGES_IS_HURT = ["img/2.Enemy/3 Final Enemy/Hurt/1.webp", "img/2.Enemy/3 Final Enemy/Hurt/2.webp", "img/2.Enemy/3 Final Enemy/Hurt/3.webp", "img/2.Enemy/3 Final Enemy/Hurt/4.webp"];
+  // IMAGES_IS_HURT = ["img/2.Enemy/3 Final Enemy/Hurt/1.webp", "img/2.Enemy/3 Final Enemy/Hurt/2.webp", "img/2.Enemy/3 Final Enemy/Hurt/3.webp", "img/2.Enemy/3 Final Enemy/Hurt/4.webp"];
+  IMAGES_IS_HURT = sprites.endboss.isHurt
 
-  IMAGES_ENDBOSS_DEAD = ["img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.webp"];
+  // IMAGES_ENDBOSS_DEAD = ["img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.webp"];
+  IMAGES_ENDBOSS_DEAD = sprites.endboss.isDead
 
-  IMAGES_ENDBOSS_IS_ATTACKING = ["img/2.Enemy/3 Final Enemy/Attack/1.webp", "img/2.Enemy/3 Final Enemy/Attack/2.webp", "img/2.Enemy/3 Final Enemy/Attack/3.webp", "img/2.Enemy/3 Final Enemy/Attack/4.webp", "img/2.Enemy/3 Final Enemy/Attack/5.webp", "img/2.Enemy/3 Final Enemy/Attack/6.webp"];
+  // IMAGES_ENDBOSS_IS_ATTACKING = ["img/2.Enemy/3 Final Enemy/Attack/1.webp", "img/2.Enemy/3 Final Enemy/Attack/2.webp", "img/2.Enemy/3 Final Enemy/Attack/3.webp", "img/2.Enemy/3 Final Enemy/Attack/4.webp", "img/2.Enemy/3 Final Enemy/Attack/5.webp", "img/2.Enemy/3 Final Enemy/Attack/6.webp"];
+  IMAGES_ENDBOSS_IS_ATTACKING = sprites.endboss.isAttacking
 
   hurt_SOUND = new Audio("audio/hurtSoundBoss.wav");
   attacking_SOUND = new Audio("audio/monsterBite.wav");

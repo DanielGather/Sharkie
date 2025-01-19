@@ -56,7 +56,6 @@ class World {
     if (this.keyboard.THROW && !this.damageDelay() && this.character.poisonStorage > 0) {
       this.lastDamage = new Date().getTime();
       this.shootingAnimation();
-
       setTimeout(() => {
         let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right + 25, this.character.y + this.character.height / 2);
         this.throwableObjects.push(bottle);
@@ -116,6 +115,18 @@ class World {
     return enemy instanceof Endboss && !this.character.spaceBar;
   }
 
+  isRemovableBasicEnemy(enemy) {
+    return (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) && !enemy.markedForRemoval;
+  }
+
+  removeBasicEnemy(enemy, index) {
+    enemy.fishIsDead = true;
+    enemy.markedForRemoval = true;
+    setTimeout(() => {
+      Level.enemyLevelArray.splice(index, 1);
+    }, 1500);
+  }
+
   isEndbossVulnerable(enemy) {
     return enemy instanceof Endboss && !this.damageDelay();
   }
@@ -124,18 +135,6 @@ class World {
     this.lastDamage = new Date().getTime();
     this.character.hitEndboss();
     this.endboss.isHurt = true;
-  }
-
-  removeBasicEnemy(enemy, index) {
-    enemy.fishIsDead = true;
-    enemy.markedForRemoval = true;
-    setTimeout(() => {
-      Level.enemyLevelArray.splice(index, 1);
-    }, 2000);
-  }
-
-  isRemovableBasicEnemy(enemy) {
-    return (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish) && !enemy.markedForRemoval;
   }
 
   speedBoostBoss() {
@@ -161,7 +160,7 @@ class World {
             enemy.isHittetByBubble = true;
             setTimeout(() => {
               Level.enemyLevelArray.splice(enemyIndex, 1);
-            }, 15000);
+            }, 1500);
           } else if (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead) {
             hitEnemy = true;
             enemy.fishIsDead = true;

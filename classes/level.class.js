@@ -14,13 +14,13 @@ class Level {
   canvasWidth = 1024;
 
   constructor(backgroundObjects, coinsPerLevel, repeatCanvas, canvasStep, poisonBottle, enemyPerLevel, dangerousEnemiesPerLevel,speedFromDangerousFish, speedNormalFish) {
-    Level.level_end_x = repeatCanvas * canvasStep;
-    this.backgroundObjects = backgroundObjects;
-    this.createBackgroundObjects(repeatCanvas, canvasStep, backgroundObjects);
-    this.createCoins(coinsPerLevel);
-    this.createBottle(poisonBottle);
-    this.createFish(repeatCanvas, enemyPerLevel, speedNormalFish );
-    this.createDangerousFish(dangerousEnemiesPerLevel,speedFromDangerousFish);
+      Level.level_end_x = repeatCanvas * canvasStep;
+      this.backgroundObjects = backgroundObjects;
+      this.createBackgroundObjects(repeatCanvas, canvasStep, backgroundObjects);
+      this.createCoins(coinsPerLevel);
+      this.createBottle(poisonBottle);
+      this.createFish(repeatCanvas, enemyPerLevel, speedNormalFish );
+      this.createDangerousFish(dangerousEnemiesPerLevel,speedFromDangerousFish);
   }
 
   createDangerousFish(dangerousEnemiesPerLevel,speedFromDangerousFish){
