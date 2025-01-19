@@ -30,6 +30,8 @@ class RedFish extends MovableObject {
     this.y = this.calculateY();
     this.speed = this.calculateSpeed(speedNormalFish);
     this.animate();
+    console.log("RedFish");
+    
   }
 
   animate() {

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="joystick.css" />
     <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon" />
-
+    <!-- <script src="./js/importSprites.js"></script> -->
     <script src="./classes/keyboard.class.js"></script>
     <script src="./js/game.js"></script>
     <script src="./classes/drawable-object.class.js"></script>
@@ -29,7 +29,7 @@
     <script src="./levels/level1.js"></script>
     <title>Sharkie</title>
   </head>
-  <body>
+  <body onload="loadSprites()">
     <h1 class="headline">Sharkie</h1>
     <div id="canvasContainer" class="canvas-Container">
       <canvas id="canvas" width="1024" height="600"></canvas>
@@ -39,12 +39,12 @@
       <button ontouchstart="shootMobile()" class="shoot"><img src="./img/1.Sharkie/7.mobile icons/target.webp" alt="" /></button>
       <div id="dataPrivacyContainer" class="data-privacy-container">
         <h1>Datenschutz</h1>
-        <p> Der Rachedurst des Hais Der junge Hai Kael suchte Rache. Der riesige Wal Morgrim hatte seine Freunde gefressen. In der finsteren Abyssos-Schlucht stellte Kael ihn schließlich. „Dein Schrecken endet hier!“ rief Kael. Morgrim lachte nur und griff an, doch Kael war flink. Mit gezielten Attacken auf Morgrims Flossen schwächte er den Riesen. Der Kampf war hart, doch Kael ließ nicht nach. Mit einem letzten mutigen Biss traf er Morgrims Auge. Der Wal brüllte vor Schmerz und floh in die Dunkelheit. Kael hatte gesiegt. Von diesem Tag an war er eine Legende der Tiefsee – ein Symbol für Mut und Entschlossenheit.</p>
+        <p>Der Rachedurst des Hais Der junge Hai Kael suchte Rache. Der riesige Wal Morgrim hatte seine Freunde gefressen. In der finsteren Abyssos-Schlucht stellte Kael ihn schließlich. „Dein Schrecken endet hier!“ rief Kael. Morgrim lachte nur und griff an, doch Kael war flink. Mit gezielten Attacken auf Morgrims Flossen schwächte er den Riesen. Der Kampf war hart, doch Kael ließ nicht nach. Mit einem letzten mutigen Biss traf er Morgrims Auge. Der Wal brüllte vor Schmerz und floh in die Dunkelheit. Kael hatte gesiegt. Von diesem Tag an war er eine Legende der Tiefsee – ein Symbol für Mut und Entschlossenheit.</p>
         <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
       </div>
       <div id="storyContainer" class="story-container">
         <h1>Der Rachedurst des Hais</h1>
-        <p> Der Rachedurst des Hais Der junge Hai Kael suchte Rache. Der riesige Wal Morgrim hatte seine Freunde gefressen. In der finsteren Abyssos-Schlucht stellte Kael ihn schließlich. „Dein Schrecken endet hier!“ rief Kael. Morgrim lachte nur und griff an, doch Kael war flink. Mit gezielten Attacken auf Morgrims Flossen schwächte er den Riesen. Der Kampf war hart, doch Kael ließ nicht nach. Mit einem letzten mutigen Biss traf er Morgrims Auge. Der Wal brüllte vor Schmerz und floh in die Dunkelheit. Kael hatte gesiegt. Von diesem Tag an war er eine Legende der Tiefsee – ein Symbol für Mut und Entschlossenheit.</p>
+        <p>Der Rachedurst des Hais Der junge Hai Kael suchte Rache. Der riesige Wal Morgrim hatte seine Freunde gefressen. In der finsteren Abyssos-Schlucht stellte Kael ihn schließlich. „Dein Schrecken endet hier!“ rief Kael. Morgrim lachte nur und griff an, doch Kael war flink. Mit gezielten Attacken auf Morgrims Flossen schwächte er den Riesen. Der Kampf war hart, doch Kael ließ nicht nach. Mit einem letzten mutigen Biss traf er Morgrims Auge. Der Wal brüllte vor Schmerz und floh in die Dunkelheit. Kael hatte gesiegt. Von diesem Tag an war er eine Legende der Tiefsee – ein Symbol für Mut und Entschlossenheit.</p>
         <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
       </div>
       <div id="startImage" class="startImage"></div>

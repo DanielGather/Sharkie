@@ -7,8 +7,20 @@ let intervalMovementIDs = [];
 let intervalMovementData = [];
 let soundData = [];
 let gamePaused = false;
+let sprites;
 
-function init() {
+
+async function importSprites(){
+    sprites = await fetch('./js/sprites.json').then(r => r.json());
+}
+
+async function loadSprites(){
+  await importSprites();
+  console.log(sprites.greenFish);
+}
+
+async function init() {
+  await loadSprites();
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
   ctx = canvas.getContext("2d");

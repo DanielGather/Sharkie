@@ -1,0 +1,9 @@
+{
+  "character": {
+    "swim": ["img/1.Sharkie/3.Swim/1.webp", "img/1.Sharkie/3.Swim/2.webp", "img/1.Sharkie/3.Swim/3.webp", "img/1.Sharkie/3.Swim/4.webp", "img/1.Sharkie/3.Swim/5.webp", "img/1.Sharkie/3.Swim/6.webp"],
+    "bubbleAttack": ["img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.webp"]
+  },
+  "greenFish" :{
+    "swim" : ["img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.webp"]
+  }
+}

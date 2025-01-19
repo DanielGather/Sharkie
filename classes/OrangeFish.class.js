@@ -30,6 +30,7 @@ class OrangeFish extends MovableObject {
     this.y = this.calculateY();
     this.speed = this.calculateSpeed(speedNormalFish);
     this.animate();
+    console.log("Wann komme ich?")
   }
 
   animate() {

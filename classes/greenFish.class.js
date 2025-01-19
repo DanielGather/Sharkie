@@ -10,7 +10,8 @@ class GreenFish extends MovableObject {
     bottom: 25,
   };
 
-  IMAGES_GREEN_FISH_SWIMING = ["img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.webp"];
+  IMAGES_GREEN_FISH_SWIMING = ["img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.webp"];  IMAGES_GREEN_FISH_SWIMING = ["img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.webp"];
+  // IMAGES_GREEN_FISH_SWIMING = sprites.greenFish.swim;
 
   IMAGES_GREEN_FISH_TRANSITION = ["img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition5.webp"];
 
@@ -27,6 +28,7 @@ class GreenFish extends MovableObject {
     this.y = this.calculateY();
     this.speed = this.calculateSpeed(speedNormalFish);
     this.animate();
+    console.log(sprites);
   }
 
   animate() {
