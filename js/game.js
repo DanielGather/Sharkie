@@ -10,12 +10,11 @@ let gamePaused = false;
 let sprites;
 let spritesLoaded = false;
 
-
-async function importSprites(){
-    sprites = await fetch('./js/sprites.json').then(r => r.json());
+async function importSprites() {
+  sprites = await fetch("./js/sprites.json").then((r) => r.json());
 }
 
-async function loadSprites(){
+async function loadSprites() {
   console.log(spritesLoaded);
   await importSprites();
   spritesLoaded = true;
@@ -32,37 +31,43 @@ async function init() {
   console.log("My World is,", world);
 }
 
-function startGame(){
+function startGame() {
   init();
   document.getElementById("startImage").style.display = "none";
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("storyContainer").style.display = "none";
   document.getElementById("dataPrivacyContainer").style.display = "none";
+  document.getElementById("imprintContainer").style.display = "none";
 }
 
-function shootMobile(){
+function shootMobile() {
   keyboard.THROW = true;
 }
 
-function showStory(){
+function showStory() {
   document.getElementById("storyContainer").style.display = "flex";
   document.getElementById("startImage").style.display = "none";
   document.getElementById("startScreen").style.display = "none";
-  document.getElementById("dataPrivacyContainer").style.display = "none";
 }
 
-function goToHomeScreen(){
+function goToHomeScreen() {
   document.getElementById("startImage").style.display = "flex";
   document.getElementById("startScreen").style.display = "flex";
   document.getElementById("storyContainer").style.display = "none";
   document.getElementById("dataPrivacyContainer").style.display = "none";
+  document.getElementById("imprintContainer").style.display = "none";
 }
 
-function showDataPrivacy(){
+function showDataPrivacy() {
   document.getElementById("dataPrivacyContainer").style.display = "flex";
   document.getElementById("startImage").style.display = "none";
   document.getElementById("startScreen").style.display = "none";
-  document.getElementById("storyContainer").style.display = "none";
+}
+
+function showImprint() {
+  document.getElementById("imprintContainer").style.display = "flex";
+  document.getElementById("startImage").style.display = "none";
+  document.getElementById("startScreen").style.display = "none";
 }
 
 function setStoppableInterval(fn, time) {
