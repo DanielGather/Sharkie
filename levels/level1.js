@@ -1,4 +1,4 @@
-let repeatCanvas = 5;
+let repeatCanvas = 3;
 let coinsPerLevel = 20;
 let PoisonBottleLevel = 15;
 let enemyPerLevel = 3;

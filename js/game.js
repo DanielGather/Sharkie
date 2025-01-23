@@ -50,6 +50,10 @@ function showStory() {
   document.getElementById("startScreen").style.display = "none";
 }
 
+function showWinScreen(){
+  document.getElementById("winContainer").style.display = "flex";
+}
+
 function goToHomeScreen() {
   document.getElementById("startImage").style.display = "flex";
   document.getElementById("startScreen").style.display = "flex";

@@ -30,7 +30,7 @@ class GreenSuperDangerousFish extends MovableObject {
 
   animate() {
     setStoppableInterval(this.isAlive.bind(this), 200);
-    setStoppableInterval(this.movementDangerousFish.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.movementDangerousFish.bind(this), 1000 / this.hz);
   }
 
   movementDangerousFish() {

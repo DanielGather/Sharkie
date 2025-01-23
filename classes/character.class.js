@@ -128,6 +128,7 @@ class Character extends MovableObject {
     setStoppableMovementInterval(this.checkSpaceBar.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.finSlapAttack.bind(this), 50);
     setStoppableMovementInterval(this.startScaryMusic.bind(this), 100);
+    setStoppableInterval(this.checkWin.bind(this), 50)
   }
 
   startScaryMusic() {
@@ -139,6 +140,12 @@ class Character extends MovableObject {
     }2
   }
   
+  checkWin(){
+    if(this.world.endboss.endbossLife == 0){
+      showWinScreen()
+      stopMovement()
+    }
+  }
 
   playHurtSound() {
     this.hurt_SOUND.play();

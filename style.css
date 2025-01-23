@@ -81,6 +81,13 @@ button:active{
   background-repeat: no-repeat;
 }
 
+.win-container{
+  display: none;
+  justify-content: flex-end;
+  gap: 2rem;
+  background-image: url(./img/6.Botones/Tittles/YouWin/Mesa\ de\ trabajo\ 1.png);
+}
+
 /* Updated specific classes */
 .imprint-container {
   color: #FFD700;
