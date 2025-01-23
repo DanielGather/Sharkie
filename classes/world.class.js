@@ -4,7 +4,7 @@ class World {
   statusBar = new StatusBar();
   LifeEndboss = new EndbossLifebar();
   //   barrier = new Barrier();
-  level = level1;
+  level = createLevel(2);
   canvas;
   ctx;
   keyboard;
@@ -108,7 +108,7 @@ class World {
   }
 
   isCollidableEnemy(enemy) {
-    return (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish || (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead)) && !this.character.spaceBar;
+    return (enemy instanceof GreenFish || enemy instanceof OrangeFish || enemy instanceof RedFish || (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead)) && !this.character.spaceBar && !enemy.fishIsDead;
   }
 
   isCollidableEndboss(enemy) {

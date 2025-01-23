@@ -15,14 +15,24 @@ async function importSprites() {
 }
 
 async function loadSprites() {
-  console.log(spritesLoaded);
   await importSprites();
   spritesLoaded = true;
-  console.log(spritesLoaded);
-  console.log(sprites.greenFish);
 }
 
 async function init() {
+  if (world) {
+    world = null;
+    canvas = null;
+    Level.enemyLevelArray = [];
+    soundData = [];
+    // stopGame();
+    // stopMovement();
+    // level1 = null;
+    // intervalData = [];
+    // intervalIDs = [];
+    // intervalMovementIDs = [];
+    // intervalMovementData = [];
+  }
   await loadSprites();
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
@@ -38,6 +48,7 @@ function startGame() {
   document.getElementById("storyContainer").style.display = "none";
   document.getElementById("dataPrivacyContainer").style.display = "none";
   document.getElementById("imprintContainer").style.display = "none";
+  document.getElementById("winContainer").style.display = "none";
 }
 
 function shootMobile() {
@@ -50,7 +61,7 @@ function showStory() {
   document.getElementById("startScreen").style.display = "none";
 }
 
-function showWinScreen(){
+function showWinScreen() {
   document.getElementById("winContainer").style.display = "flex";
 }
 
@@ -60,6 +71,7 @@ function goToHomeScreen() {
   document.getElementById("storyContainer").style.display = "none";
   document.getElementById("dataPrivacyContainer").style.display = "none";
   document.getElementById("imprintContainer").style.display = "none";
+  document.getElementById("winContainer").style.display = "none";
 }
 
 function showDataPrivacy() {
@@ -74,7 +86,7 @@ function showImprint() {
   document.getElementById("startScreen").style.display = "none";
 }
 
-function showControls(){
+function showControls() {
   document.getElementById("controlsContainer").style.display = "flex";
   document.getElementById("startImage").style.display = "none";
   document.getElementById("startScreen").style.display = "none";
