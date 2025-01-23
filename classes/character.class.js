@@ -136,7 +136,7 @@ class Character extends MovableObject {
         this.scary_SOUND.play();
         this.scarySound = true;
       }
-    }
+    }2
   }
   
 

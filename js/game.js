@@ -70,6 +70,12 @@ function showImprint() {
   document.getElementById("startScreen").style.display = "none";
 }
 
+function showControls(){
+  document.getElementById("controlsContainer").style.display = "flex";
+  document.getElementById("startImage").style.display = "none";
+  document.getElementById("startScreen").style.display = "none";
+}
+
 function setStoppableInterval(fn, time) {
   let id = setInterval(fn, time);
   intervalIDs.push(id);

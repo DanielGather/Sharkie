@@ -13,6 +13,10 @@
   box-sizing: border-box;
 }
 
+p{
+  text-shadow: 1px -1px black;
+}
+
 html{
   height: -webkit-fill-available;
 }
@@ -63,68 +67,57 @@ button:active{
   height: 600px;
 }
 
-.imprint-container{
-  color: #FFD700;
+.common-container {
   content-visibility: auto;
   display: none;
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top:0;
+  top: 0;
   width: 100%;
   height: 100%;
-  padding-bottom: 1rem;
+  padding: 2rem 2rem 1rem 2rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Updated specific classes */
+.imprint-container {
+  color: #FFD700;
   padding-left: 2rem;
   background-image: url(./img/11.Imprint/imprintBackground.webp);
-  background-size: cover;
-  background-repeat: no-repeat;
-  & h2{
+  & h2 {
     text-align: center;
-    padding-top: 2rem;
   }
-  & p{
-      display: flex;
-      padding-top: 1rem;
-      color: white;
-      width: 80%;
-      font-size: 1rem;
-      align-items: center;
-      font-family: LuckiestGuy;
-      text-shadow: none;
-    }
+  & p {
+    display: flex;
+    padding-top: 1rem;
+    color: white;
+    width: 80%;
+    font-size: 1rem;
+    align-items: center;
+    font-family: LuckiestGuy;
+  }
 }
 
-.data-privacy-container{
-  content-visibility: auto;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top:0;
-  width: 100%;
-  height: 100%;
-  padding-bottom: 1rem;
+.data-privacy-container {
   background-image: url(./img/10.DataPrivacy/dataPrivacy.webp);
-  background-size: cover;
-  background-repeat: no-repeat;
-  & h1{
-    padding-top: 2rem;
+  & h2 {
     color: #FFD700;
-  }  
-  & p{
-      display: flex;
-      width: 80%;
-      color: #FFD700;
-      font-size: 1rem;
-      align-items: center;
-      height: 100%;
-      padding: 5rem 3.5rem 0rem 3.5rem;
-      font-family: LuckiestGuy;
-      text-shadow: none;
-    }
+  }
+  & p {
+    display: flex;
+    width: 80%;
+    color: #FFD700;
+    font-size: 1rem;
+    align-items: center;
+    height: 100%;
+    padding: 5rem 3.5rem 0rem 3.5rem;
+    font-family: LuckiestGuy;
+  }
 }
 
-.startImage{
+.startImage {
   content-visibility: auto;
   position: absolute;
   top: 0;
@@ -133,48 +126,56 @@ button:active{
   background-image: url(./img/ShipUnderWater/shipUnderWater.webp);
   background-size: cover;
   background-repeat: no-repeat;
-  /* & img{
+  /* & img {
     width: 100%;
     height: 100%;
   } */
-  
 }
 
-.story-container{
-  content-visibility: auto;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top:0;
+.story-container {
+  background-image: url(./img/9.storyImage/storyImage.webp);
+  & h2 {
+    color: #FFD700;
+  }
+  & p {
+    display: flex;
+    width: 80%;
+    color: #FFD700;
+    font-size: 1rem;
+    align-items: center;
+    height: 100%;
+    padding: 6rem 3.5rem 0rem 3.5rem;
+    font-family: LuckiestGuy;
+  }
+}
+
+.controls-container{
+  background-image: url(./img/12.Controls/controlsBackground.webp);
+  color: #FFD700;
+}
+
+.web-controls{
   width: 100%;
   height: 100%;
-  padding-bottom: 1rem;
-  background-image: url(./img/9.storyImage/storyImage.webp);
-  background-size: cover;
-  background-repeat: no-repeat;
-  & h1{
-    padding-top: 2rem;
-    color: #FFD700;
-  }  
-  & p{
-      display: flex;
-      width: 80%;
-      color: #FFD700;
-      font-size: 1rem;
-      align-items: center;
-      height: 100%;
-      padding: 5rem 3.5rem 0rem 3.5rem;
-      font-family: LuckiestGuy;
-      text-shadow: none;
-    }
+}
+
+.mobile-controls{
+  width: 100%;
+  height: 100%;
+  & img{
+    width: 40px;
+    height: 40px;
+  } & p{
+    display: flex;
+    align-items: center;
+  }
 }
 
 .standard-Button{
   background-color: #531a82;
   color: white;
   max-width: 380px;
-  padding: 16px 32px 0px 32px;  
+  padding: 0px 32px 0px 32px;  
   font-size: clamp(1.5rem, 5vw, 3rem);
   border: 4px solid white;
   border-radius: 32px;
@@ -192,7 +193,7 @@ button:active{
   background-color: #531a82;
   color: white;
   max-width: 380px;
-  padding: 8px 32px 0px 32px;  
+  padding: 0px 32px 0px 32px;  
   font-size: clamp(0.5rem, 2vw,1.5rem);
   border: 4px solid white;
   border-radius: 32px;
@@ -263,10 +264,6 @@ button:active{
   }
   h1 {
     display: none;
-  }
-  body{
-    background-image: none;
-    background-color: black;
   }
 }
 
