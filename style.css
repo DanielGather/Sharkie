@@ -305,7 +305,7 @@ button:active{
 .sound-button{
   z-index: 999;
   position: absolute;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: transparent;

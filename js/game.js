@@ -51,6 +51,7 @@ function startGame() {
   document.getElementById("imprintContainer").style.display = "none";  
   document.getElementById("controlsContainer").style.display = "none";
   document.getElementById("winContainer").style.display = "none";  
+  document.getElementById("handleSound").style.display = "flex";  
   document.getElementById("joystick").style.zIndex = "999";
 
 }
