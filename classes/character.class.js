@@ -87,36 +87,10 @@ class Character extends MovableObject {
     this.sleep_SOUND.volume = 0.3;
     this.scary_SOUND.volume = 0.2;
     this.x = 80;
-
-    // this.saveAllSoundsInArray();
-    // this.isDead();
   }
 
   animate() {
     this.j = 0;
-    // setInterval(() => {
-    //   if (this.isDead()) {
-    //     this.characterIsDead();
-    //     this.walking_SOUND.pause();
-    //   } else if (this.isHurt()) {
-    //     this.playAnimation(this.IMAGES_HURT_ELECTRO);
-    //     this.playHurtSound();
-    //   } else if (this.isIdle() >= 3 && this.isIdle() <= 7 && !this.spaceBar) {
-    //     this.playAnimation(this.IMAGES_IDLE);
-    //   } else if (this.isIdle() >= 7 && !this.spaceBar) {
-    //     this.playAnimation(this.IMAGES_LONG_IDLE);
-    //     playSound(this.sleep_SOUND);
-    //   } else {
-    //     if (this.world && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) && !this.spaceBar) {
-    //       this.playAnimation(this.IMAGES_SWIMING);
-    //       this.sleep_SOUND.pause();
-    //     }
-    //   }
-    //   this.background_SOUND.play();
-    //   this.walking_SOUND.pause();
-    // }, 100);
-    
-
     this.i = 0;
     setStoppableInterval(this.checkstatus.bind(this),100)
     setStoppableMovementInterval(this.characterSwimRight.bind(this), 1000 / this.hz);
@@ -145,21 +119,27 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_IDLE);
     } else if (this.isIdle() >= 7 && !this.spaceBar) {
       this.playAnimation(this.IMAGES_LONG_IDLE);
+      console.log("hier sind wir drin");
+      
       playSound(this.sleep_SOUND);
     } else {
       if (this.world && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) && !this.spaceBar) {
         this.playAnimation(this.IMAGES_SWIMING);
+        console.log("Komm ich hier die ganze Zeit rein?");
+        
         this.sleep_SOUND.pause();
       }
     }
     this.background_SOUND.play();
+    // console.log("2 Waölomg");
+    
     this.walking_SOUND.pause();
   }
 
   startScaryMusic() {
     if (this.world.endboss.x - this.x - this.width < 1500) {
       if (!this.scarySound) {
-        this.scary_SOUND.play();
+        playSound(this.scary_SOUND)
         this.scarySound = true;
       }
     }
@@ -177,7 +157,7 @@ class Character extends MovableObject {
   }
 
   playHurtSound() {
-    this.hurt_SOUND.play();
+    playSound(this.hurt_SOUND)
     setTimeout(() => {
       this.hurt_SOUND.pause();
     }, 500);
@@ -207,6 +187,7 @@ class Character extends MovableObject {
         this.spaceBar = false;
         this.i = 0;
         this.otherDirection ? (this.offset.left = 40) : (this.offset.right = 40);
+        this.world.keyboard.SPACE = false;
       }
       this.i++;
     }
@@ -272,6 +253,8 @@ class Character extends MovableObject {
 
   playWalkingSound() {
     if (this.world && (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT)) {
+      console.log("Was passiert hier?");
+      
       playSound(this.walking_SOUND);
     }
   }
@@ -316,47 +299,4 @@ class Character extends MovableObject {
       world.characterIsInRange = true;
     }
   }
-
-  //   saveAllSoundsInArray(){
-  //     if (soundData.some(sound => sound.audio === audio)) {
-  //       playSound(this.ambience_SOUND);
-  //       playSound(this.walking_SOUND);
-  //     }
-  //   }
 }
-
-// Für später nochmal
-// if(!this.animationPlayed){
-//   clearInterval(this.movementAnimation)
-//   this.playAnimation(this.IMAGES_ELECTRO_DEAD);
-//   setTimeout(()=>{
-//     this.animationPlayed = true;
-//   }, 500)
-// } else if (!this.imageIsLoaded) {
-//   this.loadImage('img/1.Sharkie/6.dead/2.Electro_shock/10.png')
-//   this.imageIsLoaded = true;
-// }
-
-// MovementAnimation alt.
-
-// if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-//   this.moveRight();
-//   this.introduceBoss();
-//   this.otherDirection = false;
-//   this.walking_SOUND.play();
-// }
-// if (this.world.keyboard.LEFT && this.x > -944) {
-//   this.moveLeft();
-//   this.otherDirection = true;
-//   this.walking_SOUND.play();
-// }
-
-// if (this.world.keyboard.UP) {
-//   this.swimUP();
-//   this.walking_SOUND.play();
-// }
-
-// if (this.world.keyboard.DOWN) {
-//   this.swimDOWN();
-//   this.walking_SOUND.play();
-// }

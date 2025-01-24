@@ -9,7 +9,8 @@ let soundData = [];
 let gamePaused = false;
 let sprites;
 let spritesLoaded = false;
-
+let soundIsOn = true;
+let isMuted = false;
 async function importSprites() {
   sprites = await fetch("./js/sprites.json").then((r) => r.json());
 }
@@ -47,12 +48,32 @@ function startGame() {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("storyContainer").style.display = "none";
   document.getElementById("dataPrivacyContainer").style.display = "none";
-  document.getElementById("imprintContainer").style.display = "none";
-  document.getElementById("winContainer").style.display = "none";
+  document.getElementById("imprintContainer").style.display = "none";  
+  document.getElementById("controlsContainer").style.display = "none";
+  document.getElementById("winContainer").style.display = "none";  
+  document.getElementById("joystick").style.zIndex = "999";
+
 }
+
+function handleSound() {
+  isMuted = !isMuted;
+  isMuted ? muteAllSounds() : unmuteAllSounds();
+  document.getElementById("sound").src = isMuted ? "./img/12.Controls/soundOff.webp" : "./img/12.Controls/soundOn.webp";
+}
+
+// function handleSound(){
+//   isMuted = !isMuted;
+//   soundData.forEach(sound =>{
+//     sound.audio.muted = isMuted;
+//   })
+// }
 
 function shootMobile() {
   keyboard.THROW = true;
+}
+
+function finSlapMobile() {
+  keyboard.SPACE = true;
 }
 
 function showStory() {
@@ -129,11 +150,13 @@ function restartGame() {
 }
 
 function playSound(audio) {
-  audio.play();
-  if (!soundData.some((sound) => sound.audio === audio)) {
-    soundData.push({ audio });
+  if(!isMuted){
+    audio.play();
+    if (!soundData.some((sound) => sound.audio === audio)) {
+      soundData.push({ audio });
+    }
   }
-}
+  }
 
 function muteAllSounds() {
   soundData.forEach((sound) => {
@@ -161,6 +184,7 @@ document.addEventListener("keydown", (event) => {
     keyboard.DOWN = true;
   }
   if (event.code == "Space") {
+    event.preventDefault();
     keyboard.SPACE = true;
   }
   if (event.code == "KeyF") {
@@ -182,6 +206,7 @@ document.addEventListener("keyup", (event) => {
     keyboard.DOWN = false;
   }
   if (event.code == "Space") {
+    event.preventDefault();
     keyboard.SPACE = false;
   }
   if (event.code == "KeyF") {

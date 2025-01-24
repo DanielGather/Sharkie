@@ -59,7 +59,7 @@ class World {
       setTimeout(() => {
         let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right + 25, this.character.y + this.character.height / 2);
         this.throwableObjects.push(bottle);
-        this.character.bubble_shot_SOUND.play();
+        playSound(this.character.bubble_shot_SOUND)
       }, 400);
       this.character.reducePoisonStorage();
       this.keyboard.THROW = false;

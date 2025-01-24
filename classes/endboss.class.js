@@ -69,7 +69,7 @@ class Endboss extends MovableObject {
     if (this.world && this.isHurt) {
       if (this.animationCounterIsHurt < 5) {
         this.playAnimation(this.IMAGES_IS_HURT);
-        this.hurt_SOUND.play();
+        playSound(this.hurt_SOUND)
       } else {
         this.isHurt = false;
         this.animationCounterIsHurt = 0;
@@ -90,7 +90,7 @@ class Endboss extends MovableObject {
       this.playAnimation(this.IMAGES_ENDBOSS_IS_ATTACKING);
       let currentImageIndex = this.currentImage % this.IMAGES_ENDBOSS_IS_ATTACKING.length; // Aktuelles Bild ermitteln
       if (currentImageIndex === 3 || currentImageIndex === 4) {
-        this.attacking_SOUND.play();
+        playSound(this.attacking_SOUND)
       }
       this.offset.left = 10;
       this.moveLeftEndboss = true;
