@@ -11,7 +11,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: "MighySoul", Arial, Helvetica, sans-serif;
+  font-family: "MightySoul", Arial, Helvetica, sans-serif;
 }
 
 p {
@@ -28,9 +28,10 @@ h6 {
   color: #ffd700;
 }
 
-ul {
+ul,li,em {
   font-size: 1rem;
   text-shadow: 1px -1px black;
+  font-family: sans-serif;
 }
 
 a {
@@ -219,6 +220,9 @@ button:active {
   width: 100%;
   height: 100%;
   padding-bottom: 1rem;
+  & p {
+    font-family: sans-serif;
+  }
 }
 
 .startImage {
@@ -292,6 +296,9 @@ button:active {
   flex-direction: column;
   height: 100%;
   align-self: baseline;
+  & p {
+    font-family: sans-serif;
+  }
 }
 
 .police-Button {
@@ -464,5 +471,34 @@ button:active {
   }
   canvas {
     height: 100%;
+  }
+}
+
+
+* {
+  --sb-track-color: #232E33;
+  --sb-thumb-color: #ffd700;
+  --sb-size: 8px;
+}
+
+*::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 4px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
   }
 }
