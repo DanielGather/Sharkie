@@ -63,6 +63,7 @@ class Character extends MovableObject {
   sleep_SOUND = new Audio("audio/sleepSound.wav");
   scary_SOUND = new Audio("audio/whaleSound.mp3");
   bubble_shot_SOUND = new Audio("audio/bubbleShot.wav");
+  coin_collected_SOUND = new Audio("audio/coinCollection.wav")
 
   constructor() {
     super().loadImage("img/1.Sharkie/3.Swim/1.webp");
@@ -175,6 +176,7 @@ class Character extends MovableObject {
 
   hitCoin() {
     this.coins += 1;
+    playSound(this.coin_collected_SOUND)
   }
 
   finSlapAttack() {

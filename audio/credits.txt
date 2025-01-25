@@ -42,3 +42,15 @@ imprintBackground
 
 controls
 <a href="https://www.freepik.com/free-vector/sea-landscape-with-moon-stars-sky-night_21184537.htm#fromView=search&page=1&position=14&uuid=b4bb1a5b-0f6f-415c-b653-3286df023d3d&query=sea+dark+cartoon">Image by upklyak on Freepik</a>
+
+finSlap
+<a href="https://www.flaticon.com/free-icons/fin" title="fin icons">Fin icons created by Smashicons - Flaticon</a>
+
+pausePicture
+<a href="https://www.flaticon.com/de/kostenlose-icons/musik-und-multimedia" title="musik und multimedia Icons">Musik und multimedia Icons erstellt von Dreamstale - Flaticon</a>
+
+playImg
+<a href="https://www.flaticon.com/de/kostenlose-icons/google-play-musik" title="google play musik Icons">Google play musik Icons erstellt von IYAHICON - Flaticon</a>
+
+phoneImg
+<a href="https://www.flaticon.com/de/kostenlose-icons/telefon" title="telefon Icons">Telefon Icons erstellt von Freepik - Flaticon</a>

@@ -6,11 +6,11 @@ let intervalData = [];
 let intervalMovementIDs = [];
 let intervalMovementData = [];
 let soundData = [];
-let gamePaused = false;
 let sprites;
 let spritesLoaded = false;
 let soundIsOn = true;
 let isMuted = false;
+let isPaused = false;
 async function importSprites() {
   sprites = await fetch("./js/sprites.json").then((r) => r.json());
 }
@@ -26,13 +26,6 @@ async function init() {
     canvas = null;
     Level.enemyLevelArray = [];
     soundData = [];
-    // stopGame();
-    // stopMovement();
-    // level1 = null;
-    // intervalData = [];
-    // intervalIDs = [];
-    // intervalMovementIDs = [];
-    // intervalMovementData = [];
   }
   await loadSprites();
   canvas = document.getElementById("canvas");
@@ -52,14 +45,93 @@ function startGame() {
   document.getElementById("controlsContainer").style.display = "none";
   document.getElementById("winContainer").style.display = "none";  
   document.getElementById("handleSound").style.display = "flex";  
+  document.getElementById("gamePause").style.display = "flex";  
   document.getElementById("joystick").style.zIndex = "999";
 
 }
+
+function isTablet() {
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const screenWidth = window.innerWidth;
+
+  // Prüfe auf typische Tablet-Bildschirmgrößen
+  return isTouchDevice && screenWidth >= 768 && screenWidth <= 1367;
+}
+
+function checkHardware(){
+  if (/iPad|iPhone|Android|/i.test(navigator.userAgent)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function getMobileOperatingSystem() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  // Windows Phone must come first because its UA also contains "Android"
+  if (/windows phone/i.test(userAgent)) {
+      return "Windows Phone";
+  }
+
+  if (/android/i.test(userAgent)) {
+      return "Android";
+  }
+
+  // iOS detection from: http://stackoverflow.com/a/9039885/177710
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return "iOS";
+  }
+
+  return "unknown";
+}
+
+window.addEventListener("resize", ()=>{
+  if(checkHardware()){
+    console.log("Tablet");
+    
+  } else {
+    console.log("Desktop");
+    
+  }
+});
+
+// window.addEventListener("resize", ()=>{
+//   if(checkHardware()){
+//     console.log("Mobile");
+//   } else {
+//     console.log("Desktop");
+    
+//   }
+  
+// }
+// )
+
+// function checkScreenWidth() {
+//   const width = window.innerWidth;
+
+//   if (width < 768) {
+//     console.log("Mobiles Layout");
+//   } else if (width < 1024) {
+//     console.log("Tablet Layout");
+//   } else {
+//     console.log("Desktop Layout");
+//   }
+// }
 
 function handleSound() {
   isMuted = !isMuted;
   isMuted ? muteAllSounds() : unmuteAllSounds();
   document.getElementById("sound").src = isMuted ? "./img/12.Controls/soundOff.webp" : "./img/12.Controls/soundOn.webp";
+}
+
+function handlePlayAndPause(){
+  isPaused = !isPaused;
+  isPaused ? stopGame() : restartGame();
+  document.getElementById("pauseButton").src = isPaused ? "./img/12.Controls/play.webp" : "./img/12.Controls/pause.webp"
+  if(!isMuted || !isPaused){
+    handleSound();
+  }
 }
 
 // function handleSound(){
@@ -133,9 +205,8 @@ function stopMovement() {
 function stopGame() {
   intervalIDs.forEach(clearInterval);
   intervalMovementIDs.forEach(clearInterval);
-  muteAllSounds();
+  // muteAllSounds();
   console.log(keyboard);
-  gamePaused = true;
 }
 
 function restartGame() {
@@ -147,7 +218,7 @@ function restartGame() {
     let id = setInterval(fn, time);
     intervalMovementIDs.push(id); // Speichert die neuen Interval-IDs
   });
-  unmuteAllSounds();
+  // unmuteAllSounds();
 }
 
 function playSound(audio) {

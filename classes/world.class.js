@@ -4,7 +4,7 @@ class World {
   statusBar = new StatusBar();
   LifeEndboss = new EndbossLifebar();
   //   barrier = new Barrier();
-  level = createLevel(2);
+  level = createLevel(1);
   canvas;
   ctx;
   keyboard;

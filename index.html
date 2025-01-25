@@ -29,7 +29,7 @@
     <script src="./levels/level1.js"></script>
     <title>Sharkie</title>
   </head>
-  <body onload="loadSprites()">
+  <body onload="loadSprites(), checkHardware()">
     <h1 class="headline">Sharkie</h1>
     <div id="canvasContainer" class="canvas-Container">
       <canvas id="canvas" width="1024" height="600"></canvas>
@@ -38,7 +38,19 @@
       </div>
       <button ontouchstart="shootMobile()" class="shoot"><img src="./img/1.Sharkie/7.mobile icons/target.webp" alt="" /></button>
       <button ontouchstart="finSlapMobile()" class="fin-slap"><img src="./img/1.Sharkie/7.mobile icons/fin.webp" alt="" /></button>
-      <button id="handleSound" onclick="handleSound()" class="sound-button"><img class="sound-button-icon" id="sound" src="./img/12.Controls/soundOn.webp" alt="" /></button>
+      <button id="handleSound" onclick="handleSound()" class="sound-button ingame-button"><img id="sound" src="./img/12.Controls/soundOn.webp" alt="" /></button>      
+      <button id="gamePause" onclick="handlePlayAndPause()" class="pause-button ingame-button"><img id="pauseButton" src="./img/12.Controls/pause.webp" alt="" /></button>
+      <div class="rotate-your-phone">
+        <p>Rotate Screen please :)</p>
+        <img src="./img/telefon.png" alt="">
+      </div>
+      <div class="desktop-experience">
+        <p>I think this is where the gaming experience becomes limited. Please make your window a little larger. Thank you.</p>
+      </div>
+      <div class="joke">
+        <p>Thanks for checking the responsiveness, but I don't think anyone plays a game at that size. </p>
+      </div>
+
 
       <div id="winContainer" class="win-container common-container">
         <button onclick="goToHomeScreen()" class="standard-Button">Home</button>

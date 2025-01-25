@@ -8,7 +8,7 @@ class Endboss extends MovableObject {
   width = 500;
   height = 500;
   lastHitEndboss = 0;
-  endbossLife = 100;
+  endbossLife = 1000;
   speed = 0.25;
   initialLife = this.endbossLife;
   isNotDead = true;
@@ -63,6 +63,7 @@ class Endboss extends MovableObject {
     setStoppableInterval(this.endbossTakesDamage.bind(this), 100);
     setStoppableInterval(this.attackCharacter.bind(this), 150);
     setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
+    this.attacking_SOUND.volume = 0.1
   }
 
   endbossTakesDamage() {
