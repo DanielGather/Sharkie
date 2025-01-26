@@ -54,3 +54,9 @@ playImg
 
 phoneImg
 <a href="https://www.flaticon.com/de/kostenlose-icons/telefon" title="telefon Icons">Telefon Icons erstellt von Freepik - Flaticon</a>
+
+winSound
+piglevelwin2.mp3 by Tuudurt -- https://freesound.org/s/275104/ -- License: Creative Commons 0
+
+loseSound
+Video Game - Die or Lose Life by AdamWeeden -- https://freesound.org/s/157218/ -- License: Attribution 3.0
