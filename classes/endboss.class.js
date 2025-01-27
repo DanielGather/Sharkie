@@ -8,13 +8,16 @@ class Endboss extends MovableObject {
   width = 500;
   height = 500;
   lastHitEndboss = 0;
-  endbossLife = 100;
+  endbossLife = 1000;
+  maxHealth;
   speed = 0.25;
   initialLife = this.endbossLife;
   isNotDead = true;
   attackingCharacter = false;
   isHurt = false;
   moveLeftEndboss = false;
+  rageModeActivated = false;
+  oneRageModePerLevel = false;
 
   offset = {
     top: 160,
@@ -24,24 +27,24 @@ class Endboss extends MovableObject {
   };
 
   // IMAGES_INTRODUCE = ["img/2.Enemy/3 Final Enemy/1.Introduce/1.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/2.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/3.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/4.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/5.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/6.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/7.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/8.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/9.webp", "img/2.Enemy/3 Final Enemy/1.Introduce/10.webp"];
-  IMAGES_INTRODUCE = sprites.endboss.introduce
+  IMAGES_INTRODUCE = sprites.endboss.introduce;
 
   // IMAGES_SWIMING = ["img/2.Enemy/3 Final Enemy/2.floating/1.webp", "img/2.Enemy/3 Final Enemy/2.floating/2.webp", "img/2.Enemy/3 Final Enemy/2.floating/3.webp", "img/2.Enemy/3 Final Enemy/2.floating/4.webp", "img/2.Enemy/3 Final Enemy/2.floating/5.webp", "img/2.Enemy/3 Final Enemy/2.floating/6.webp", "img/2.Enemy/3 Final Enemy/2.floating/7.webp", "img/2.Enemy/3 Final Enemy/2.floating/8.webp", "img/2.Enemy/3 Final Enemy/2.floating/9.webp", "img/2.Enemy/3 Final Enemy/2.floating/10.webp", "img/2.Enemy/3 Final Enemy/2.floating/11.webp", "img/2.Enemy/3 Final Enemy/2.floating/12.webp", "img/2.Enemy/3 Final Enemy/2.floating/13.webp"];
-  IMAGES_SWIMING = sprites.endboss.swim
+  IMAGES_SWIMING = sprites.endboss.swim;
 
   // IMAGES_IS_HURT = ["img/2.Enemy/3 Final Enemy/Hurt/1.webp", "img/2.Enemy/3 Final Enemy/Hurt/2.webp", "img/2.Enemy/3 Final Enemy/Hurt/3.webp", "img/2.Enemy/3 Final Enemy/Hurt/4.webp"];
-  IMAGES_IS_HURT = sprites.endboss.isHurt
+  IMAGES_IS_HURT = sprites.endboss.isHurt;
 
   // IMAGES_ENDBOSS_DEAD = ["img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.webp", "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.webp"];
-  IMAGES_ENDBOSS_DEAD = sprites.endboss.isDead
+  IMAGES_ENDBOSS_DEAD = sprites.endboss.isDead;
 
   // IMAGES_ENDBOSS_IS_ATTACKING = ["img/2.Enemy/3 Final Enemy/Attack/1.webp", "img/2.Enemy/3 Final Enemy/Attack/2.webp", "img/2.Enemy/3 Final Enemy/Attack/3.webp", "img/2.Enemy/3 Final Enemy/Attack/4.webp", "img/2.Enemy/3 Final Enemy/Attack/5.webp", "img/2.Enemy/3 Final Enemy/Attack/6.webp"];
-  IMAGES_ENDBOSS_IS_ATTACKING = sprites.endboss.isAttacking
+  IMAGES_ENDBOSS_IS_ATTACKING = sprites.endboss.isAttacking;
 
   hurt_SOUND = new Audio("audio/hurtSoundBoss.wav");
   attacking_SOUND = new Audio("audio/monsterBite.wav");
 
-  constructor(newEndbossLife) {
+  constructor() {
     super().loadImage(this.IMAGES_INTRODUCE[0]);
     this.damage = 10;
     this.loadImages(this.IMAGES_INTRODUCE);
@@ -50,7 +53,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_IS_HURT);
     this.loadImages(this.IMAGES_ENDBOSS_IS_ATTACKING);
     this.waitForEndbossVariable();
-    this.changeLifeOnNextLevel(newEndbossLife);
+    this.changeLifeOnNextLevel();
     this.animate();
   }
 
@@ -64,24 +67,43 @@ class Endboss extends MovableObject {
     setStoppableInterval(this.endbossTakesDamage.bind(this), 100);
     setStoppableInterval(this.attackCharacter.bind(this), 150);
     setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
-    this.attacking_SOUND.volume = 0.1
+    setStoppableInterval(this.rageMode.bind(this), 100);
+    this.attacking_SOUND.volume = 0.1;
   }
 
-  changeLifeOnNextLevel(newEndbossLife){
-    if(nextLevelBoolean){
-      this.endbossLife = newEndbossLife
+  changeLifeOnNextLevel() {
+    if (nextLevelBoolean) {
+      this.endbossLife = this.endbossLife + 100 * levelCounter;
+    } else {
+      this.endbossLife = 1000;
     }
+    this.maxHealth = this.endbossLife;
   }
+
   endbossTakesDamage() {
     if (this.world && this.isHurt) {
       if (this.animationCounterIsHurt < 5) {
         this.playAnimation(this.IMAGES_IS_HURT);
-        playSound(this.hurt_SOUND)
+        playSound(this.hurt_SOUND);
       } else {
         this.isHurt = false;
         this.animationCounterIsHurt = 0;
       }
       this.animationCounterIsHurt++;
+    }
+  }
+
+  rageMode() {
+    if (repeatCanvas >= 2 && !this.oneRageModePerLevel) {
+      if (this.endbossLife <= this.maxHealth / 2) {
+        rageMode = true;
+        this.speed = 1.5;
+        setTimeout(() => {
+          this.speed = 0.25;
+          rageMode = false;
+          this.oneRageModePerLevel = true;
+        }, 5000);
+      }
     }
   }
 
@@ -97,7 +119,7 @@ class Endboss extends MovableObject {
       this.playAnimation(this.IMAGES_ENDBOSS_IS_ATTACKING);
       let currentImageIndex = this.currentImage % this.IMAGES_ENDBOSS_IS_ATTACKING.length; // Aktuelles Bild ermitteln
       if (currentImageIndex === 3 || currentImageIndex === 4) {
-        playSound(this.attacking_SOUND)
+        playSound(this.attacking_SOUND);
       }
       this.offset.left = 10;
       this.moveLeftEndboss = true;

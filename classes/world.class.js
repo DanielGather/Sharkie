@@ -264,6 +264,7 @@ class World {
     }
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx);
+    mo.drawRageFrame(this.ctx);
     mo.drawFrameOffset(this.ctx);
 
     if (mo.otherDirection) {

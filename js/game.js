@@ -15,6 +15,8 @@ let coinMultiplikator = 1.25;
 let fishMultiplikator = 1.25;
 let poisonBottleMultiplikator = 1.5;
 let nextLevelBoolean = false;
+let levelCounter = 1
+let rageMode = false;
 
 async function importSprites() {
   sprites = await fetch("./js/sprites.json").then((r) => r.json());
@@ -24,20 +26,21 @@ async function loadSprites() {
   await importSprites();
 }
 
-function init(newDamage,newEndbossLife) {
+function init(newDamage) {
   if (world) {
     clearAllParameters();
     checkSound();
   }
-  newWorld(newDamage,newEndbossLife);
+  newWorld(newDamage);
 }
 
-function newWorld(newDamage,newEndbossLife){
+function newWorld(newDamage){
   canvas = document.getElementById("canvas");
-  world = new World(canvas, keyboard, newDamage, newEndbossLife);
+  world = new World(canvas, keyboard, newDamage);
 }
 
 function nextLevel(){
+  levelCounter++;
   nextLevelBoolean = true;
   coinsPerLevel = coinsPerLevel * coinMultiplikator;
   enemyPerLevel = enemyPerLevel * fishMultiplikator;
@@ -45,9 +48,8 @@ function nextLevel(){
   speedNormalFish = speedNormalFish * 1.15;
   speedFromDangerousFish = speedFromDangerousFish * 1.35
   newDamage = Level.enemyLevelArray[0].damage + 2;
-  newEndbossLife = world.endboss.endbossLife + 100;
   repeatCanvas++;
-  init(newDamage, newEndbossLife);
+  init(newDamage);
   handleAllCointainers();
 }
 
@@ -134,6 +136,20 @@ function goToHomeScreen() {
   document.getElementById("joystick").style.display = "none";
   document.getElementById("gamePause").style.display = "none";
   document.getElementById("handleSound").style.display = "none";
+  resetLevelParameter();
+}
+
+function resetLevelParameter(){
+repeatCanvas = 2;
+coinsPerLevel = 10;
+PoisonBottleLevel = 15;
+enemyPerLevel = 0;
+speedNormalFish = 0.5;
+speedFromDangerousFish = 0.1;
+canvasStep = 1024;
+first_level_end_x_ = repeatCanvas * canvasStep;
+dangerousEnemiesPerLevel = repeatCanvas;
+Level.enemyLevelArray[0].damage = 1;
 }
 
 function showDataPrivacy() {
