@@ -8,7 +8,6 @@
     <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon" />
     <!-- <script src="./js/importSprites.js"></script> -->
     <script src="./classes/keyboard.class.js"></script>
-    <script defer src="./js/game.js"></script>
     <script src="./classes/drawable-object.class.js"></script>
     <script src="./classes/movable-object.class.js"></script>
     <script src="./classes/background-object.class.js"></script>
@@ -27,9 +26,10 @@
     <script src="./classes/level.class.js"></script>
     <script src="./classes/endbossLifebar.class.js"></script>
     <script src="./levels/level1.js"></script>
+    <script src="./js/game.js"></script>
     <title>Sharkie</title>
   </head>
-  <body onload="loadSprites(), checkHardware()">
+  <body onload="loadSprites()">
     <h1 class="headline">Sharkie</h1>
     <div id="canvasContainer" class="canvas-Container">
       <canvas id="canvas" width="1024" height="600"></canvas>
@@ -55,6 +55,10 @@
       <div id="winContainer" class="win-container common-container">
         <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
         <button onclick="nextLevel()" class="standard-Button">Next Level</button>
+      </div>
+
+      <div id="loseContainer" class="lose-container common-container">
+        <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
       </div>
 
       <div id="controlsContainer" class="controls-container common-container">
@@ -173,8 +177,41 @@
             <br />
             <h3>Urheberrechtliche Hinweise</h3>
             <br />
-            <p>
               <em>Diese Datenschutzerklärung wurde mit Hilfe der activeMind AG erstellt – den Experten für <a href="https://www.activemind.de/datenschutz/datenschutzbeauftragter/" target="_blank" rel="noopener dofollow">externe Datenschutzbeauftragte</a> (Version #2024-10-25).</em>
+              <br>
+              <br>
+              <p>Sounds</p>
+              <br>
+              <ul>
+                <li>Sub-Breathing-Nose-High-BPM 34 by AmeAfterDark -- <a href="//freesound.org/people/AmeAfterDark/sounds/568518/" target="_blank">Sleep Sound</a> -- License: Attribution NonCommercial 4.0</li>
+                <li><a href="https://freesound.org/people/echojonas/sounds/503073/" target="_blank">pain2.wav</a> by <a href="https://freesound.org/people/echojonas/">echojonas</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank">Creative Commons 0</a>
+                <li><a href="https://freesound.org/people/DAN2008/sounds/175169/" target="_blank">monster bite</a> by <a href="https://freesound.org/people/DAN2008/">DAN2008</a> | License: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Attribution 4.0</a></li>
+                <li><a href="https://freesound.org/people/MPooman/sounds/653612/" target="_blank">[ MPooman ] Whale Sounds (High Quality)</a> by <a href="https://freesound.org/people/MPooman/" target="_blank">MPooman</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a></li>
+                <li><a href="https://freesound.org/people/Breviceps/sounds/445961/" target="_blank">Cartoon / Video Game - Bubble Shot</a> by <a href="https://freesound.org/people/Breviceps/" target="_blank">Breviceps</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank">Creative Commons 0</a></li>
+                <li>piglevelwin2.mp3 by Tuudurt <a href="//freesound.org/s/275104/"target="_blank">winSound</a> -- License: Creative Commons 0</li>
+                <li>Video Game - Die or Lose Life by AdamWeeden <a href="//freesound.org/s/157218/" target="_blank">loseSound</a> -- License: Attribution 3.0</li>
+                <li>CollectCoin.wav by bradwesson -- <a href="//freesound.org/s/135936/" target="_blank">Coin Sound</a> -- License: Attribution NonCommercial 4.0</li>
+                </li>
+              </ul>
+              <br>
+              <p>Icons / Bilder</p>
+              <br>
+              <ul>
+                <li>Shark Icon Image by <a href="https://pixabay.com/users/benkageyama-16400508/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5135934">Ben Kageyama</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5135934">Pixabay</a></li>
+                <li>Mobile Shoot Icon<a href="https://www.flaticon.com/free-icons/target" target="_blank" title="target icons">Target icons created by Freepik - Flaticon</a></li>
+                <li>Start Screen<a href="https://www.freepik.com/free-vector/cartoon-ship-wreck-sinking-after-crash-vector_159232053.htm#fromView=search&page=1&position=2&uuid=582099b2-116b-4434-9e17-7c1893e8901f&query=cartoon+backgrounds+sea+dark" target="_blank">Image by upklyak on Freepik</a></li>
+                <li>Story <a href="https://www.freepik.com/free-vector/coral-reef-ocean-sea-underwater-background_22753076.htm#fromView=search&page=1&position=12&uuid=e0627ae7-b91d-47d2-ab85-6961c541c41f&query=cartoon+backgrounds+sea+dark+underwater"target="_blank">Image by upklyak on Freepik</a></li>
+                <li>Data Privacy <a href="https://www.freepik.com/free-vector/sunbeam-penetrating-underwater-background_39653249.htm#fromView=search&page=2&position=2&uuid=d71372a9-5d69-46a1-842b-b3cfb4ea7dfd&query=cartoon+backgrounds+sea+dark+underwater" target="_blank">Image by brgfx on Freepik</a></li>
+                <li>Start Screen Background<a href="https://www.freepik.com/free-ai-image/view-underwater-sea-life-cartoon-style_137489153.htm#fromView=search&page=2&position=29&uuid=d71372a9-5d69-46a1-842b-b3cfb4ea7dfd&query=cartoon+backgrounds+sea+dark+underwater" target="_blank">Image by freepik</a></li>
+                <li>Imprint <a href="https://www.freepik.com/free-vector/seabed-with-underwater-corals-stones-algae_134792075.htm#fromView=search&page=1&position=26&uuid=1a5cf677-c0ae-4687-92a9-1d3e21710c38&query=sea+background+underwater+cartoon+dark" target="_blank">Image by upklyak on Freepik</a></li>
+                <li>Controls<a href="https://www.freepik.com/free-vector/sea-landscape-with-moon-stars-sky-night_21184537.htm#fromView=search&page=1&position=14&uuid=b4bb1a5b-0f6f-415c-b653-3286df023d3d&query=sea+dark+cartoon" target="_blank">Image by upklyak on Freepik</a></li>
+                <li>Mobile Fin Slap Icon<a href="https://www.flaticon.com/free-icons/fin" target="_blank" title="fin icons">Fin icons created by Smashicons - Flaticon</a></li>
+                <li>Pause Icon <a href="https://www.flaticon.com/de/kostenlose-icons/musik-und-multimedia" target="_blank" title="musik und multimedia Icons">Musik und multimedia Icons erstellt von Dreamstale - Flaticon</a></li>
+                <li>Play Icon<a href="https://www.flaticon.com/de/kostenlose-icons/google-play-musik" target="_blank" title="google play musik Icons">Google play musik Icons erstellt von IYAHICON - Flaticon</a></li>
+                <li>Phone Img <a href="https://www.flaticon.com/de/kostenlose-icons/telefon" target="_blank" title="telefon Icons">Telefon Icons erstellt von Freepik - Flaticon</a></li>
+
+              </ul>
+
             </p>
           </div>
         </div>

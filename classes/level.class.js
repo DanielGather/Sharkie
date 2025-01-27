@@ -10,29 +10,29 @@ class Level {
   dangerousEnemiesPerLevel;
   coinsArray = [];
   poisonBottleArray = [];
-  characterSafeSpace = 500;
+  characterSafeSpace = 1000;
   canvasWidth = 1024;
 
-  constructor(backgroundObjects, coinsPerLevel, repeatCanvas, canvasStep, poisonBottle, enemyPerLevel, dangerousEnemiesPerLevel,speedFromDangerousFish, speedNormalFish) {
-      Level.level_end_x = repeatCanvas * canvasStep;
-      this.backgroundObjects = backgroundObjects;
-      this.createBackgroundObjects(repeatCanvas, canvasStep, backgroundObjects);
-      this.createCoins(coinsPerLevel);
-      this.createBottle(poisonBottle);
-      this.createFish(repeatCanvas, enemyPerLevel, speedNormalFish );
-      this.createDangerousFish(dangerousEnemiesPerLevel,speedFromDangerousFish);
+  constructor(backgroundObjects, coinsPerLevel, repeatCanvas, canvasStep, poisonBottle, enemyPerLevel, dangerousEnemiesPerLevel, speedFromDangerousFish, speedNormalFish, damage) {
+    Level.level_end_x = repeatCanvas * canvasStep;
+    this.backgroundObjects = backgroundObjects;
+    this.createBackgroundObjects(repeatCanvas, canvasStep, backgroundObjects);
+    this.createCoins(coinsPerLevel);
+    this.createBottle(poisonBottle);
+    this.createFish(repeatCanvas, enemyPerLevel, speedNormalFish, damage);
+    this.createDangerousFish(dangerousEnemiesPerLevel, speedFromDangerousFish);
   }
 
-  createDangerousFish(dangerousEnemiesPerLevel,speedFromDangerousFish){
+  createDangerousFish(dangerousEnemiesPerLevel, speedFromDangerousFish) {
     let numberOfDangerousFishes = dangerousEnemiesPerLevel;
     let middleOfCanvas = this.canvasWidth / 2;
     for (let i = 0; i < numberOfDangerousFishes; i++) {
-      Level.enemyLevelArray.push(new GreenSuperDangerousFish(middleOfCanvas,speedFromDangerousFish));
+      Level.enemyLevelArray.push(new GreenSuperDangerousFish(middleOfCanvas, speedFromDangerousFish));
       middleOfCanvas = middleOfCanvas + this.canvasWidth;
     }
   }
 
-  createFish(repeatCanvas, enemyPerLevel,speedNormalFish ) {
+  createFish(repeatCanvas, enemyPerLevel, speedNormalFish, damage) {
     let numberOfCanvas = repeatCanvas;
     let totalEnemies = enemyPerLevel;
     let enemiesPerCanvas = Math.floor(totalEnemies / numberOfCanvas);
@@ -40,7 +40,7 @@ class Level {
     let fishTypes = [OrangeFish, GreenFish, RedFish];
     let fishTypeCounts = this.calculateFishTypeCounts(totalEnemies, fishTypes);
     for (let i = 0; i < numberOfCanvas; i++) {
-      this.createFishForCanvas.call(this, i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts, speedNormalFish);
+      this.createFishForCanvas.call(this, i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts, speedNormalFish, damage);
     }
   }
 
@@ -49,7 +49,7 @@ class Level {
     return fishTypeCounts;
   }
 
-  createFishForCanvas(i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts, speedNormalFish) {
+  createFishForCanvas(i, enemiesPerCanvas, remainingEnemies, fishTypes, fishTypeCounts, speedNormalFish, damage) {
     let canvasStartX = i * this.canvasWidth;
     let fishCount = enemiesPerCanvas + (i < remainingEnemies ? 1 : 0);
     let currentTypeIndex = 0;
@@ -57,7 +57,7 @@ class Level {
       let xPosition = this.getFishPosition.call(this, i, canvasStartX);
       for (let attempts = 0; attempts < fishTypes.length; attempts++) {
         if (fishTypeCounts[currentTypeIndex] > 0) {
-          this.createFishOfType(fishTypes, currentTypeIndex, xPosition, speedNormalFish);
+          this.createFishOfType(fishTypes, currentTypeIndex, xPosition, speedNormalFish, damage);
           fishTypeCounts[currentTypeIndex]--;
           currentTypeIndex = (currentTypeIndex + 1) % fishTypes.length;
           break;
@@ -75,8 +75,8 @@ class Level {
     return xPosition;
   }
 
-  createFishOfType(fishTypes, currentTypeIndex, xPosition, speedNormalFish) {
-    Level.enemyLevelArray.push(new fishTypes[currentTypeIndex](xPosition, speedNormalFish));
+  createFishOfType(fishTypes, currentTypeIndex, xPosition, speedNormalFish, damage) {
+    Level.enemyLevelArray.push(new fishTypes[currentTypeIndex](xPosition, speedNormalFish, damage));
   }
 
   createCoins(coins) {

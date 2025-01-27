@@ -23,8 +23,10 @@ class OrangeFish extends MovableObject {
   IMAGES_ORANGE_DEAD = sprites.orangeFish.isDead
 
 
-  constructor(xPosition, speedNormalFish) {
+  constructor(xPosition, speedNormalFish, damage) {
     super();
+    this.ifNextLevel(damage)
+
     this.x = xPosition;
     this.loadImages(this.IMAGES_ORANGE_FISH_SWIMING);
     this.loadImages(this.IMAGES_ORANGE_FISH_TRANSITION);
@@ -34,7 +36,6 @@ class OrangeFish extends MovableObject {
     this.y = this.calculateY();
     this.speed = this.calculateSpeed(speedNormalFish);
     this.animate();
-    console.log("Wann komme ich?")
   }
 
   animate() {
@@ -43,4 +44,5 @@ class OrangeFish extends MovableObject {
     setStoppableInterval(this.checkFishAndCharacterDistance.bind(this, this.IMAGES_ORANGE_FISH_BUBBLE_SWIM, this.IMAGES_ORANGE_FISH_SWIMING, this.IMAGES_ORANGE_FISH_TRANSITION), 150);
     setStoppableInterval(this.checkIfSmallFishIsDead.bind(this,this.IMAGES_ORANGE_DEAD ), 1000 / this.hz)
   }
+
 }

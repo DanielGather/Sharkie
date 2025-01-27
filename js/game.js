@@ -7,117 +7,84 @@ let intervalMovementIDs = [];
 let intervalMovementData = [];
 let soundData = [];
 let sprites;
-let spritesLoaded = false;
+// let spritesLoaded = false;
 let soundIsOn = true;
 let isMuted = false;
 let isPaused = false;
+let coinMultiplikator = 1.25;
+let fishMultiplikator = 1.25;
+let poisonBottleMultiplikator = 1.5;
+let nextLevelBoolean = false;
+
 async function importSprites() {
   sprites = await fetch("./js/sprites.json").then((r) => r.json());
 }
 
 async function loadSprites() {
   await importSprites();
-  spritesLoaded = true;
 }
 
-async function init() {
+function init(newDamage,newEndbossLife) {
   if (world) {
-    world = null;
-    canvas = null;
-    Level.enemyLevelArray = [];
-    soundData = [];
+    clearAllParameters();
+    checkSound();
   }
-  await loadSprites();
+  newWorld(newDamage,newEndbossLife);
+}
+
+function newWorld(newDamage,newEndbossLife){
   canvas = document.getElementById("canvas");
-  world = new World(canvas, keyboard);
-  ctx = canvas.getContext("2d");
-  console.log("My Character is,", world.character);
-  console.log("My World is,", world);
+  world = new World(canvas, keyboard, newDamage, newEndbossLife);
+}
+
+function nextLevel(){
+  nextLevelBoolean = true;
+  coinsPerLevel = coinsPerLevel * coinMultiplikator;
+  enemyPerLevel = enemyPerLevel * fishMultiplikator;
+  PoisonBottleLevel = PoisonBottleLevel * poisonBottleMultiplikator;
+  speedNormalFish = speedNormalFish * 1.15;
+  speedFromDangerousFish = speedFromDangerousFish * 1.35
+  newDamage = Level.enemyLevelArray[0].damage + 2;
+  newEndbossLife = world.endboss.endbossLife + 100;
+  repeatCanvas++;
+  init(newDamage, newEndbossLife);
+  handleAllCointainers();
+}
+
+function clearAllParameters(){
+  canvas = null;
+  world = null;
+  Level.enemyLevelArray = [];
+  soundData = [];
+  intervalIDs = [];
+  intervalData = [];
+  intervalMovementIDs = [];
+  intervalMovementData = [];
+}
+
+function checkSound(){
+  if (isMuted) {
+    handleSound();
+  }
 }
 
 function startGame() {
   init();
+  handleAllCointainers();
+}
+
+function handleAllCointainers(){
   document.getElementById("startImage").style.display = "none";
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("storyContainer").style.display = "none";
   document.getElementById("dataPrivacyContainer").style.display = "none";
-  document.getElementById("imprintContainer").style.display = "none";  
+  document.getElementById("imprintContainer").style.display = "none";
   document.getElementById("controlsContainer").style.display = "none";
-  document.getElementById("winContainer").style.display = "none";  
-  document.getElementById("handleSound").style.display = "flex";  
-  document.getElementById("gamePause").style.display = "flex";  
+  document.getElementById("winContainer").style.display = "none";
+  document.getElementById("handleSound").style.display = "flex";
+  document.getElementById("gamePause").style.display = "flex";
   document.getElementById("joystick").style.zIndex = "999";
-
 }
-
-function isTablet() {
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  const screenWidth = window.innerWidth;
-
-  // Prüfe auf typische Tablet-Bildschirmgrößen
-  return isTouchDevice && screenWidth >= 768 && screenWidth <= 1367;
-}
-
-function checkHardware(){
-  if (/iPad|iPhone|Android|/i.test(navigator.userAgent)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function getMobileOperatingSystem() {
-  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-  // Windows Phone must come first because its UA also contains "Android"
-  if (/windows phone/i.test(userAgent)) {
-      return "Windows Phone";
-  }
-
-  if (/android/i.test(userAgent)) {
-      return "Android";
-  }
-
-  // iOS detection from: http://stackoverflow.com/a/9039885/177710
-  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      return "iOS";
-  }
-
-  return "unknown";
-}
-
-window.addEventListener("resize", ()=>{
-  if(checkHardware()){
-    console.log("Tablet");
-    
-  } else {
-    console.log("Desktop");
-    
-  }
-});
-
-// window.addEventListener("resize", ()=>{
-//   if(checkHardware()){
-//     console.log("Mobile");
-//   } else {
-//     console.log("Desktop");
-    
-//   }
-  
-// }
-// )
-
-// function checkScreenWidth() {
-//   const width = window.innerWidth;
-
-//   if (width < 768) {
-//     console.log("Mobiles Layout");
-//   } else if (width < 1024) {
-//     console.log("Tablet Layout");
-//   } else {
-//     console.log("Desktop Layout");
-//   }
-// }
 
 function handleSound() {
   isMuted = !isMuted;
@@ -125,21 +92,14 @@ function handleSound() {
   document.getElementById("sound").src = isMuted ? "./img/12.Controls/soundOff.webp" : "./img/12.Controls/soundOn.webp";
 }
 
-function handlePlayAndPause(){
+function handlePlayAndPause() {
   isPaused = !isPaused;
   isPaused ? stopGame() : restartGame();
-  document.getElementById("pauseButton").src = isPaused ? "./img/12.Controls/play.webp" : "./img/12.Controls/pause.webp"
-  if(!isMuted || !isPaused){
+  document.getElementById("pauseButton").src = isPaused ? "./img/12.Controls/play.webp" : "./img/12.Controls/pause.webp";
+  if (!isMuted || !isPaused) {
     handleSound();
   }
 }
-
-// function handleSound(){
-//   isMuted = !isMuted;
-//   soundData.forEach(sound =>{
-//     sound.audio.muted = isMuted;
-//   })
-// }
 
 function shootMobile() {
   keyboard.THROW = true;
@@ -159,6 +119,10 @@ function showWinScreen() {
   document.getElementById("winContainer").style.display = "flex";
 }
 
+function showLoseScreen() {
+  document.getElementById("loseContainer").style.display = "flex";
+}
+
 function goToHomeScreen() {
   document.getElementById("startImage").style.display = "flex";
   document.getElementById("startScreen").style.display = "flex";
@@ -166,6 +130,10 @@ function goToHomeScreen() {
   document.getElementById("dataPrivacyContainer").style.display = "none";
   document.getElementById("imprintContainer").style.display = "none";
   document.getElementById("winContainer").style.display = "none";
+  document.getElementById("loseContainer").style.display = "none";
+  document.getElementById("joystick").style.display = "none";
+  document.getElementById("gamePause").style.display = "none";
+  document.getElementById("handleSound").style.display = "none";
 }
 
 function showDataPrivacy() {
@@ -205,8 +173,6 @@ function stopMovement() {
 function stopGame() {
   intervalIDs.forEach(clearInterval);
   intervalMovementIDs.forEach(clearInterval);
-  // muteAllSounds();
-  console.log(keyboard);
 }
 
 function restartGame() {
@@ -218,17 +184,16 @@ function restartGame() {
     let id = setInterval(fn, time);
     intervalMovementIDs.push(id); // Speichert die neuen Interval-IDs
   });
-  // unmuteAllSounds();
 }
 
 function playSound(audio) {
-  if(!isMuted){
+  if (!isMuted) {
     audio.play();
     if (!soundData.some((sound) => sound.audio === audio)) {
       soundData.push({ audio });
     }
   }
-  }
+}
 
 function muteAllSounds() {
   soundData.forEach((sound) => {

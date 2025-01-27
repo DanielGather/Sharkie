@@ -28,31 +28,14 @@ class Character extends MovableObject {
     bottom: 50,
   };
 
-  // IMAGES_SWIMING = ["img/1.Sharkie/3.Swim/1.webp", "img/1.Sharkie/3.Swim/2.webp", "img/1.Sharkie/3.Swim/3.webp", "img/1.Sharkie/3.Swim/4.webp", "img/1.Sharkie/3.Swim/5.webp", "img/1.Sharkie/3.Swim/6.webp"];
   IMAGES_SWIMING = sprites.character.swim;
-
-  // IMAGES_IDLE = ["img/1.Sharkie/1.IDLE/1.webp", "img/1.Sharkie/1.IDLE/2.webp", "img/1.Sharkie/1.IDLE/3.webp", "img/1.Sharkie/1.IDLE/4.webp", "img/1.Sharkie/1.IDLE/5.webp", "img/1.Sharkie/1.IDLE/6.webp", "img/1.Sharkie/1.IDLE/7.webp", "img/1.Sharkie/1.IDLE/8.webp", "img/1.Sharkie/1.IDLE/9.webp", "img/1.Sharkie/1.IDLE/10.webp", "img/1.Sharkie/1.IDLE/11.webp", "img/1.Sharkie/1.IDLE/12.webp", "img/1.Sharkie/1.IDLE/13.webp", "img/1.Sharkie/1.IDLE/14.webp", "img/1.Sharkie/1.IDLE/15.webp", "img/1.Sharkie/1.IDLE/16.webp", "img/1.Sharkie/1.IDLE/17.webp", "img/1.Sharkie/1.IDLE/18.webp"];
   IMAGES_IDLE = sprites.character.idle;
-
-  // IMAGES_LONG_IDLE = ["img/1.Sharkie/2.Long_IDLE/i1.webp", "img/1.Sharkie/2.Long_IDLE/i2.webp", "img/1.Sharkie/2.Long_IDLE/i3.webp", "img/1.Sharkie/2.Long_IDLE/i4.webp", "img/1.Sharkie/2.Long_IDLE/i5.webp", "img/1.Sharkie/2.Long_IDLE/i6.webp", "img/1.Sharkie/2.Long_IDLE/i7.webp", "img/1.Sharkie/2.Long_IDLE/i8.webp", "img/1.Sharkie/2.Long_IDLE/i9.webp", "img/1.Sharkie/2.Long_IDLE/i10.webp", "img/1.Sharkie/2.Long_IDLE/i11.webp", "img/1.Sharkie/2.Long_IDLE/i12.webp", "img/1.Sharkie/2.Long_IDLE/i13.webp", "img/1.Sharkie/2.Long_IDLE/i14.webp"];
   IMAGES_LONG_IDLE = sprites.character.longIdle;
-
-  // IMAGES_POISON_DEAD = ["img/1.Sharkie/6.dead/1.Poisoned/1.webp", "img/1.Sharkie/6.dead/1.Poisoned/2.webp", "img/1.Sharkie/6.dead/1.Poisoned/3.webp", "img/1.Sharkie/6.dead/1.Poisoned/4.webp", "img/1.Sharkie/6.dead/1.Poisoned/5.webp", "img/1.Sharkie/6.dead/1.Poisoned/6.webp", "img/1.Sharkie/6.dead/1.Poisoned/7.webp", "img/1.Sharkie/6.dead/1.Poisoned/8.webp", "img/1.Sharkie/6.dead/1.Poisoned/9.webp", "img/1.Sharkie/6.dead/1.Poisoned/10.webp", "img/1.Sharkie/6.dead/1.Poisoned/11.webp", "img/1.Sharkie/6.dead/1.Poisoned/12.webp"];
   IMAGES_POISON_DEAD = sprites.character.poisonDead;
-
-  // IMAGES_ELECTRO_DEAD = ["img/1.Sharkie/6.dead/2.Electro_shock/1.webp", "img/1.Sharkie/6.dead/2.Electro_shock/2.webp", "img/1.Sharkie/6.dead/2.Electro_shock/3.webp", "img/1.Sharkie/6.dead/2.Electro_shock/4.webp", "img/1.Sharkie/6.dead/2.Electro_shock/5.webp", "img/1.Sharkie/6.dead/2.Electro_shock/6.webp", "img/1.Sharkie/6.dead/2.Electro_shock/7.webp", "img/1.Sharkie/6.dead/2.Electro_shock/8.webp", "img/1.Sharkie/6.dead/2.Electro_shock/9.webp", "img/1.Sharkie/6.dead/2.Electro_shock/10.webp"];
   IMAGES_ELECTRO_DEAD = sprites.character.electroDead;
-
-  // IMAGES_HURT_POISON = ["img/1.Sharkie/5.Hurt/1.Poisoned/1.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/2.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/3.webp", "img/1.Sharkie/5.Hurt/1.Poisoned/4.webp"];
   IMAGES_HURT_POISON = sprites.character.hurtPoison;
-
-  // IMAGES_HURT_ELECTRO = ["img/1.Sharkie/5.Hurt/2.Electric shock/1.webp", "img/1.Sharkie/5.Hurt/2.Electric shock/2.webp", "img/1.Sharkie/5.Hurt/2.Electric shock/3.webp"];
   IMAGES_HURT_ELECTRO = sprites.character.hurtElectro;
-
-  // IMAGES_SHOOTING_BUBBLE = ["img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.webp"];  IMAGES_SHOOTING_BUBBLE = ["img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.webp", "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.webp"];
   IMAGES_SHOOTING_BUBBLE = sprites.character.bubbleAttack;
-
-  // IMAGES_FIN_SLAP = ["img/1.Sharkie/4.Attack/Fin slap/1.webp", "img/1.Sharkie/4.Attack/Fin slap/2.webp", "img/1.Sharkie/4.Attack/Fin slap/3.webp", "img/1.Sharkie/4.Attack/Fin slap/4.webp", "img/1.Sharkie/4.Attack/Fin slap/5.webp", "img/1.Sharkie/4.Attack/Fin slap/6.webp", "img/1.Sharkie/4.Attack/Fin slap/7.webp", "img/1.Sharkie/4.Attack/Fin slap/8.webp", "img/1.Sharkie/3.Swim/1.webp"];
   IMAGES_FIN_SLAP = sprites.character.finSlap;
 
   walking_SOUND = new Audio("audio/fishSwiming.mp3");
@@ -63,11 +46,12 @@ class Character extends MovableObject {
   sleep_SOUND = new Audio("audio/sleepSound.wav");
   scary_SOUND = new Audio("audio/whaleSound.mp3");
   bubble_shot_SOUND = new Audio("audio/bubbleShot.wav");
-  coin_collected_SOUND = new Audio("audio/coinCollection.wav")
+  coin_collected_SOUND = new Audio("audio/coinCollection.wav");
+  lose_SOUND = new Audio("audio/loseSound.mp3");
+  win_SOUND = new Audio("audio/winSound.mp3");
 
   constructor() {
     super().loadImage("img/1.Sharkie/3.Swim/1.webp");
-    // this.loadImages(this.IMAGES_SWIMING);
     this.loadImages(this.IMAGES_SWIMING);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONG_IDLE);
@@ -79,21 +63,15 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_FIN_SLAP);
     this.animate();
     this.applyGravity();
-    playSound(this.background_SOUND);
-    this.walking_SOUND.volume = 0.5;
-    // this.ambience_SOUND.volume = 1;
-    this.background_SOUND.volume = 0.2;
-    this.finSlap_SOUND.volume = 0.2;
-    this.hurt_SOUND.volume = 0.3;
-    this.sleep_SOUND.volume = 0.3;
-    this.scary_SOUND.volume = 0.2;
+    this.handleVolume();
+    // this.lifebar = 100;
     this.x = 80;
   }
 
   animate() {
     this.j = 0;
     this.i = 0;
-    setStoppableInterval(this.checkstatus.bind(this),100)
+    setStoppableInterval(this.checkstatus.bind(this), 100);
     setStoppableMovementInterval(this.characterSwimRight.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimLeft.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimUp.bind(this), 1000 / this.hz);
@@ -109,10 +87,16 @@ class Character extends MovableObject {
     setStoppableInterval(this.checkWin.bind(this), 50);
   }
 
-  checkstatus(){
+  checkstatus() {
+    console.log(this.lifebar);
     if (this.isDead()) {
       this.characterIsDead();
       this.walking_SOUND.pause();
+      showLoseScreen();
+      stopGame();
+      muteAllSounds();
+      playSound(this.lose_SOUND);
+      nextLevelBoolean = false;
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT_ELECTRO);
       this.playHurtSound();
@@ -120,27 +104,22 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_IDLE);
     } else if (this.isIdle() >= 7 && !this.spaceBar) {
       this.playAnimation(this.IMAGES_LONG_IDLE);
-      console.log("hier sind wir drin");
-      
       playSound(this.sleep_SOUND);
     } else {
       if (this.world && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) && !this.spaceBar) {
         this.playAnimation(this.IMAGES_SWIMING);
-        console.log("Komm ich hier die ganze Zeit rein?");
-        
         this.sleep_SOUND.pause();
       }
     }
     this.background_SOUND.play();
-    // console.log("2 Waölomg");
-    
+
     this.walking_SOUND.pause();
   }
 
   startScaryMusic() {
     if (this.world.endboss.x - this.x - this.width < 1500) {
       if (!this.scarySound) {
-        playSound(this.scary_SOUND)
+        playSound(this.scary_SOUND);
         this.scarySound = true;
       }
     }
@@ -152,13 +131,14 @@ class Character extends MovableObject {
       this.hasWon = true;
       showWinScreen();
       stopGame();
-      stopMovement();
+      // stopMovement();
       muteAllSounds();
+      playSound(this.win_SOUND);
     }
   }
 
   playHurtSound() {
-    playSound(this.hurt_SOUND)
+    playSound(this.hurt_SOUND);
     setTimeout(() => {
       this.hurt_SOUND.pause();
     }, 500);
@@ -176,7 +156,11 @@ class Character extends MovableObject {
 
   hitCoin() {
     this.coins += 1;
-    playSound(this.coin_collected_SOUND)
+    if (this.coin_collected_SOUND) {
+      this.coin_collected_SOUND.pause();
+      this.coin_collected_SOUND.currentTime = 0;
+    }
+    playSound(this.coin_collected_SOUND);
   }
 
   finSlapAttack() {
@@ -255,8 +239,6 @@ class Character extends MovableObject {
 
   playWalkingSound() {
     if (this.world && (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT)) {
-      console.log("Was passiert hier?");
-      
       playSound(this.walking_SOUND);
     }
   }
@@ -300,5 +282,17 @@ class Character extends MovableObject {
     if (this.world && this.x + this.width == Level.level_end_x - 1548) {
       world.characterIsInRange = true;
     }
+  }
+
+  handleVolume() {
+    playSound(this.background_SOUND);
+    this.walking_SOUND.volume = 0.5;
+    this.background_SOUND.volume = 0.2;
+    this.finSlap_SOUND.volume = 0.2;
+    this.hurt_SOUND.volume = 0.3;
+    this.sleep_SOUND.volume = 0.3;
+    this.scary_SOUND.volume = 0.2;
+    this.lose_SOUND.volume = 0.05;
+    this.win_SOUND.volume = 0.05;
   }
 }

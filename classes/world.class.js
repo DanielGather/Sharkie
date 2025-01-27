@@ -1,10 +1,9 @@
 class World {
   character = new Character();
-  endboss = new Endboss();
+  endboss;
   statusBar = new StatusBar();
   LifeEndboss = new EndbossLifebar();
-  //   barrier = new Barrier();
-  level = createLevel(1);
+  level;
   canvas;
   ctx;
   keyboard;
@@ -13,18 +12,18 @@ class World {
   throwableObjects = [];
   bossIsTriggerd = false;
   lastDamage;
-  // intervalIDs = [];
 
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard,newDamage,newEndbossLife) {
     this.ctx = canvas.getContext("2d");
+    this.level = createLevel(newDamage);
+    this.endboss = new Endboss(newEndbossLife)
     this.canvas = canvas;
     this.keyboard = keyboard;
-    // this.createBackgroundObjects(2, 1024);
-    this.draw();
     this.setWorld();
     this.setFontRules();
     this.pushEndbossInArray();
     setStoppableInterval(this.run.bind(this), 100);
+    this.draw();
   }
 
   run() {
@@ -105,6 +104,7 @@ class World {
         }
       }
     });
+    // Level.enemyLevelArray = Level.enemyLevelArray.filter(enemy => !enemy.markedForRemoval)
   }
 
   isCollidableEnemy(enemy) {
@@ -123,7 +123,7 @@ class World {
     enemy.fishIsDead = true;
     enemy.markedForRemoval = true;
     setTimeout(() => {
-      Level.enemyLevelArray.splice(index, 1);
+      Level.enemyLevelArray = Level.enemyLevelArray.filter(enemy => !enemy.markedForRemoval)
     }, 1500);
   }
 

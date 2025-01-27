@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   height = 100;
   width = 100;
-  damage = 5;
+  damage = 1;
   fishIsDead = false;
   lastMovementCharacter;
   FishIsInRange = false;
@@ -19,6 +19,11 @@ class MovableObject extends DrawableObject {
   j;
   x;
   animationPlayed;
+
+ constructor(){
+  super()
+  this.lifebar = 100;
+ }
 
   applyGravity() {
     setInterval(() => {
@@ -40,6 +45,12 @@ class MovableObject extends DrawableObject {
   moveLeft() {
     if (!this.fishIsDead) {
       this.x -= this.speed;
+    }
+  }
+
+  ifNextLevel(damage){
+    if(nextLevelBoolean){
+      this.damage = damage;
     }
   }
 

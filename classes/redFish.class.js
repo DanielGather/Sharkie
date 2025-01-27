@@ -22,8 +22,9 @@ class RedFish extends MovableObject {
   // IMAGES_RED_DEAD = ["img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.webp"]
   IMAGES_RED_DEAD = sprites.redFish.isDead
 
-  constructor(xPosition, speedNormalFish) {
+  constructor(xPosition, speedNormalFish, damage) {
     super();
+    this.ifNextLevel(damage)
     this.x = xPosition;
     this.loadImages(this.IMAGES_RED_FISH_SWIMING);
     this.loadImages(this.IMAGES_RED_FISH_TRANSITION);
@@ -31,9 +32,7 @@ class RedFish extends MovableObject {
     this.loadImages(this.IMAGES_RED_DEAD);
     this.y = this.calculateY();
     this.speed = this.calculateSpeed(speedNormalFish);
-    this.animate();
-    console.log("RedFish");
-    
+    this.animate();    
   }
 
   animate() {
@@ -43,4 +42,7 @@ class RedFish extends MovableObject {
     setStoppableInterval(this.checkIfSmallFishIsDead.bind(this,this.IMAGES_RED_DEAD ), 1000 / this.hz)
 
   }
+
+  
+
 }

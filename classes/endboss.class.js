@@ -8,7 +8,7 @@ class Endboss extends MovableObject {
   width = 500;
   height = 500;
   lastHitEndboss = 0;
-  endbossLife = 1000;
+  endbossLife = 100;
   speed = 0.25;
   initialLife = this.endbossLife;
   isNotDead = true;
@@ -41,7 +41,7 @@ class Endboss extends MovableObject {
   hurt_SOUND = new Audio("audio/hurtSoundBoss.wav");
   attacking_SOUND = new Audio("audio/monsterBite.wav");
 
-  constructor() {
+  constructor(newEndbossLife) {
     super().loadImage(this.IMAGES_INTRODUCE[0]);
     this.damage = 10;
     this.loadImages(this.IMAGES_INTRODUCE);
@@ -50,6 +50,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_IS_HURT);
     this.loadImages(this.IMAGES_ENDBOSS_IS_ATTACKING);
     this.waitForEndbossVariable();
+    this.changeLifeOnNextLevel(newEndbossLife);
     this.animate();
   }
 
@@ -66,6 +67,11 @@ class Endboss extends MovableObject {
     this.attacking_SOUND.volume = 0.1
   }
 
+  changeLifeOnNextLevel(newEndbossLife){
+    if(nextLevelBoolean){
+      this.endbossLife = newEndbossLife
+    }
+  }
   endbossTakesDamage() {
     if (this.world && this.isHurt) {
       if (this.animationCounterIsHurt < 5) {
