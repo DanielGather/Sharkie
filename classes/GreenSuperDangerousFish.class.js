@@ -20,6 +20,7 @@ class GreenSuperDangerousFish extends MovableObject {
 
   constructor(middleOfCanvas, speedFromDangerousFish) {
     super();
+    this.loadImage("img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.webp");
     this.loadImages(this.IMAGES_GREEN_SUPER_DANGEROUS);
     this.loadImages(this.IMAGES_GREEN_SUPER_DEAD);
     this.x = middleOfCanvas;

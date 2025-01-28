@@ -7,19 +7,27 @@ let intervalMovementIDs = [];
 let intervalMovementData = [];
 let soundData = [];
 let sprites;
+let sounds;
 // let spritesLoaded = false;
 let soundIsOn = true;
 let isMuted = false;
 let isPaused = false;
 let coinMultiplikator = 1.25;
 let fishMultiplikator = 1.25;
-let poisonBottleMultiplikator = 1.5;
+let poisonBottleMultiplikator = 1.15;
+let speedNormalFishMultiplikator = 1.25;
+let speedDangerousFishMultiplikator = 1.5;
 let nextLevelBoolean = false;
 let levelCounter = 1
 let rageMode = false;
 
 async function importSprites() {
   sprites = await fetch("./js/sprites.json").then((r) => r.json());
+  // await preloadImagesAndContinue()
+}
+
+async function importSounds() {
+  sounds = await fetch("./js/sounds.json").then((r) => r.json());
 }
 
 async function loadSprites() {
@@ -45,8 +53,8 @@ function nextLevel(){
   coinsPerLevel = coinsPerLevel * coinMultiplikator;
   enemyPerLevel = enemyPerLevel * fishMultiplikator;
   PoisonBottleLevel = PoisonBottleLevel * poisonBottleMultiplikator;
-  speedNormalFish = speedNormalFish * 1.15;
-  speedFromDangerousFish = speedFromDangerousFish * 1.35
+  speedNormalFish = speedNormalFish * speedNormalFishMultiplikator;
+  speedFromDangerousFish = speedFromDangerousFish * speedDangerousFishMultiplikator;
   newDamage = Level.enemyLevelArray[0].damage + 2;
   repeatCanvas++;
   init(newDamage);
@@ -65,9 +73,10 @@ function clearAllParameters(){
 }
 
 function checkSound(){
+  // unmuteAllSounds();
   if (isMuted) {
     handleSound();
-  }
+  } 
 }
 
 function startGame() {
@@ -98,6 +107,7 @@ function handlePlayAndPause() {
   isPaused = !isPaused;
   isPaused ? stopGame() : restartGame();
   document.getElementById("pauseButton").src = isPaused ? "./img/12.Controls/play.webp" : "./img/12.Controls/pause.webp";
+  document.getElementById('handleSound').disabled = isPaused? true : false;
   if (!isMuted || !isPaused) {
     handleSound();
   }
@@ -140,10 +150,10 @@ function goToHomeScreen() {
 }
 
 function resetLevelParameter(){
-repeatCanvas = 2;
+repeatCanvas = 4;
 coinsPerLevel = 10;
 PoisonBottleLevel = 15;
-enemyPerLevel = 0;
+enemyPerLevel = 3;
 speedNormalFish = 0.5;
 speedFromDangerousFish = 0.1;
 canvasStep = 1024;
@@ -204,9 +214,14 @@ function restartGame() {
 
 function playSound(audio) {
   if (!isMuted) {
-    audio.play();
-    if (!soundData.some((sound) => sound.audio === audio)) {
-      soundData.push({ audio });
+    // Nur abspielen, wenn das Audio entweder pausiert oder gestoppt wurde
+    if (audio.paused || audio.currentTime === 0) {
+      audio.play();
+
+      // Wenn das Audio nicht bereits in soundData vorhanden ist, füge es hinzu
+      if (!soundData.some((sound) => sound.audio === audio)) {
+        soundData.push({ audio });
+      }
     }
   }
 }

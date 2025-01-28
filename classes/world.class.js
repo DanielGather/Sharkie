@@ -164,7 +164,7 @@ class World {
           } else if (enemy instanceof GreenSuperDangerousFish && !enemy.fishIsDead) {
             hitEnemy = true;
             enemy.fishIsDead = true;
-          } else if (enemy instanceof Endboss) {
+          } else if (enemy instanceof Endboss && !rageMode) {
             this.character.hitEndboss();
             this.endboss.moveLeftEndboss = true;
             this.endboss.isHurt = true;

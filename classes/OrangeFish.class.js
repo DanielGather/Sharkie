@@ -24,9 +24,9 @@ class OrangeFish extends MovableObject {
 
 
   constructor(xPosition, speedNormalFish, damage) {
-    super();
-    this.ifNextLevel(damage)
+    super().loadImage("img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.webp");
 
+    this.ifNextLevel(damage)
     this.x = xPosition;
     this.loadImages(this.IMAGES_ORANGE_FISH_SWIMING);
     this.loadImages(this.IMAGES_ORANGE_FISH_TRANSITION);
@@ -41,6 +41,8 @@ class OrangeFish extends MovableObject {
   animate() {
     this.j = 0;
     setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
+    setStoppableInterval(this.fishChangeDirection.bind(this), 1000 / this.hz)
+    // setStoppableInterval(this.checkOtherDirection.bind(this), 100)
     setStoppableInterval(this.checkFishAndCharacterDistance.bind(this, this.IMAGES_ORANGE_FISH_BUBBLE_SWIM, this.IMAGES_ORANGE_FISH_SWIMING, this.IMAGES_ORANGE_FISH_TRANSITION), 150);
     setStoppableInterval(this.checkIfSmallFishIsDead.bind(this,this.IMAGES_ORANGE_DEAD ), 1000 / this.hz)
   }

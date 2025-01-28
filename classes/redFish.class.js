@@ -23,7 +23,8 @@ class RedFish extends MovableObject {
   IMAGES_RED_DEAD = sprites.redFish.isDead
 
   constructor(xPosition, speedNormalFish, damage) {
-    super();
+    super().loadImage("img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.webp");
+
     this.ifNextLevel(damage)
     this.x = xPosition;
     this.loadImages(this.IMAGES_RED_FISH_SWIMING);

@@ -10,7 +10,7 @@ class Level {
   dangerousEnemiesPerLevel;
   coinsArray = [];
   poisonBottleArray = [];
-  characterSafeSpace = 1000;
+  characterSafeSpace = 500;
   canvasWidth = 1024;
 
   constructor(backgroundObjects, coinsPerLevel, repeatCanvas, canvasStep, poisonBottle, enemyPerLevel, dangerousEnemiesPerLevel, speedFromDangerousFish, speedNormalFish, damage) {
@@ -21,8 +21,13 @@ class Level {
     this.createBottle(poisonBottle);
     this.createFish(repeatCanvas, enemyPerLevel, speedNormalFish, damage);
     this.createDangerousFish(dangerousEnemiesPerLevel, speedFromDangerousFish);
+    // this.pushFish();
   }
 
+
+  // pushFish(){
+  //   Level.enemyLevelArray.push(new GreenFish(700, 0.15,2),new GreenFish(500, 0.15,2),new GreenFish(500, 0.15,2),new GreenFish(500, 0.15,2),new GreenFish(500, 0.15,2))
+  // }
   createDangerousFish(dangerousEnemiesPerLevel, speedFromDangerousFish) {
     let numberOfDangerousFishes = dangerousEnemiesPerLevel;
     let middleOfCanvas = this.canvasWidth / 2;

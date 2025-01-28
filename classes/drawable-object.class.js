@@ -69,4 +69,7 @@ class DrawableObject {
       this.imageCache[path] = image;
     });
   }
+
+  
+
 }

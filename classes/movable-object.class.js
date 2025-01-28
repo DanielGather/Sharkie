@@ -19,6 +19,7 @@ class MovableObject extends DrawableObject {
   j;
   x;
   animationPlayed;
+  changeDirection = false;
 
  constructor(){
   super()
@@ -43,8 +44,21 @@ class MovableObject extends DrawableObject {
   }
 
   moveLeft() {
-    if (!this.fishIsDead) {
+    if (!this.fishIsDead && !this.changeDirection) {
       this.x -= this.speed;
+    }
+  }
+
+  fishChangeDirection(){
+    if(this.x < 0){
+      this.changeDirection = true;
+      this.otherDirection = true;
+    } else if (this.x > first_level_end_x_){
+      this.changeDirection = false;
+      this.otherDirection = false;
+    }
+    if(this.changeDirection){
+      this.x += this.speed;
     }
   }
 
