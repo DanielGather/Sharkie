@@ -47,6 +47,7 @@ class Character extends MovableObject {
   coin_collected_SOUND = new Audio("audio/coinCollection.wav");
   lose_SOUND =  new Audio("audio/loseSound.mp3");
   win_SOUND = new Audio("audio/winSound.mp3");
+  bottle_collected_SOUND = new Audio("audio/bottlePickUp.mp3")
 
   constructor() {
     super().loadImage("img/1.Sharkie/3.Swim/1.webp");
@@ -84,7 +85,6 @@ class Character extends MovableObject {
   }
 
   checkstatus() {
-    console.log(this.lifebar);
     if (this.isDead()) {
       this.handleDeath();
     } else if (this.isHurt()) {
@@ -219,6 +219,7 @@ class Character extends MovableObject {
 
   hitPoisonBottle() {
     this.poisonStorage += 1;
+    playSound(this.bottle_collected_SOUND);
   }
 
   reducePoisonStorage() {
@@ -288,12 +289,12 @@ class Character extends MovableObject {
 
   handleVolume() {
     playSound(this.background_SOUND);
-    this.walking_SOUND.volume = 0.5;
+    this.walking_SOUND.volume = 0.25;
     this.background_SOUND.volume = 0.2;
     this.finSlap_SOUND.volume = 0.2;
     this.hurt_SOUND.volume = 0.3;
     this.sleep_SOUND.volume = 0.3;
-    this.scary_SOUND.volume = 0.2;
+    this.scary_SOUND.volume = 0.7;
     this.lose_SOUND.volume = 0.05;
     this.win_SOUND.volume = 0.05;
   }

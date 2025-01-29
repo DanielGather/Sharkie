@@ -8,8 +8,8 @@ var options = {
     multitouch: false,
     maxNumberOfNipples: 1, // when multitouch, what is too many?
     dataOnly: false, // no dom element whatsoever
-    position: { bottom: "75px", left: "100px" }, // preset position for 'static' mode
-    mode: "static", // 'dynamic', 'static' or 'semi'
+    position: { bottom: "150px", left: "125px" }, // preset position for 'static' mode
+    mode: "dynamic", // 'dynamic', 'static' or 'semi'
     restJoystick: true, // Re-center joystick on rest state
     restOpacity: 0.5, // opacity when not 'dynamic' and rested
     lockX: false, // only move on the X axis

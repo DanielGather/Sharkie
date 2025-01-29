@@ -15,10 +15,10 @@ let isPaused = false;
 let coinMultiplikator = 1.25;
 let fishMultiplikator = 1.25;
 let poisonBottleMultiplikator = 1.15;
-let speedNormalFishMultiplikator = 1.25;
-let speedDangerousFishMultiplikator = 1.5;
+let speedNormalFishMultiplikator = 1.35;
+let speedDangerousFishMultiplikator = 1.75;
 let nextLevelBoolean = false;
-let levelCounter = 1
+let levelCounter = 1;
 let rageMode = false;
 
 async function importSprites() {
@@ -42,12 +42,12 @@ function init(newDamage) {
   newWorld(newDamage);
 }
 
-function newWorld(newDamage){
+function newWorld(newDamage) {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard, newDamage);
 }
 
-function nextLevel(){
+function nextLevel() {
   levelCounter++;
   nextLevelBoolean = true;
   coinsPerLevel = coinsPerLevel * coinMultiplikator;
@@ -61,7 +61,7 @@ function nextLevel(){
   handleAllCointainers();
 }
 
-function clearAllParameters(){
+function clearAllParameters() {
   canvas = null;
   world = null;
   Level.enemyLevelArray = [];
@@ -72,11 +72,11 @@ function clearAllParameters(){
   intervalMovementData = [];
 }
 
-function checkSound(){
+function checkSound() {
   // unmuteAllSounds();
   if (isMuted) {
     handleSound();
-  } 
+  }
 }
 
 function startGame() {
@@ -84,7 +84,7 @@ function startGame() {
   handleAllCointainers();
 }
 
-function handleAllCointainers(){
+function handleAllCointainers() {
   document.getElementById("startImage").style.display = "none";
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("storyContainer").style.display = "none";
@@ -92,9 +92,12 @@ function handleAllCointainers(){
   document.getElementById("imprintContainer").style.display = "none";
   document.getElementById("controlsContainer").style.display = "none";
   document.getElementById("winContainer").style.display = "none";
+  document.getElementById("infoContainer").style.display = "none";
   document.getElementById("handleSound").style.display = "flex";
   document.getElementById("gamePause").style.display = "flex";
-  document.getElementById("joystick").style.zIndex = "999";
+  document.getElementById("joystick").style.zIndex = "888";
+  document.getElementById("finSlap").style.zIndex = "999";
+  document.getElementById("shoot").style.zIndex = "999";
 }
 
 function handleSound() {
@@ -107,7 +110,7 @@ function handlePlayAndPause() {
   isPaused = !isPaused;
   isPaused ? stopGame() : restartGame();
   document.getElementById("pauseButton").src = isPaused ? "./img/12.Controls/play.webp" : "./img/12.Controls/pause.webp";
-  document.getElementById('handleSound').disabled = isPaused? true : false;
+  document.getElementById("handleSound").disabled = isPaused ? true : false;
   if (!isMuted || !isPaused) {
     handleSound();
   }
@@ -135,31 +138,40 @@ function showLoseScreen() {
   document.getElementById("loseContainer").style.display = "flex";
 }
 
+function showInfo(){
+  document.getElementById("infoContainer").style.display = "flex";
+  document.getElementById("startImage").style.display = "none";
+  document.getElementById("startScreen").style.display = "none";
+}
+
 function goToHomeScreen() {
-  document.getElementById("startImage").style.display = "flex";
-  document.getElementById("startScreen").style.display = "flex";
+  document.getElementById("loseContainer").style.display = "none";
+  document.getElementById("infoContainer").style.display = "none";
   document.getElementById("storyContainer").style.display = "none";
   document.getElementById("dataPrivacyContainer").style.display = "none";
   document.getElementById("imprintContainer").style.display = "none";
   document.getElementById("winContainer").style.display = "none";
-  document.getElementById("loseContainer").style.display = "none";
   document.getElementById("joystick").style.display = "none";
   document.getElementById("gamePause").style.display = "none";
   document.getElementById("handleSound").style.display = "none";
+  document.getElementById("startImage").style.display = "flex";
+  document.getElementById("startScreen").style.display = "flex";
+  document.getElementById("finSlap").style.zIndex = "-999";
+  document.getElementById("shoot").style.zIndex = "-999";
   resetLevelParameter();
 }
 
-function resetLevelParameter(){
-repeatCanvas = 4;
-coinsPerLevel = 10;
-PoisonBottleLevel = 15;
-enemyPerLevel = 3;
-speedNormalFish = 0.5;
-speedFromDangerousFish = 0.1;
-canvasStep = 1024;
-first_level_end_x_ = repeatCanvas * canvasStep;
-dangerousEnemiesPerLevel = repeatCanvas;
-Level.enemyLevelArray[0].damage = 1;
+function resetLevelParameter() {
+  repeatCanvas = 4;
+  coinsPerLevel = 10;
+  PoisonBottleLevel = 15;
+  enemyPerLevel = 10;
+  speedNormalFish = 0.5;
+  speedFromDangerousFish = 0.1;
+  canvasStep = 1024;
+  first_level_end_x_ = repeatCanvas * canvasStep;
+  dangerousEnemiesPerLevel = repeatCanvas;
+  Level.enemyLevelArray[0].damage = 1;
 }
 
 function showDataPrivacy() {
@@ -214,14 +226,9 @@ function restartGame() {
 
 function playSound(audio) {
   if (!isMuted) {
-    // Nur abspielen, wenn das Audio entweder pausiert oder gestoppt wurde
-    if (audio.paused || audio.currentTime === 0) {
       audio.play();
-
-      // Wenn das Audio nicht bereits in soundData vorhanden ist, füge es hinzu
-      if (!soundData.some((sound) => sound.audio === audio)) {
-        soundData.push({ audio });
-      }
+    if (!soundData.some((sound) => sound.audio === audio)) {
+      soundData.push({ audio });
     }
   }
 }

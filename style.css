@@ -11,7 +11,8 @@
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: "MightySoul", Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+  font-family: "LuckiestGuy", "MightSoul", "Arial", "Helvetica", "sans-serif";
 }
 
 p {
@@ -133,7 +134,7 @@ button:active {
     padding-top: 1rem;
     width: 80%;
     font-size: 1rem;
-    align-items: center;
+    align-items: start;
     /* font-family: LuckiestGuy; */
   }
 }
@@ -262,14 +263,36 @@ button:active {
   }
   & p {
     display: flex;
-    width: 80%;
     color: #ffd700;
     font-size: 1rem;
     align-items: center;
-    height: 100%;
-    padding: 6rem 3.5rem 0rem 3.5rem;
     /* font-family: LuckiestGuy; */
   }
+}
+
+.story-text{
+  height: 100%;
+  overflow-y: auto;
+  padding: 10rem 3.5rem 0rem 3.5rem;
+}
+
+.info-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(./img/9.storyImage/storyImage.webp);
+  height: 100%;
+  color: #ffd700;
+}
+
+.info{
+  text-align: center;
+  height: 60%;
+}
+
+.info-text{
+  height: 100%;
+  font-family: LuckiestGuy;
 }
 
 .controls-container {
@@ -358,7 +381,7 @@ button:active {
 
 .shoot {
   position: absolute;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: transparent;
@@ -378,7 +401,7 @@ button:active {
 
 .fin-slap {
   position: absolute;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: transparent;
@@ -455,6 +478,15 @@ button:active {
   }
 }
 
+@media (orientation: landscape) and (any-pointer:coarse){
+  .fin-slap{
+    display: flex;
+  }
+  .shoot{
+    display: flex;
+  }
+}
+
 @media (min-width:300px) and (max-width: 600px) and (min-height: 865px) and (any-pointer: fine){
   .desktop-experience{
     display: flex;
@@ -478,14 +510,29 @@ button:active {
 }
 
 @media only screen and (max-height: 600px) {
+  *{
+    font-family: MightySoul;
+  }
   body {
     height: 90vh;
+    background-color: black;
   }
   .canvas-Container {
     height: 100%;
   }
   canvas {
     height: 100%;
+  }
+  .info-text{
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+  }
+  .info-container{
+    justify-content: unset;
+    overflow-y: auto;
+  }
+  .story-text{
+  padding: 4rem 3.5rem 1rem 3.5rem;
   }
 }
 

@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="joystick.css" />
     <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon" />
+    <link rel="icon" sizes="16x16 32x32 48x48" href="./img/favicon.webp">
+    <link rel="apple-touch-icon" sizes="32x32" href="./img/favicon.webp"/>
+
     <!-- <script src="./js/importSprites.js"></script> -->
     <script src="./classes/keyboard.class.js"></script>
     <script src="./classes/drawable-object.class.js"></script>
@@ -25,7 +28,7 @@
     <script src="./classes/throwable-object.class.js"></script>
     <script src="./classes/level.class.js"></script>
     <script src="./classes/endbossLifebar.class.js"></script>
-    <script src="./levels/level1.js"></script>
+    <script src="./levels/level.js"></script>
     <script src="./js/game.js"></script>
     <!-- <script src="./js/test.js"></script> -->
     <!-- <script src="./js/audioFiles.js"></script> -->
@@ -38,8 +41,8 @@
       <div id="joystick" class="joystick-container">
         <div id="zone_joystick"></div>
       </div>
-      <button ontouchstart="shootMobile()" class="shoot"><img src="./img/1.Sharkie/7.mobile icons/target.webp" alt="" /></button>
-      <button ontouchstart="finSlapMobile()" class="fin-slap"><img src="./img/1.Sharkie/7.mobile icons/fin.webp" alt="" /></button>
+      <button id="shoot" ontouchstart="shootMobile()" class="shoot"><img src="./img/1.Sharkie/7.mobile icons/target.webp" alt="" /></button>
+      <button id="finSlap" ontouchstart="finSlapMobile()" class="fin-slap"><img src="./img/1.Sharkie/7.mobile icons/fin.webp" alt="" /></button>
       <button id="handleSound" onclick="handleSound()" class="sound-button ingame-button"><img id="sound" src="./img/12.Controls/soundOn.webp" alt="" /></button>      
       <button id="gamePause" onclick="handlePlayAndPause()" class="pause-button ingame-button"><img id="pauseButton" src="./img/12.Controls/pause.webp" alt="" /></button>
       <div class="rotate-your-phone">
@@ -63,6 +66,8 @@
         <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
       </div>
 
+
+
       <div id="controlsContainer" class="controls-container common-container">
         <div class="web-controls">
           <h2>Web-Steuerung</h2>
@@ -70,12 +75,32 @@
           <p>Fin-Slap = SPACE</p>
           <p>Bubble-Shoot = F</p>
         </div>
+
+
+        
         <div class="mobile-controls">
           <h2>Mobile-Steuerung</h2>
           <p>Movement = Joystick am linken Bildschirmrand</p>
           <p>Fin-Slap = <img src="./img/1.Sharkie/7.mobile icons/fin.webp" alt="" /></p>
           <p>Bubble-Shoot = <img src="./img/1.Sharkie/7.mobile icons/target.webp" alt="" /></p>
         </div>
+        <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
+      </div>
+
+      <div id="infoContainer" class="info-container common-container">
+        <div class="info">
+          <h2>Info</h2>
+        </div>
+        <div class="info-text">
+            <p>Bereit für die ultimative Herausforderung?
+              In diesem Spiel gibt es keine Grenzen! Du kannst unendlich lange spielen, und mit jedem neuen Level wird es noch härter. Du wirst ständig auf die Probe gestellt, und es warten immer neue Gegner auf dich, die es dir nicht leicht machen! 😈
+              <br>
+              
+              Aber sei vorsichtig... Der Boss wird irgendwann richtig sauer auf dich. Ab einem bestimmten Punkt kannst du die Wut förmlich spüren, die in der Luft liegt! 🔥
+              <br>
+              
+              Tipp: Halte immer einen näheren Blick auf den Boss! Entferne dich nicht zu weit von ihm, sonst wirst du feststellen, dass er immer rasender wird! 😱</p>
+        </div>  
         <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
       </div>
 
@@ -193,6 +218,7 @@
                 <li>piglevelwin2.mp3 by Tuudurt <a href="//freesound.org/s/275104/"target="_blank">winSound</a> -- License: Creative Commons 0</li>
                 <li>Video Game - Die or Lose Life by AdamWeeden <a href="//freesound.org/s/157218/" target="_blank">loseSound</a> -- License: Attribution 3.0</li>
                 <li>CollectCoin.wav by bradwesson -- <a href="//freesound.org/s/135936/" target="_blank">Coin Sound</a> -- License: Attribution NonCommercial 4.0</li>
+                <li>Item Pickup sound by Strechy -- <a href="//freesound.org/s/654251/"  target="_blank">Bottle Sound</a> License: Attribution 4.0</li>
                 </li>
               </ul>
               <br>
@@ -221,7 +247,9 @@
       </div>
       <div id="storyContainer" class="story-container common-container">
         <h2>Der Rachedurst des Hais</h2>
-        <p>Der Rachedurst des Hais Der junge Hai Kael suchte Rache. Der riesige Wal Morgrim hatte seine Freunde gefressen. In der finsteren Abyssos-Schlucht stellte Kael ihn schließlich. „Dein Schrecken endet hier!“ rief Kael. Morgrim lachte nur und griff an, doch Kael war flink. Mit gezielten Attacken auf Morgrims Flossen schwächte er den Riesen. Der Kampf war hart, doch Kael ließ nicht nach. Mit einem letzten mutigen Biss traf er Morgrims Auge. Der Wal brüllte vor Schmerz und floh in die Dunkelheit. Kael hatte gesiegt. Von diesem Tag an war er eine Legende der Tiefsee – ein Symbol für Mut und Entschlossenheit.</p>
+        <div class="story-text">
+          <p>Der Rachedurst des Hais Der junge Hai Kael suchte Rache. Der riesige Wal Morgrim hatte seine Freunde gefressen. In der finsteren Abyssos-Schlucht stellte Kael ihn schließlich. „Dein Schrecken endet hier!“ rief Kael. Morgrim lachte nur und griff an, doch Kael war flink. Mit gezielten Attacken auf Morgrims Flossen schwächte er den Riesen. Der Kampf war hart, doch Kael ließ nicht nach. Mit einem letzten mutigen Biss traf er Morgrims Auge. Der Wal brüllte vor Schmerz und floh in die Dunkelheit. Kael hatte gesiegt. Von diesem Tag an war er eine Legende der Tiefsee – ein Symbol für Mut und Entschlossenheit.</p>
+        </div>
         <button onclick="goToHomeScreen()" class="standard-Button">Home</button>
       </div>
       <div id="startImage" class="startImage"></div>
@@ -230,6 +258,7 @@
           <button onclick="startGame()" class="standard-Button">START</button>
           <button onclick="showStory()" class="standard-Button">STORY</button>
           <button onclick="showControls()" class="standard-Button">CONTROLS</button>
+          <button onclick="showInfo()" class="standard-Button">Info</button>
         </div>
         <div class="container-right">
           <button onclick="showImprint()" class="police-Button">IMPRINT</button>

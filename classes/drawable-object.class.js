@@ -18,15 +18,15 @@ class DrawableObject {
     }
   }
 
-  drawFrame(ctx) {
-    if (this instanceof Character || this instanceof GreenFish || this instanceof OrangeFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle || this instanceof GreenSuperDangerousFish) {
-      ctx.beginPath();
-      ctx.lineWidth = "3";
-      ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    }
-  }
+  // drawFrame(ctx) {
+  //   if (this instanceof Character || this instanceof GreenFish || this instanceof OrangeFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle || this instanceof GreenSuperDangerousFish) {
+  //     ctx.beginPath();
+  //     ctx.lineWidth = "3";
+  //     ctx.strokeStyle = "blue";
+  //     ctx.rect(this.x, this.y, this.width, this.height);
+  //     ctx.stroke();
+  //   }
+  // }
 
   blur = 40;
   increasing = true;
@@ -52,15 +52,15 @@ class DrawableObject {
     }
   }
 
-  drawFrameOffset(ctx) {
-    if (this instanceof Character || this instanceof GreenFish || this instanceof OrangeFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle || this instanceof GreenSuperDangerousFish) {
-      ctx.beginPath();
-      ctx.lineWidth = "3";
-      ctx.strokeStyle = "red";
-      ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right - this.offset.left, this.height - this.offset.bottom - this.offset.top);
-      ctx.stroke();
-    }
-  }
+  // drawFrameOffset(ctx) {
+  //   if (this instanceof Character || this instanceof GreenFish || this instanceof OrangeFish || this instanceof RedFish || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coins || this instanceof PoisonBottle || this instanceof GreenSuperDangerousFish) {
+  //     ctx.beginPath();
+  //     ctx.lineWidth = "3";
+  //     ctx.strokeStyle = "red";
+  //     ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right - this.offset.left, this.height - this.offset.bottom - this.offset.top);
+  //     ctx.stroke();
+  //   }
+  // }
 
   loadImages(arr) {
     arr.forEach((path) => {
