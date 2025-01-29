@@ -4,6 +4,8 @@ class DrawableObject {
   currentImage = 0;
   x = 0;
   y = 200;
+  blur = 40;
+  increasing = true;
 
   loadImage(path) {
     this.img = new Image();
@@ -28,8 +30,7 @@ class DrawableObject {
   //   }
   // }
 
-  blur = 40;
-  increasing = true;
+
   drawRageFrame(ctx) {
     if (this instanceof Endboss && rageMode == true) {
       ctx.save();

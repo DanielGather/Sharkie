@@ -1,11 +1,5 @@
 class Coins extends DrawableObject{
-
-
-
-
     COIN_IMAGE = "img/4. Marcadores/green/100_ copia 6.webp"
-
-
     offset = {
         top: 15,
         right: 15,
