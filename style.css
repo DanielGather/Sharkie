@@ -29,7 +29,9 @@ h6 {
   color: #ffd700;
 }
 
-ul,li,em {
+ul,
+li,
+em {
   font-size: 1rem;
   text-shadow: 1px -1px black;
   font-family: sans-serif;
@@ -51,7 +53,7 @@ body {
   justify-content: center;
   background-image: url(./img/7.landscapeSea/view-underwater-sea-life-cartoon-style.webp);
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: center;
   background-size: cover;
   font-family: "MightySoul", Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
@@ -112,7 +114,7 @@ button:active {
   background-position: center;
 }
 
-.lose-container{
+.lose-container {
   display: none;
   z-index: 9999;
   justify-content: flex-end;
@@ -151,14 +153,16 @@ button:active {
     align-items: center;
     height: 100%;
     filter: drop-shadow(2px 4px 6px black);
-  } & em{
+  }
+  & em {
     filter: drop-shadow(2px 4px 6px black);
-  } & a {
+  }
+  & a {
     font-family: sans-serif;
   }
 }
 
-.joke{
+.joke {
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -169,7 +173,7 @@ button:active {
   top: 0px;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9); 
+  background-color: rgba(0, 0, 0, 0.9);
   & p {
     color: #ffd700;
     font-family: "LuckiestGuy";
@@ -177,8 +181,7 @@ button:active {
   }
 }
 
-
-.desktop-experience{
+.desktop-experience {
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -189,7 +192,7 @@ button:active {
   top: 0px;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9); 
+  background-color: rgba(0, 0, 0, 0.9);
   & p {
     color: #ffd700;
     font-family: "LuckiestGuy";
@@ -197,8 +200,7 @@ button:active {
   }
 }
 
-
-.rotate-your-phone{
+.rotate-your-phone {
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -214,18 +216,18 @@ button:active {
     color: #ffd700;
     font-family: "LuckiestGuy";
     font-weight: bold;
-  } & img {
+  }
+  & img {
     width: 5rem;
     height: 5rem;
     animation: rotate90 3s infinite alternate ease-in-out;
   }
-
 }
-@keyframes rotate90{
-  0%{
+@keyframes rotate90 {
+  0% {
     transform: rotate(0deg);
   }
-  100%{
+  100% {
     transform: rotate(90deg);
   }
 }
@@ -270,14 +272,14 @@ button:active {
   }
 }
 
-.story-text{
+.story-text {
   height: 100%;
   overflow-y: auto;
   padding: 10rem 3.5rem 0rem 3.5rem;
 }
 
-.info-container{
-  display: flex;
+.info-container {
+  display: none;
   align-items: center;
   justify-content: center;
   background-image: url(./img/9.storyImage/storyImage.webp);
@@ -285,12 +287,12 @@ button:active {
   color: #ffd700;
 }
 
-.info{
+.info {
   text-align: center;
   height: 60%;
 }
 
-.info-text{
+.info-text {
   height: 100%;
   font-family: LuckiestGuy;
 }
@@ -421,10 +423,20 @@ button:active {
   }
 }
 
-
-.ingame-button{
-  position: absolute;
+.controlButtonsTop {
   display: none;
+  width: fit-content;
+  z-index: 999;
+  gap: 1rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding-top: 0.5rem;
+  transform: translate(-50%);
+}
+
+.ingame-button {
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
@@ -442,16 +454,6 @@ button:active {
     width: clamp(1rem, 2vw, 1.5rem);
     height: clamp(1rem, 2vw, 1.5rem);
   }
-
-}
-.sound-button {
-  right: 47%;
-  top: 1rem;
-}
-
-.pause-button {
-  right: 53%;
-  top: 1rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -472,49 +474,55 @@ button:active {
   }
 }
 
-@media (max-width: 1024px) and (orientation: portrait) and (any-pointer: coarse){
-  .rotate-your-phone{
+@media (max-width: 1024px) and (orientation: portrait) and (any-pointer: coarse) {
+  .rotate-your-phone {
     display: flex;
   }
-}
-
-@media (orientation: landscape) and (any-pointer:coarse){
-  .fin-slap{
-    display: flex;
-  }
-  .shoot{
-    display: flex;
-  }
-}
-
-@media (min-width:300px) and (max-width: 600px) and (min-height: 865px) and (any-pointer: fine){
-  .desktop-experience{
-    display: flex;
-  }
-}
-
-@media (max-width:300px){
-
-  .standard-Button{
-    display: none;
-  }
-  .police-Button{
+  .headline {
     display: none;
   }
 }
 
-@media (min-width:250px) and (max-width:300px){
-  .joke{
+@media (orientation: landscape) and (any-pointer: coarse) {
+  .fin-slap {
+    display: flex;
+  }
+  .shoot {
+    display: flex;
+  }
+  .headline {
+    display: none;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 600px) and (min-height: 865px) and (any-pointer: fine) {
+  .desktop-experience {
     display: flex;
   }
 }
 
-@media only screen and (max-height: 600px) {
-  *{
+@media (max-width: 300px) {
+  .standard-Button {
+    display: none;
+  }
+  .police-Button {
+    display: none;
+  }
+}
+
+@media (min-width: 250px) and (max-width: 300px) {
+  .joke {
+    display: flex;
+  }
+}
+
+@media only screen and (any-pointer: coarse) {
+  * {
     font-family: MightySoul;
   }
   body {
-    height: 90vh;
+    height: 100dvh;
+    background-image: unset;
     background-color: black;
   }
   .canvas-Container {
@@ -523,28 +531,27 @@ button:active {
   canvas {
     height: 100%;
   }
-  .info-text{
+  .info-text {
     padding-top: 5rem;
     padding-bottom: 1rem;
   }
-  .info-container{
+  .info-container {
     justify-content: unset;
     overflow-y: auto;
   }
-  .story-text{
-  padding: 4rem 3.5rem 1rem 3.5rem;
+  .story-text {
+    padding: 4rem 3.5rem 1rem 3.5rem;
   }
 }
 
-
 * {
-  --sb-track-color: #232E33;
+  --sb-track-color: #232e33;
   --sb-thumb-color: #ffd700;
   --sb-size: 8px;
 }
 
 *::-webkit-scrollbar {
-  width: var(--sb-size)
+  width: var(--sb-size);
 }
 
 *::-webkit-scrollbar-track {
@@ -555,12 +562,10 @@ button:active {
 *::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 4px;
-  
 }
 
 @supports not selector(::-webkit-scrollbar) {
   * {
-    scrollbar-color: var(--sb-thumb-color)
-                     var(--sb-track-color);
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 }

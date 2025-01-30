@@ -41,8 +41,8 @@ class Endboss extends MovableObject {
   // IMAGES_ENDBOSS_IS_ATTACKING = ["img/2.Enemy/3 Final Enemy/Attack/1.webp", "img/2.Enemy/3 Final Enemy/Attack/2.webp", "img/2.Enemy/3 Final Enemy/Attack/3.webp", "img/2.Enemy/3 Final Enemy/Attack/4.webp", "img/2.Enemy/3 Final Enemy/Attack/5.webp", "img/2.Enemy/3 Final Enemy/Attack/6.webp"];
   IMAGES_ENDBOSS_IS_ATTACKING = sprites.endboss.isAttacking;
 
-  hurt_SOUND = new Audio("audio/hurtSoundBoss.wav");
-  attacking_SOUND = new Audio("audio/monsterBite.wav");
+  hurt_SOUND = new Audio("audio/hurtSoundBoss.mp3");
+  attacking_SOUND = new Audio("audio/monsterBite.mp3");
 
   constructor() {
     super().loadImage(this.IMAGES_INTRODUCE[0]);

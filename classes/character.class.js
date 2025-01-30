@@ -41,10 +41,10 @@ class Character extends MovableObject {
   background_SOUND = new Audio("audio/backgroundSound.mp3");
   finSlap_SOUND = new Audio("audio/finSlap.mp3");
   hurt_SOUND = new Audio("audio/electroHurt.mp3");
-  sleep_SOUND = new Audio("audio/sleepSound.wav");
+  sleep_SOUND = new Audio("audio/sleepSound.mp3");
   scary_SOUND = new Audio("audio/whaleSound.mp3");
-  bubble_shot_SOUND = new Audio("audio/bubbleShot.wav");
-  coin_collected_SOUND = new Audio("audio/coinCollection.wav");
+  bubble_shot_SOUND = new Audio("audio/bubbleShot.mp3");
+  coin_collected_SOUND = new Audio("audio/coinCollection.mp3");
   lose_SOUND =  new Audio("audio/loseSound.mp3");
   win_SOUND = new Audio("audio/winSound.mp3");
   bottle_collected_SOUND = new Audio("audio/bottlePickUp.mp3")
@@ -68,7 +68,6 @@ class Character extends MovableObject {
     this.j = 0;
     this.i = 0;
     setStoppableInterval(this.checkstatus.bind(this), 100);
-    // setStoppableInterval(this.characterIsDead.bind(this), 100)
     setStoppableMovementInterval(this.characterSwimRight.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimLeft.bind(this), 1000 / this.hz);
     setStoppableMovementInterval(this.characterSwimUp.bind(this), 1000 / this.hz);
@@ -89,7 +88,7 @@ class Character extends MovableObject {
       this.handleDeath();
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT_ELECTRO);
-      this.playHurtSound();
+      playSound(this.hurt_SOUND)
     } else if (this.isIdle() >= 3 && this.isIdle() <= 7 && !this.spaceBar) {
       this.playAnimation(this.IMAGES_IDLE);
     } else if (this.isIdle() >= 7 && !this.spaceBar) {
@@ -100,6 +99,7 @@ class Character extends MovableObject {
         this.sleep_SOUND.pause();
     } else {
       this.walking_SOUND.pause();
+      this.hurt_SOUND.pause()
       this.walking_SOUND.currentTime = 0;
     }
     this.background_SOUND.play();
@@ -136,13 +136,6 @@ class Character extends MovableObject {
       muteAllSounds();
       playSound(this.win_SOUND);
     }
-  }
-
-  playHurtSound() {
-    playSound(this.hurt_SOUND);
-    setTimeout(() => {
-      this.hurt_SOUND.pause();
-    }, 500);
   }
 
   characterIsDead() {

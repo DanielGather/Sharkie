@@ -34,7 +34,7 @@
     <!-- <script src="./js/audioFiles.js"></script> -->
     <title>Sharkie</title>
   </head>
-  <body onload="loadSprites()">
+  <body id="body" onload="loadSprites()">
     <h1 class="headline">Sharkie</h1>
     <div id="canvasContainer" class="canvas-Container">
       <canvas id="canvas" width="1024" height="600"></canvas>
@@ -43,11 +43,15 @@
       </div>
       <button id="shoot" ontouchstart="shootMobile()" class="shoot"><img src="./img/1.Sharkie/7.mobile icons/target.webp" alt="" /></button>
       <button id="finSlap" ontouchstart="finSlapMobile()" class="fin-slap"><img src="./img/1.Sharkie/7.mobile icons/fin.webp" alt="" /></button>
-      <button id="handleSound" onclick="handleSound()" class="sound-button ingame-button"><img id="sound" src="./img/12.Controls/soundOn.webp" alt="" /></button>      
-      <button id="gamePause" onclick="handlePlayAndPause()" class="pause-button ingame-button"><img id="pauseButton" src="./img/12.Controls/pause.webp" alt="" /></button>
+      <div id="controlButtonsTop" class="controlButtonsTop">
+        <button id="gamePause" onclick="handlePlayAndPause()" class="pause-button ingame-button"><img id="pauseButton" src="./img/12.Controls/pause.webp" alt="" /></button>
+        <button id="fullscreen" onclick="fullscreen()" class="fullscrenn-button ingame-button"><img id="pauseButton" src="./img/12.Controls/fullscreen.webp" alt="" /></button>
+        <button id="handleSound" onclick="handleSound()" class="sound-button ingame-button"><img id="sound" src="./img/12.Controls/soundOn.webp" alt="" /></button>      
+      </div>
+
       <div class="rotate-your-phone">
         <p>Rotate Screen please :)</p>
-        <img src="./img/telefon.png" alt="">
+        <img src="./img/telefon.webp" alt="">
       </div>
       <div class="desktop-experience">
         <p>I think this is where the gaming experience becomes limited. Please make your window a little larger. Thank you.</p>
@@ -237,7 +241,7 @@
                 <li>Pause Icon <a href="https://www.flaticon.com/de/kostenlose-icons/musik-und-multimedia" target="_blank" title="musik und multimedia Icons">Musik und multimedia Icons erstellt von Dreamstale - Flaticon</a></li>
                 <li>Play Icon<a href="https://www.flaticon.com/de/kostenlose-icons/google-play-musik" target="_blank" title="google play musik Icons">Google play musik Icons erstellt von IYAHICON - Flaticon</a></li>
                 <li>Phone Img <a href="https://www.flaticon.com/de/kostenlose-icons/telefon" target="_blank" title="telefon Icons">Telefon Icons erstellt von Freepik - Flaticon</a></li>
-
+                <li>Fullscreen Img<a href="https://www.freepik.com/icon/maximize_7291155#fromView=search&page=1&position=20&uuid=400de2c4-4cd5-47c9-9495-5458f69c7de5">Icon by Hazicon</a></li>
               </ul>
 
             </p>
