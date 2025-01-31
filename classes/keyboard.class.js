@@ -7,6 +7,5 @@ class Keyboard {
     THROW = false;
 
     constructor(){
-
     }
 }

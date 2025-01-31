@@ -3,6 +3,15 @@ class OrangeFish extends MovableObject {
   height = 80;
   speed = 0.08;
 
+ /**
+  * Defines the offset values for the object, used for positioning or collision detection.
+  * @typedef {Object} Offset
+  * @property {number} top - The top offset value.
+  * @property {number} right - The right offset value.
+  * @property {number} left - The left offset value.
+  * @property {number} bottom - The bottom offset value.
+  * @type {Offset}
+  */
   offset = {
     top: 5,
     right: 10,
@@ -10,41 +19,41 @@ class OrangeFish extends MovableObject {
     bottom: 25,
   };
 
-  // IMAGES_ORANGE_FISH_SWIMING = ["img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim5.webp"];
-  IMAGES_ORANGE_FISH_SWIMING = sprites.orangeFish.swim
-
-  // IMAGES_ORANGE_FISH_TRANSITION = ["img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition5.webp"];
-  IMAGES_ORANGE_FISH_TRANSITION = sprites.orangeFish.transition
-
-  // IMAGES_ORANGE_FISH_BUBBLE_SWIM = ["img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim1.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim2.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim3.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim4.webp", "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim5.webp"];
-  IMAGES_ORANGE_FISH_BUBBLE_SWIM = sprites.orangeFish.bubbleSwim
-
-  // IMAGES_ORANGE_DEAD = ["img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.webp"]
-  IMAGES_ORANGE_DEAD = sprites.orangeFish.isDead
-
-
+  /**
+ * Initializes a new instance of the fish, loading images, setting initial position, speed, 
+ * and triggering animations. The constructor sets up the fish based on provided parameters 
+ * and handles level progression.
+ * @constructor
+ * @param {number} xPosition - The initial horizontal position of the fish.
+ * @param {number} speedNormalFish - The speed at which the fish moves.
+ * @param {number} damage - The amount of damage the fish deals when interacted with.
+ */
   constructor(xPosition, speedNormalFish, damage) {
     super().loadImage("img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.webp");
-
     this.ifNextLevel(damage)
     this.x = xPosition;
-    this.loadImages(this.IMAGES_ORANGE_FISH_SWIMING);
-    this.loadImages(this.IMAGES_ORANGE_FISH_TRANSITION);
-    this.loadImages(this.IMAGES_ORANGE_FISH_BUBBLE_SWIM);
-    this.loadImages(this.IMAGES_ORANGE_DEAD)
-
+    this.loadImages(sprites.orangeFish.swim);
+    this.loadImages(sprites.orangeFish.transition);
+    this.loadImages(sprites.orangeFish.bubbleSwim);
+    this.loadImages(sprites.orangeFish.isDead)
     this.y = this.calculateY();
     this.speed = this.calculateSpeed(speedNormalFish);
     this.animate();
   }
 
+  /**
+ * Initiates the animation loop for the fish, controlling movement, direction change, 
+ * and interactions with the character. It sets multiple intervals to update the 
+ * fish's behavior, position, and status.
+ * @method animate
+ * @memberof FishClass  // Replace with the appropriate class name if needed.
+ */
   animate() {
     this.j = 0;
     setStoppableInterval(this.moveLeft.bind(this), 1000 / this.hz);
     setStoppableInterval(this.fishChangeDirection.bind(this), 1000 / this.hz)
-    // setStoppableInterval(this.checkOtherDirection.bind(this), 100)
-    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this, this.IMAGES_ORANGE_FISH_BUBBLE_SWIM, this.IMAGES_ORANGE_FISH_SWIMING, this.IMAGES_ORANGE_FISH_TRANSITION), 150);
-    setStoppableInterval(this.checkIfSmallFishIsDead.bind(this,this.IMAGES_ORANGE_DEAD ), 1000 / this.hz)
+    setStoppableInterval(this.checkFishAndCharacterDistance.bind(this, sprites.orangeFish.bubbleSwim, sprites.orangeFish.swim, sprites.orangeFish.transition), 150);
+    setStoppableInterval(this.checkIfSmallFishIsDead.bind(this,sprites.orangeFish.isDead), 1000 / this.hz)
   }
 
 }
