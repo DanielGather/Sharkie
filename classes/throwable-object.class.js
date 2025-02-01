@@ -55,10 +55,6 @@ class ThrowableObject extends MovableObject {
 
   /**
    * Calculates the movement of the shot based on the current position and direction.
-   * The shot's horizontal position is updated based on the given direction, while the vertical
-   * position is influenced by a sine wave for closer distances and a constant downward motion for farther distances.
-   * @param {number} currentX - The initial horizontal position of the shot when it was fired.
-   * @param {number} direction - The direction in which the shot is moving. It is either 1 (right) or -1 (left).
    */
   calculateShot(currentX, direction) {
     this.x += direction;

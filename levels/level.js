@@ -17,17 +17,16 @@ function createLevel(damage) {
         new BackgroundObject("img/3.Background/Layers/4.Fondo 2/D2.webp", -1024, 0),
         new BackgroundObject("img/3.Background/Layers/2.Floor/D2.webp", -1024, 0),
       ],
-      coinsPerLevel, // Coins
-      repeatCanvas, // repeatCount
-      canvasStep, // step(width)
-      PoisonBottleLevel, // PoisonBottle
+      coinsPerLevel,
+      repeatCanvas,
+      canvasStep, 
+      PoisonBottleLevel,
       enemyPerLevel,
       dangerousEnemiesPerLevel,
       speedFromDangerousFish,
       speedNormalFish,
       damage
     );
-
     levelIsLoaded = true;
     return level1;
 }

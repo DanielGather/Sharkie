@@ -65,6 +65,7 @@ class Character extends MovableObject {
     this.loadImages(sprites.character.hurtElectro);
     this.loadImages(sprites.character.bubbleAttack);
     this.loadImages(sprites.character.finSlap);
+    this.animateCharacter = new CharacterAnimate()
     this.animate();
     this.applyGravity();
     this.handleVolume();
@@ -79,33 +80,25 @@ class Character extends MovableObject {
     this.j = 0;
     this.i = 0;
     setStoppableInterval(this.checkstatus.bind(this), 100);
-    setStoppableMovementInterval(this.characterSwimRight.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.characterSwimLeft.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.characterSwimUp.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.characterSwimDown.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.playWalkingSound.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.checkIfCharacterIsCloseToEndboss.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.bossFollowsCharacter.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.lastMovement.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.changeCameraX.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.checkSpaceBar.bind(this), 1000 / this.hz);
-    setStoppableMovementInterval(this.finSlapAttack.bind(this), 50);
-    setStoppableMovementInterval(this.startScaryMusic.bind(this), 100);
-    setStoppableInterval(this.checkWin.bind(this), 50);
+    setStoppableMovementInterval(this.animateCharacter.characterSwimRight.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.characterSwimLeft.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.characterSwimUp.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.characterSwimDown.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.playWalkingSound.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.checkIfCharacterIsCloseToEndboss.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.bossFollowsCharacter.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.lastMovement.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.changeCameraX.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.checkSpaceBar.bind(this), 1000 / this.hz);
+    setStoppableMovementInterval(this.animateCharacter.finSlapAttack.bind(this), 50);
+    setStoppableMovementInterval(this.animateCharacter.startScaryMusic.bind(this), 100);
+    setStoppableInterval(this.animateCharacter.checkWin.bind(this), 50);
   }
 
   /**
  * Checks the character's status and plays the appropriate animation or sound.
  * This method evaluates the current status of the character, including whether the character is dead,
- * hurt, idle, moving, or inactive. Depending on the result, it calls the corresponding animation or 
- * sound method:
- * - If the character is dead, it triggers the death handling.
- * - If the character is hurt, it plays the hurt animation and sound.
- * - If the character is in a short idle state, it plays the idle animation.
- * - If the character is in a long idle state, it plays the long idle animation.
- * - If the character is moving, it plays the movement animation.
- * - If none of the above conditions are met, it pauses the audio and stops movement sounds.
- * Additionally, the background sound is always played, regardless of the character's state.
+ * hurt, idle, moving, or inactive.
  */
   checkstatus() {
     if (this.isDead()) {
@@ -126,8 +119,6 @@ class Character extends MovableObject {
 
   /**
    * Pauses the walking and hurt sound effects and resets the walking sound's current time.
-   * This method pauses the `walking_SOUND` and `hurt_SOUND` audio tracks, ensuring they stop playing.
-   * Additionally, it resets the `walking_SOUND` to the start (currentTime = 0) so that it can be played again from the beginning if needed.
    */
   pauseAudio() {
     this.walking_SOUND.pause();
@@ -137,8 +128,6 @@ class Character extends MovableObject {
 
   /**
    * Checks if the character is currently moving.
-   * This method returns `true` if the character is pressing one of the movement keys (RIGHT, LEFT, UP, DOWN)
-   * and is not pressing the space bar. It returns `false` otherwise.
    * @returns {boolean} `true` if the character is moving, `false` otherwise.
    */
   isMoving() {
@@ -147,8 +136,6 @@ class Character extends MovableObject {
 
   /**
    * Plays the movement animation for the character.
-   * This method triggers the swimming animation and pauses the sleep sound to ensure
-   * that the character's movement is visually represented and any background sleep sound is halted.
    */
   playMovementAnimation() {
     this.playAnimation(sprites.character.swim);
@@ -156,9 +143,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Checks if the character is in a short idle state. The method determines if the character has been idle for a duration
-   * between 3 and 7 seconds and is not pressing the space bar. If both conditions are met,
-   * the character is considered to be in a short idle state.
+   * Checks if the character is in a short idle state. 
    * @returns {boolean} `true` if the character is idle for a duration between 3 and 7 seconds and the space bar is not pressed, otherwise `false`.
    */
   checkShortIdle() {
@@ -167,9 +152,6 @@ class Character extends MovableObject {
 
   /**
    * Checks if the character is in a long idle state.
-   * The method determines if the character has been idle for a sufficient amount of time
-   * (greater than or equal to 7 seconds) and is not pressing the space bar. If both conditions
-   * are met, the character is considered to be in a long idle state.
    * @returns {boolean} `true` if the character is idle for 7 seconds or more and the space bar is not pressed, otherwise `false`.
    */
   checkLongIdle() {
@@ -178,9 +160,6 @@ class Character extends MovableObject {
 
   /**
    * Plays the idle animation for the character.
-   * This method triggers the character's idle animation, typically used when the character
-   * is not moving or performing any other actions. It helps represent a state of inactivity or
-   * resting position.
    */
   playIdleAnimation() {
     this.playAnimation(sprites.character.idle);
@@ -188,9 +167,6 @@ class Character extends MovableObject {
 
   /**
    * Plays the long idle animation and the sleep sound effect.
-   * This method triggers the character's long idle animation and plays the corresponding
-   * sleep sound effect. It is typically used when the character is idle for a prolonged
-   * period, and the animation and sound indicate the character's rest or inactivity.
    */
   playLongIdleAnimation() {
     this.playAnimation(sprites.character.longIdle);
@@ -199,23 +175,20 @@ class Character extends MovableObject {
 
   /**
    * Handles the character's death sequence.
-   * This method pauses the walking sound, triggers the character's death animation,
-   * displays the lose screen, and stops the game after a brief delay.
-   * It also mutes all sounds and plays the lose sound effect.
    * Finally, it sets the `nextLevelBoolean` to `false` to prevent moving to the next level.
    */
   handleDeath() {
     this.walking_SOUND.pause();
     this.characterIsDead();
     showLoseScreen();
+    playSound(this.lose_SOUND);
+    stopGame();
+    nextLevelBoolean = false;
     setTimeout(() => {
-      stopGame();
       muteAllSounds();
       document.getElementById("restart").classList.remove("disabled");
       document.getElementById("restart").disabled = false;
     }, 1500);
-    playSound(this.lose_SOUND);
-    nextLevelBoolean = false;
   }
 
   /**
@@ -226,35 +199,6 @@ class Character extends MovableObject {
   handleHurt() {
     this.playAnimation(sprites.character.hurtElectro);
     playSound(this.hurt_SOUND);
-  }
-
-  /**
-   * Plays the scary background music when the endboss is close to the player.
-   * This method checks if the distance between the player and the endboss is less than 1500 pixels.
-   * If the condition is met and the scary music hasn't already been played, it starts the scary music.
-   */
-  startScaryMusic() {
-    if (this.world.endboss.x - this.x - this.width < 1500) {
-      if (!this.scarySound) {
-        playSound(this.scary_SOUND);
-        this.scarySound = true;
-      }
-    }
-  }
-
-  /**
-   * Checks if the player has won the game by defeating the endboss.
-   * If the endboss's life reaches 0 and the player hasn't already won, this method sets the `hasWon` flag to true,
-   * displays the win screen, stops the game, mutes all sounds, and plays the win sound.
-   */
-  checkWin() {
-    if (this.world.endboss.endbossLife == 0 && !this.hasWon) {
-      this.hasWon = true;
-      showWinScreen();
-      stopGame();
-      muteAllSounds();
-      playSound(this.win_SOUND);
-    }
   }
 
   /**
@@ -288,42 +232,7 @@ class Character extends MovableObject {
     playSound(this.coin_collected_SOUND);
   }
 
-  /**
-   * Executes the fin slap attack when the spacebar is pressed.
-   * The method checks if the spacebar has been pressed and, if so, plays a series of fin slap animations.
-   * It increments a counter (`i`) and modifies the character's offset position depending on the direction.
-   * After completing the animation, it plays the fin slap sound and resets the spacebar state and animation counter.
-   * This method ensures the fin slap attack only happens once per press and provides the appropriate animation and sound.
-   */
-  finSlapAttack() {
-    if (this.spaceBar) {
-      if (this.i <= 9) {
-        this.otherDirection ? (this.offset.left = 15) : (this.offset.right = 15);
-        this.playAnimation(sprites.character.finSlap);
-      } else {
-        playSound(this.finSlap_SOUND);
-        this.spaceBar = false;
-        this.i = 0;
-        this.otherDirection ? (this.offset.left = 40) : (this.offset.right = 40);
-        this.world.keyboard.SPACE = false;
-      }
-      this.i++;
-    }
-  }
 
-  /**
-   * Checks if the spacebar has been pressed and handles its state.
-   * The method checks if the spacebar is pressed, if it hasn’t been pressed already (based on the `spaceBar` flag),
-   * and if sufficient time has passed (at least 1.5 seconds) since the last spacebar press. If these conditions are met,
-   * it updates the `spaceBar` flag to `true` and records the time when the spacebar was pressed.
-   * This prevents multiple spacebar presses from being registered in quick succession.
-   */
-  checkSpaceBar() {
-    if (this.world && this.world.keyboard.SPACE && !this.spaceBar && this.timePassedClickSpacebar() >= 1.5) {
-      this.spaceBar = true;
-      this.clickedSpacebar = new Date().getTime();
-    }
-  }
 
   /**
    * Calculates the time passed since the spacebar was last clicked.
@@ -335,33 +244,6 @@ class Character extends MovableObject {
     let currentTime = new Date().getTime();
     let timepassed = (currentTime - this.clickedSpacebar) / 1000;
     return timepassed;
-  }
-
-  /**
-   * Checks if the character is close enough to the endboss to trigger the attack.
-   * If the character's position is close enough to the endboss (determined by the character's `x` position and the level's
-   * end boundary), the method sets the `attackingCharacter` flag of the endboss to `true`, indicating that the endboss
-   * should start attacking the character.
-   */
-  checkIfCharacterIsCloseToEndboss() {
-    if (this.world && this.x + this.width == Level.level_end_x - 1248) {
-      this.world.endboss.attackingCharacter = true;
-    }
-  }
-
-  /**
-   * Makes the endboss follow the character vertically.
-   * If the endboss is attacking the character and is not dead, the method calculates the vertical offset between the
-   * character's center and the endboss's center. The endboss's vertical position (`y`) is then adjusted to match
-   * the character's vertical position, ensuring the endboss follows the character's movements vertically.
-   */
-  bossFollowsCharacter() {
-    if (this.world.endboss.attackingCharacter && this.world.endboss.isNotDead) {
-      let characterCenterY = this.y + this.offset.top + this.height / 2;
-      let endbossCurrentCenterY = this.world.endboss.y + this.world.endboss.offset.top + this.world.endboss.height / 2;
-      let offsetToCenter = characterCenterY - endbossCurrentCenterY;
-      this.world.endboss.y += offsetToCenter;
-    }
   }
 
   /**
@@ -400,8 +282,6 @@ class Character extends MovableObject {
 
   /**
    * Calculates the amount of time the character has been idle.
-   * This method compares the current time with the time of the last recorded movement (`lastMovementCharacter`),
-   * and returns the time passed in seconds. If no movement has occurred, it will return a larger value.
    * @returns {number} The time (in seconds) that has passed since the last movement of the character.
    */
   isIdle() {
@@ -410,99 +290,9 @@ class Character extends MovableObject {
     return timepassed;
   }
 
-  /**
-   * Records the timestamp of the last movement or action performed by the character.
-   * This method checks if any movement key (down, up, left, right) or the spacebar is pressed,
-   * and if so, it updates the `lastMovementCharacter` variable with the current time (in milliseconds).
-   */
-  lastMovement() {
-    if (this.world && (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT || this.world.keyboard.SPACE)) {
-      this.lastMovementCharacter = new Date().getTime();
-    }
-  }
-
-  /**
-   * Plays the walking sound when any movement key (up, down, left, or right) is pressed,
-   * unless the spacebar is active. The method checks if any of the movement keys (down, up, left, or right) are pressed,
-   * and ensures that the spacebar is not active. If these conditions are met, it plays the walking sound effect.
-   */
-  playWalkingSound() {
-    if (this.world && (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT) && !this.spaceBar) {
-      playSound(this.walking_SOUND);
-    }
-  }
-
-  /**
-   * Moves the character downwards if the down arrow key is pressed and the character is
-   * not at the bottom boundary of the level. The method checks if the down key is pressed and ensures that the character does not
-   * move below the bottom of the level. Once the condition is met, the character swims down.
-   */
-  characterSwimDown() {
-    if (this.world && this.world.keyboard.DOWN && this.y + this.height - this.offset.bottom < 600) {
-      this.swimDOWN();
-    }
-  }
-
-  /**
-   * Moves the character upwards if the up arrow key is pressed and the character is
-   * not at the top boundary of the level. The method checks if the up key is pressed and ensures that the character does not
-   * move above the top of the level. Once the condition is met, the character swims up.
-   */
-  characterSwimUp() {
-    if (this.world && this.world.keyboard.UP && this.y + this.offset.top > 0) {
-      this.swimUP();
-    }
-  }
-
-  /**
-   * Moves the character to the left if the left arrow key is pressed and the character
-   * has not crossed the left boundary of the level. The method checks if the left key is pressed
-   * and ensures that the character does not move beyond the left edge of the level. Once the conditions are met,
-   * the character moves to the left and changes the direction indicator.
-   */
-  characterSwimLeft() {
-    if (this.world && this.world.keyboard.LEFT && this.x > -944) {
-      this.moveLeft();
-      this.otherDirection = true;
-    }
-  }
-
-  /**
-   * Moves the character to the right if the right arrow key is pressed and the character
-   * is not at the end of the level. It also introduces the boss when the character reaches
-   * a certain position.
-   *
-   * The method checks if the right key is pressed and ensures that the character does
-   * not move beyond the level's boundaries. Once the conditions are met, the character
-   * is moved to the right, and the boss is introduced.
-   */
-  characterSwimRight() {
-    if (this.world && this.world.keyboard.RIGHT && this.x + this.width + this.offset.left < Level.level_end_x) {
-      this.moveRight();
-      this.introduceBoss();
-      this.otherDirection = false;
-    }
-  }
-
-  /**
-   * Adjusts the camera's X position based on the character's position.
-   * When the character reaches the end of the level or a specified position,
-   * the camera is adjusted to follow the character smoothly.
-   * If the character is at the end of the level, the camera shifts to the appropriate final position.
-   */
-  changeCameraX() {
-    if (this.world && this.x >= Level.level_end_x - 1024) {
-      this.world.camera_x = -Level.level_end_x + 1104;
-    } else {
-      this.world.camera_x = -this.x + 80;
-    }
-  }
 
   /**
    * Introduces the boss when the character reaches a specific position in the level.
-   * When the character's position reaches the specified point near the end of the level,
-   * this method sets the flag `characterIsInRange` in the world object to true, signaling
-   * that the character is in range of the boss.
    */
   introduceBoss() {
     if (this.world && this.x + this.width == Level.level_end_x - 1548) {
@@ -518,7 +308,7 @@ class Character extends MovableObject {
   handleVolume() {
     playSound(this.background_SOUND);
     this.walking_SOUND.volume = 0.25;
-    this.background_SOUND.volume = 0.2;
+    this.background_SOUND.volume = 0.35;
     this.finSlap_SOUND.volume = 0.2;
     this.hurt_SOUND.volume = 0.3;
     this.sleep_SOUND.volume = 0.3;

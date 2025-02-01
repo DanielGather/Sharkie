@@ -65,10 +65,6 @@ class GreenSuperDangerousFish extends MovableObject {
 
   /**
    * Controls the vertical movement of the fish based on its current direction.
-   * If the fish is moving down, it increases its vertical position.
-   * If it reaches the bottom of the canvas, the direction changes to "up".
-   * If the fish is moving up, it decreases its vertical position.
-   * If it reaches the top of the canvas, the direction changes to "down".
    * @function playMovementAnimation
    */
   playMovementAnimation() {
@@ -87,8 +83,6 @@ class GreenSuperDangerousFish extends MovableObject {
 
   /**
    * Checks whether the fish is alive or dead and plays the corresponding animation.
-   * If the fish is alive, it plays the swimming animation.
-   * If the fish is dead, it plays the dead animation.
    * @function isAlive
    */
   isAlive() {
