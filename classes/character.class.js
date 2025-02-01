@@ -211,6 +211,8 @@ class Character extends MovableObject {
     setTimeout(() => {
       stopGame();
       muteAllSounds();
+      document.getElementById("restart").classList.remove("disabled");
+      document.getElementById("restart").disabled = false;
     }, 1500);
     playSound(this.lose_SOUND);
     nextLevelBoolean = false;

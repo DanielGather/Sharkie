@@ -6,14 +6,14 @@ class GreenSuperDangerousFish extends MovableObject {
   direction = "down";
 
   /**
-   * Represents the offset values used for positioning an element.
-   * These values define the spacing around the object, typically used for hitboxes or positioning adjustments.
-   * @typedef {Object} Offset
-   * @property {number} top - The distance from the top edge of the element.
-   * @property {number} right - The distance from the right edge of the element.
-   * @property {number} left - The distance from the left edge of the element.
-   * @property {number} bottom - The distance from the bottom edge of the element.
-   */
+  * Defines the offset values for the object, used for positioning or collision detection.
+  * @typedef {Object} Offset
+  * @property {number} top - The top offset value.
+  * @property {number} right - The right offset value.
+  * @property {number} left - The left offset value.
+  * @property {number} bottom - The bottom offset value.
+  * @type {Offset}
+  */
   offset = {
     top: 5,
     right: 10,

@@ -47,7 +47,7 @@ function startGame() {
   handleAllCointainers();
 }
 
-function getMuteStatus(){
+function getMuteStatus() {
   isMuted = JSON.parse(localStorage.getItem("isMuted"));
 }
 
@@ -65,6 +65,7 @@ function init(newDamage) {
     checkSound();
   }
   newWorld(newDamage);
+  // restartGame();
 }
 
 /**
@@ -189,7 +190,8 @@ function handleAllCointainers() {
   document.getElementById("controlsContainer").classList.add("d-none");
   document.getElementById("winContainer").classList.add("d-none");
   document.getElementById("infoContainer").classList.add("d-none");
-  document.getElementById("controlButtonsTop").classList.remove("d-none")
+  document.getElementById("loseContainer").classList.add("d-none");
+  document.getElementById("controlButtonsTop").classList.remove("d-none");
   document.getElementById("joystick").style.zIndex = "888";
   document.getElementById("finSlap").style.zIndex = "999";
   document.getElementById("shoot").style.zIndex = "999";
@@ -207,7 +209,9 @@ function handleSound() {
   isMuted = !isMuted;
   localStorage.setItem("isMuted", isMuted);
   isMuted ? muteAllSounds() : unmuteAllSounds();
-  document.getElementById("sound").src = isMuted ? "./img/8.Controls/soundOff.webp" : "./img/8.Controls/soundOn.webp";
+  document.getElementById("sound").src = isMuted
+    ? "./img/8.Controls/soundOff.webp"
+    : "./img/8.Controls/soundOn.webp";
 }
 
 /**
@@ -225,7 +229,7 @@ function handlePlayAndPause() {
     ? "./img/8.Controls/play.webp"
     : "./img/8.Controls/pause.webp";
   document.getElementById("handleSound").disabled = isPaused ? true : false;
-  if ((!isMuted && isPaused) || (!isPaused && !isMuted) ) {
+  if ((!isMuted && isPaused) || (!isPaused && !isMuted)) {
     handleSound();
   }
 }
@@ -445,11 +449,13 @@ function unmuteAllSounds() {
  */
 function checkSound() {
   if (isMuted) {
-    muteAllSounds()
+    muteAllSounds();
   } else {
     unmuteAllSounds();
   }
-  document.getElementById("sound").src = isMuted ? "./img/8.Controls/soundOff.webp" : "./img/8.Controls/soundOn.webp";
+  document.getElementById("sound").src = isMuted
+    ? "./img/8.Controls/soundOff.webp"
+    : "./img/8.Controls/soundOn.webp";
 }
 
 /**
