@@ -29,4 +29,4 @@ Dieses Projekt steht unter der MIT-Lizenz.
 📬 Kontakt
 
 Falls du Fragen hast oder mithelfen möchtest, kannst du mich gerne kontaktieren:
-📧 Email: gather.daniel@yahoo.de 🐙 GitHub: dein-username
+📧 Email: gather.daniel@yahoo.de 🐙 GitHub: Daniel Gather
